@@ -6,12 +6,19 @@ const tabs = [
 ];
 ---
 <section class="product-preview" id="solutions">
-  <div class="product-preview-inner">
-    <div class="reveal">
-      <p class="section-label">See it in action</p>
-      <h2>Your complete patent portfolio, <br/><span class="highlight">visualized instantly.</span></h2>
-      <p class="sub">See your patents, monitor competitors, analyze landscapes — all in one place.</p>
+  <!-- Background images (one per tab, blurred) -->
+  {tabs.map((t, i) => (
+    <div class={`pp-bg${i === 0 ? ' active' : ''}`} id={`bg-${t.id}`}>
+      <img src={`${import.meta.env.BASE_URL}${t.image}`} alt="" aria-hidden="true" loading={i === 0 ? 'eager' : 'lazy'} />
     </div>
+  ))}
+  <div class="pp-bg-overlay"></div>
+
+  <!-- Foreground content -->
+  <div class="pp-content reveal">
+    <p class="section-label" style="color: var(--primary);">See it in action</p>
+    <h2>Your complete patent portfolio, <br/><span class="highlight">visualized instantly.</span></h2>
+    <p class="sub">See your patents, monitor competitors, analyze landscapes — all in one place.</p>
 
     <div class="preview-tabs" id="previewTabs">
       {tabs.map((t, i) => (
@@ -22,58 +29,85 @@ const tabs = [
       ))}
     </div>
 
-    {tabs.map((t, i) => (
-      <div class={`tab-content${i === 0 ? ' active' : ''}`} id={`tab-${t.id}`}>
-        <div class="preview-frame">
-          <div class="preview-bar">
-            <div class="preview-dots"><i></i><i></i><i></i></div>
-            <div class="preview-url">
-              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="3.5"/><path d="M7.5 7.5L10 10"/></svg>
-              app.simpleip.com
-            </div>
-          </div>
-          <div class="preview-screen">
-            <img src={`${import.meta.env.BASE_URL}${t.image}`} alt={t.label} loading={i === 0 ? 'eager' : 'lazy'} />
-          </div>
-        </div>
-      </div>
-    ))}
+    <a href={`${import.meta.env.BASE_URL}register`} class="pp-cta">
+      Start free
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
   </div>
 </section>
 
 <script>
   const tabs = document.querySelectorAll('.preview-tab');
-  const contents = document.querySelectorAll('.tab-content');
+  const bgs = document.querySelectorAll('.pp-bg');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       const target = (tab as HTMLElement).dataset.tab;
       tabs.forEach(t => t.classList.remove('active'));
-      contents.forEach(c => c.classList.remove('active'));
+      bgs.forEach(b => b.classList.remove('active'));
       tab.classList.add('active');
-      document.getElementById(`tab-${target}`)?.classList.add('active');
+      document.getElementById(`bg-${target}`)?.classList.add('active');
     });
   });
 </script>
 
 <style>
-  .product-preview { padding: 80px 24px 100px; text-align: center; background: var(--bg-light); }
-  .product-preview-inner { max-width: 1100px; margin: 0 auto; }
-  .product-preview h2 {
-    font-size: clamp(28px, 3.5vw, 42px); font-weight: 900; color: var(--headline);
-    letter-spacing: -1.5px; margin-bottom: 14px; line-height: 1.2;
+  .product-preview {
+    position: relative;
+    min-height: 520px;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 100px 24px;
+  }
+
+  /* Background screenshots — blurred, full cover */
+  .pp-bg {
+    position: absolute; inset: 0; z-index: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .pp-bg.active { opacity: 1; }
+  .pp-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top center;
+    display: block;
+    filter: blur(4px);
+    transform: scale(1.03);
+  }
+
+  /* Overlay — white wash so text is readable */
+  .pp-bg-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(2px);
+  }
+
+  /* Foreground content */
+  .pp-content {
+    position: relative; z-index: 2;
+    max-width: 700px;
+  }
+  .pp-content h2 {
+    font-size: clamp(28px, 3.5vw, 44px); font-weight: 900; color: var(--headline);
+    letter-spacing: -1.5px; margin-bottom: 14px; line-height: 1.15;
   }
   .highlight {
     background: linear-gradient(135deg, var(--primary), #2B7A8C);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
-  .sub { font-size: 17px; color: var(--body); max-width: 520px; margin: 0 auto 40px; line-height: 1.7; }
+  .sub {
+    font-size: 17px; color: var(--body); max-width: 500px;
+    margin: 0 auto 36px; line-height: 1.7;
+  }
 
   /* Tabs */
   .preview-tabs {
     display: inline-flex; gap: 4px; padding: 5px; border-radius: 14px;
-    background: var(--white); border: 1px solid var(--border); margin-bottom: 36px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    background: rgba(255, 255, 255, 0.9); border: 1px solid var(--border);
+    margin-bottom: 28px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    backdrop-filter: blur(8px);
   }
   .preview-tab {
     display: flex; align-items: center; gap: 8px;
@@ -87,46 +121,27 @@ const tabs = [
     background: var(--primary); color: white;
     box-shadow: 0 4px 12px rgba(26, 77, 92, 0.25);
   }
-  .preview-tab:not(.active):hover { background: var(--bg-light); color: var(--headline); }
+  .preview-tab:not(.active):hover { background: rgba(255,255,255,0.8); color: var(--headline); }
 
-  /* Tab content */
-  .tab-content { display: none; }
-  .tab-content.active { display: block; animation: fadeDown 0.4s ease; }
-
-  /* Browser frame */
-  .preview-frame {
-    border-radius: 16px; overflow: hidden;
-    background: var(--white); border: 1px solid var(--border);
-    box-shadow:
-      0 4px 12px rgba(0,0,0,0.03),
-      0 20px 60px rgba(0,0,0,0.06);
-    text-align: left;
+  /* CTA button */
+  .pp-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px; border-radius: 12px;
+    background: var(--primary-dark); color: white;
+    font-size: 15px; font-weight: 700;
+    box-shadow: 0 4px 20px rgba(15, 44, 53, 0.2);
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
   }
-  .preview-bar {
-    display: flex; align-items: center; gap: 14px;
-    height: 44px; padding: 0 18px;
-    background: var(--bg-lighter); border-bottom: 1px solid var(--border);
+  .pp-cta svg { width: 14px; height: 14px; transition: transform 0.3s var(--ease-out); }
+  .pp-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(15, 44, 53, 0.3);
   }
-  .preview-dots { display: flex; gap: 6px; }
-  .preview-dots i {
-    width: 10px; height: 10px; border-radius: 50%; display: block; font-style: normal;
-  }
-  .preview-dots i:nth-child(1) { background: #ff5f57; }
-  .preview-dots i:nth-child(2) { background: #febc2e; }
-  .preview-dots i:nth-child(3) { background: #28c840; }
-  .preview-url {
-    display: flex; align-items: center; gap: 6px;
-    padding: 5px 14px; border-radius: 7px;
-    background: var(--white); border: 1px solid var(--border);
-    font-size: 11.5px; color: var(--body); font-weight: 500;
-  }
-  .preview-url svg { width: 10px; height: 10px; opacity: 0.5; }
-  .preview-screen { overflow: hidden; }
-  .preview-screen img { width: 100%; display: block; }
+  .pp-cta:hover svg { transform: translateX(3px); }
 
   @media (max-width: 768px) {
+    .product-preview { min-height: 420px; padding: 72px 20px; }
     .preview-tabs { flex-wrap: wrap; }
     .preview-tab { font-size: 12px; padding: 9px 16px; }
-    .preview-frame { border-radius: 12px; }
   }
 </style>
