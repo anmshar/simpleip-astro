@@ -1,379 +1,298 @@
 ---
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-
-const mockResults = [
-  { name: 'Siemens AG', country: 'DE', patents: 48231 },
-  { name: 'Siemens Energy AG', country: 'DE', patents: 5102 },
-  { name: 'Siemens Healthineers AG', country: 'DE', patents: 12840 },
-  { name: 'Siemens Gamesa Renewable Energy', country: 'ES', patents: 3201 },
-];
 ---
 <Base title="SimpleIP — Create your free account">
   <Nav />
 
-  <!-- Step 1: Select Organisation -->
-  <section class="register-page" id="step-org">
-    <div class="org-card">
-      <div class="org-header">
-        <a href={import.meta.env.BASE_URL} class="reg-logo"><img src={`${import.meta.env.BASE_URL}logo.svg`} alt="SimpleIP" class="reg-logo-img" /></a>
-        <h1>Select your organisation</h1>
-        <p>We found multiple matches for <strong id="orgQuery">your search</strong>. Choose the correct entity below.</p>
-      </div>
-      <!-- Search within step 1 -->
-      <form class="org-search" id="orgSearchForm">
-        <div class="org-search-icon">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="6"/><path d="M18 18l-4-4"/></svg>
-        </div>
-        <input type="text" id="orgSearchInput" name="query" placeholder="Search by company name..." />
-        <button type="submit">Search</button>
-      </form>
-      <div class="results-list" id="resultsList">
-        {mockResults.map(r => (
-          <button type="button" class="result-row" data-company={r.name}>
-            <div>
-              <div class="result-name">{r.name}</div>
-              <div class="result-meta">{r.country} · {r.patents.toLocaleString()} patents</div>
-            </div>
-            <span class="result-arrow">→</span>
-          </button>
-        ))}
-      </div>
-      <p class="org-note">Can't find your organisation? <button type="button" class="org-manual-link" id="skipToRegister">Register manually →</button></p>
-    </div>
-    <div class="register-side">
-      <div class="side-orb side-orb-2"></div>
-      <div class="side-ring side-ring-1"></div>
-      <div class="side-ring side-ring-2"></div>
-      <div class="side-content">
-        <h2>What you get — free, forever.</h2>
-        <ul class="side-list">
-          <li><span class="check-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8l4 4 6-6"/></svg></span> Full patent portfolio overview</li>
-          <li><span class="check-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8l4 4 6-6"/></svg></span> Competitor monitoring alerts</li>
-          <li><span class="check-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8l4 4 6-6"/></svg></span> Professional IP reports</li>
-          <li><span class="check-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8l4 4 6-6"/></svg></span> 100M+ patents from 80+ offices</li>
-          <li><span class="check-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8l4 4 6-6"/></svg></span> No credit card required</li>
-        </ul>
-        <div class="side-trust">
-          <p>Backed by <strong>Dennemeyer Group</strong></p>
-          <p>Trusted since 1962 · 100+ countries</p>
+  <!-- Blurred dashboard background -->
+  <div class="reg-bg">
+    <div class="reg-bg-frame">
+      <div class="reg-bg-sidebar">
+        <div class="reg-bg-logo">SimpleIP</div>
+        <div class="reg-sidebar-items">
+          <div class="reg-sb-item">
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 3v5H3"/><circle cx="7" cy="8" r="5"/><path d="M15 15l-3-3"/></svg>
+            My patents
+          </div>
+          <div class="reg-sb-item active">
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 6A4 4 0 005 6c0 4.5-2 6-2 6h12S13 10.5 13 6z"/><path d="M10 15a1.5 1.5 0 01-3 0"/></svg>
+            Monitoring
+          </div>
+          <div class="reg-sb-item">
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 15V6l3.5-3 3.5 4 5-4v12H3z"/></svg>
+            Landscape
+          </div>
+          <div class="reg-sb-item">
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="12" height="12" rx="2"/><path d="M3 8h12"/><path d="M8 3v12"/></svg>
+            Smart file upload
+          </div>
         </div>
       </div>
+      <div class="reg-bg-main">
+        <img src={`${import.meta.env.BASE_URL}screenshot-monitoring.png`} alt="" class="reg-bg-screenshot" />
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Step 2: Account creation -->
-  <section class="register-page hidden" id="step-account">
-    <div class="register-card">
-      <div class="register-header">
-        <a href={import.meta.env.BASE_URL} class="reg-logo"><img src={`${import.meta.env.BASE_URL}logo.svg`} alt="SimpleIP" class="reg-logo-img" /></a>
-        <button type="button" class="back-btn" id="backToOrg">← Back to organisation</button>
-        <h1>Create your free account</h1>
-        <p>Start managing your patent portfolio in under 2 minutes.</p>
-        <div class="selected-org" id="selectedOrgBadge" hidden>
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8h6M8 5v6"/></svg>
-          <span id="selectedOrgName"></span>
-        </div>
+  <!-- Step 1: Loading state modal -->
+  <div class="reg-overlay" id="step-loading">
+    <div class="reg-modal" id="loadingModal">
+      <div class="loading-spinner">
+        <svg viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="16" stroke="#E5E3DF" stroke-width="3"/>
+          <path d="M20 4a16 16 0 0112.65 6.2" stroke="var(--primary)" stroke-width="3" stroke-linecap="round">
+            <animateTransform attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="1s" repeatCount="indefinite"/>
+          </path>
+        </svg>
       </div>
-      <form class="register-form" action="/verify" method="post">
-        <input type="hidden" id="selectedCompany" name="company" />
-        <div class="form-group">
-          <label for="name">Full name</label>
-          <input type="text" id="name" name="name" placeholder="Jane Müller" required />
-        </div>
-        <div class="form-group">
-          <label for="email">Business email</label>
-          <input type="email" id="email" name="email" placeholder="jane@company.com" required />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="At least 8 characters" required />
-        </div>
-        <button type="submit" class="register-btn">Create account →</button>
-        <p class="register-terms">By creating an account you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.</p>
+      <p class="loading-text">Creating your report...</p>
+      <h2>Did you know SimpleIP is free and always will be?</h2>
+      <ul class="loading-features">
+        <li>
+          <span class="lf-check">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#2D8A6E"/><path d="M5 8.2l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div>
+            <strong>Oversee your portfolio</strong>
+            <span>Find and manage your patent families in seconds.</span>
+          </div>
+        </li>
+        <li>
+          <span class="lf-check">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#2D8A6E"/><path d="M5 8.2l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div>
+            <strong>Track competition</strong>
+            <span>Get a monthly radar of competitor updates.</span>
+          </div>
+        </li>
+        <li>
+          <span class="lf-check">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#2D8A6E"/><path d="M5 8.2l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div>
+            <strong>Assess new ideas</strong>
+            <span>Generate AI novelty reports to vet your next invention.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Step 2: Register CTA overlay -->
+  <div class="reg-overlay hidden" id="step-signup">
+    <div class="reg-signup-bar">
+      <div class="signup-lock">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6a3 3 0 016 0v3"/></svg>
+      </div>
+      <span class="signup-label">REGISTER TO MONITOR YOUR COMPETITORS FOR FREE</span>
+      <form class="signup-form" id="signupForm">
+        <input type="email" name="email" placeholder="Enter your work email" required />
+        <button type="submit">Sign up →</button>
       </form>
-      <p class="register-signin">Already have an account? <a href="#">Sign in</a></p>
+      <p class="signup-note">100% free · No credit card required</p>
     </div>
-    <div class="register-side">
-      <div class="side-orb side-orb-2"></div>
-      <div class="side-ring side-ring-1"></div>
-      <div class="side-ring side-ring-2"></div>
-      <div class="side-content">
-        <h2>What you get — free, forever.</h2>
-        <ul class="side-list">
-          <li><span class="check-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8l4 4 6-6"/></svg></span> Full patent portfolio overview</li>
-          <li><span class="check-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8l4 4 6-6"/></svg></span> Competitor monitoring alerts</li>
-          <li><span class="check-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8l4 4 6-6"/></svg></span> Professional IP reports</li>
-          <li><span class="check-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8l4 4 6-6"/></svg></span> 100M+ patents from 80+ offices</li>
-          <li><span class="check-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8l4 4 6-6"/></svg></span> No credit card required</li>
-        </ul>
-        <div class="side-trust">
-          <p>Backed by <strong>Dennemeyer Group</strong></p>
-          <p>Trusted since 1962 · 100+ countries</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
 </Base>
 
 <script>
-  const stepOrg = document.getElementById('step-org');
-  const stepAccount = document.getElementById('step-account');
-  const orgQuery = document.getElementById('orgQuery');
-  const orgSearchInput = document.getElementById('orgSearchInput') as HTMLInputElement;
-  const selectedOrgBadge = document.getElementById('selectedOrgBadge');
-  const selectedOrgName = document.getElementById('selectedOrgName');
-  const selectedCompany = document.getElementById('selectedCompany') as HTMLInputElement;
-
-  // Pre-fill from URL params
+  // Preserve search param
   const params = new URLSearchParams(window.location.search);
-  const company = params.get('company');
-  if (company) {
-    if (orgQuery) orgQuery.textContent = company;
-    if (orgSearchInput) orgSearchInput.value = company;
-  }
+  const company = params.get('company') || '';
 
-  // Select an organisation → go to step 2
-  document.querySelectorAll('.result-row').forEach(row => {
-    row.addEventListener('click', () => {
-      const name = (row as HTMLElement).dataset.company || '';
-      goToAccountStep(name);
-    });
-  });
+  // After 3s loading, transition to signup state
+  setTimeout(() => {
+    document.getElementById('step-loading')?.classList.add('hidden');
+    document.getElementById('step-signup')?.classList.remove('hidden');
+  }, 3000);
 
-  // Skip to register manually
-  document.getElementById('skipToRegister')?.addEventListener('click', () => {
-    goToAccountStep('');
-  });
-
-  // Back button
-  document.getElementById('backToOrg')?.addEventListener('click', () => {
-    stepAccount?.classList.add('hidden');
-    stepOrg?.classList.remove('hidden');
-    window.scrollTo(0, 0);
-  });
-
-  // Org search form
-  document.getElementById('orgSearchForm')?.addEventListener('submit', (e) => {
+  // Signup form
+  document.getElementById('signupForm')?.addEventListener('submit', (e) => {
     e.preventDefault();
-    // In a real app this would search — for now just update the query text
-    const query = orgSearchInput?.value.trim();
-    if (orgQuery && query) orgQuery.textContent = query;
+    const input = (e.target as HTMLFormElement).querySelector('input[name="email"]') as HTMLInputElement;
+    const email = input?.value.trim();
+    if (!email) return;
+    // In production: redirect to Keycloak with company param preserved
+    const base = import.meta.env.BASE_URL;
+    window.location.href = `${base}verify?email=${encodeURIComponent(email)}&company=${encodeURIComponent(company)}`;
   });
-
-  function goToAccountStep(companyName: string) {
-    stepOrg?.classList.add('hidden');
-    stepAccount?.classList.remove('hidden');
-    if (selectedCompany) selectedCompany.value = companyName;
-    if (companyName && selectedOrgBadge && selectedOrgName) {
-      selectedOrgName.textContent = companyName;
-      selectedOrgBadge.hidden = false;
-    }
-    window.scrollTo(0, 0);
-  }
 </script>
 
 <style>
   .hidden { display: none !important; }
 
-  .register-page {
-    min-height: 100vh; display: flex; padding-top: 72px;
+  /* ============================
+     BLURRED DASHBOARD BACKGROUND
+     ============================ */
+  .reg-bg {
+    position: fixed; inset: 0; z-index: 0;
+    background: var(--bg-light);
+    padding-top: 104px;
+    filter: blur(3px) brightness(0.97);
+    overflow: hidden;
+  }
+  .reg-bg-frame {
+    display: flex; height: 100%;
+    max-width: 1400px; margin: 0 auto;
+    border-radius: 12px 12px 0 0; overflow: hidden;
+    background: white;
+    box-shadow: 0 -4px 40px rgba(0,0,0,0.06);
   }
 
-  /* Shared side panel */
-  .register-side {
-    flex: 1;
-    background: linear-gradient(165deg, #0F2C35 0%, #1A4D5C 100%);
-    display: flex; align-items: center; justify-content: center; padding: 60px;
-    position: relative; overflow: hidden;
+  /* Fake sidebar */
+  .reg-bg-sidebar {
+    width: 180px; border-right: 1px solid var(--border);
+    padding: 24px 16px; flex-shrink: 0;
+    background: white;
   }
-  /* Subtle grid pattern */
-  .register-side::before {
-    content: ''; position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent);
-    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent);
+  .reg-bg-logo {
+    font-size: 16px; font-weight: 800; color: var(--headline);
+    margin-bottom: 32px; padding: 0 8px;
   }
-  /* Soft glow orbs */
-  .register-side::after {
-    content: ''; position: absolute; top: -80px; right: -80px;
-    width: 400px; height: 400px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(43,122,140,0.15), transparent 65%);
-    filter: blur(60px);
-    animation: sideFloat 12s ease-in-out infinite alternate;
+  .reg-sidebar-items { display: flex; flex-direction: column; gap: 4px; }
+  .reg-sb-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: 8px;
+    font-size: 12px; font-weight: 500; color: var(--body);
   }
-  @keyframes sideFloat {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(-20px, 30px); }
+  .reg-sb-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .reg-sb-item.active {
+    background: rgba(26, 77, 92, 0.06); color: var(--primary); font-weight: 700;
   }
-  /* Second orb — bottom left */
-  .side-orb-2 {
-    position: absolute; bottom: -60px; left: -60px;
-    width: 300px; height: 300px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(224,122,47,0.08), transparent 65%);
-    filter: blur(50px);
-    animation: sideFloat 15s ease-in-out infinite alternate-reverse;
-  }
-  /* Decorative rings */
-  .side-ring {
-    position: absolute; border-radius: 50%; pointer-events: none;
-    border: 1px solid rgba(255,255,255,0.04);
-  }
-  .side-ring-1 {
-    width: 350px; height: 350px; top: -80px; right: -120px;
-    animation: ringPulse 8s ease-in-out infinite;
-  }
-  .side-ring-2 {
-    width: 250px; height: 250px; bottom: -40px; left: -60px;
-    border-color: rgba(255,255,255,0.03);
-    animation: ringPulse 10s ease-in-out infinite 2s;
-  }
-  @keyframes ringPulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.08); opacity: 0.5; }
-  }
-  .side-content { max-width: 380px; position: relative; }
-  .side-content h2 { font-size: 28px; font-weight: 900; color: white; letter-spacing: -0.5px; margin-bottom: 28px; }
-  .side-list { list-style: none; }
-  .side-list li {
-    display: flex; align-items: center; gap: 14px;
-    font-size: 15px; color: rgba(255,255,255,0.75); padding: 10px 0; font-weight: 500;
-  }
-  .check-icon {
-    width: 24px; height: 24px; border-radius: 8px;
-    background: rgba(45, 138, 110, 0.15); color: #2D8A6E;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .check-icon svg { width: 13px; height: 13px; }
-  .side-trust { margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); }
-  .side-trust p { font-size: 13px; color: rgba(255,255,255,0.35); }
-  .side-trust strong { color: rgba(255,255,255,0.6); }
 
-  /* Logo */
-  .reg-logo { display: inline-flex; margin-bottom: 24px; }
-  .reg-logo-img { height: 22px; width: auto; }
+  /* Main screenshot area */
+  .reg-bg-main { flex: 1; overflow: hidden; }
+  .reg-bg-screenshot {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top left;
+    display: block;
+  }
 
-  /* Step 1: Org selection */
-  .org-card {
-    flex: 1; display: flex; flex-direction: column; justify-content: center;
-    padding: 60px 48px; max-width: 580px; margin: 0 auto;
+  /* ============================
+     OVERLAY — shared base
+     ============================ */
+  .reg-overlay {
+    position: fixed; inset: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(2px);
+    padding: 24px;
+    animation: fadeIn 0.4s ease;
   }
-  .org-header { margin-bottom: 28px; }
-  .org-header h1 {
-    font-size: clamp(24px, 3vw, 32px); font-weight: 900; color: var(--headline);
-    letter-spacing: -0.5px; margin-bottom: 10px;
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
-  .org-header p { font-size: 15px; color: var(--body); line-height: 1.6; }
-  .org-header strong { color: var(--headline); font-weight: 700; }
 
-  .org-search {
-    display: flex; align-items: center; margin-bottom: 24px;
-    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
-    background: white; position: relative;
-    transition: border-color 0.2s;
+  /* ============================
+     STEP 1: LOADING MODAL
+     ============================ */
+  .reg-modal {
+    background: white;
+    border-radius: 20px;
+    padding: 48px 44px;
+    max-width: 520px; width: 100%;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04);
+    text-align: center;
+    animation: modalUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .org-search:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26, 77, 92, 0.1); }
-  .org-search-icon {
-    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-    color: #94A3B8; width: 18px; height: 18px;
+  @keyframes modalUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-  .org-search-icon svg { width: 18px; height: 18px; }
-  .org-search input {
-    flex: 1; padding: 14px 16px 14px 42px; border: none; outline: none;
-    font-size: 14px; color: var(--headline); background: transparent;
-  }
-  .org-search input::placeholder { color: #94A3B8; }
-  .org-search button {
-    padding: 10px 20px; margin: 4px; border: none; cursor: pointer;
-    background: var(--primary); color: white; border-radius: 8px;
-    font-size: 13px; font-weight: 700; transition: background 0.2s;
-  }
-  .org-search button:hover { background: var(--primary-light); }
 
-  .results-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
-  .result-row {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 22px; border: 1px solid var(--border); border-radius: 14px;
-    background: white; cursor: pointer; text-align: left;
-    transition: border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    font: inherit;
+  .loading-spinner { margin-bottom: 20px; }
+  .loading-spinner svg { width: 40px; height: 40px; }
+  .loading-text {
+    font-size: 13px; color: var(--body); margin-bottom: 24px;
+    font-weight: 500;
   }
-  .result-row:hover {
-    border-color: var(--primary); background: rgba(26, 77, 92, 0.02);
-    transform: translateX(4px);
+  .reg-modal h2 {
+    font-size: 22px; font-weight: 800; color: var(--headline);
+    letter-spacing: -0.5px; margin-bottom: 28px; line-height: 1.3;
   }
-  .result-name { font-size: 16px; font-weight: 700; color: var(--headline); }
-  .result-meta { font-size: 13px; color: var(--body); margin-top: 3px; }
-  .result-arrow { font-size: 20px; color: var(--primary); font-weight: 600; }
-  .org-note { font-size: 13px; color: var(--body); text-align: center; }
-  .org-manual-link {
-    color: var(--primary); font-weight: 700; background: none; border: none;
-    cursor: pointer; font: inherit; font-size: 13px;
-  }
-  .org-manual-link:hover { text-decoration: underline; }
 
-  /* Step 2: Account form */
-  .register-card {
-    flex: 1; display: flex; flex-direction: column; justify-content: center;
-    padding: 60px 48px; max-width: 540px; margin: 0 auto;
-    animation: fadeDown 0.4s ease both;
+  .loading-features { list-style: none; text-align: left; }
+  .loading-features li {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
   }
-  .register-header { margin-bottom: 28px; }
-  .back-btn {
-    display: inline-flex; align-items: center; gap: 4px;
-    font-size: 13px; font-weight: 600; color: var(--primary);
-    background: none; border: none; cursor: pointer; padding: 0;
-    margin-bottom: 20px; font: inherit; font-size: 13px; font-weight: 600; color: var(--primary);
+  .loading-features li:last-child { padding-bottom: 0; }
+  .lf-check { flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px; }
+  .lf-check svg { width: 24px; height: 24px; }
+  .loading-features strong {
+    display: block; font-size: 15px; font-weight: 700;
+    color: var(--headline); margin-bottom: 3px;
   }
-  .back-btn:hover { text-decoration: underline; }
-  .register-header h1 {
-    font-size: 28px; font-weight: 900; color: var(--headline);
-    letter-spacing: -0.5px; margin-bottom: 8px;
+  .loading-features span {
+    font-size: 13.5px; color: var(--body); line-height: 1.5;
   }
-  .register-header p { font-size: 15px; color: var(--body); }
-  .selected-org {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 8px 16px; border-radius: 10px; margin-top: 14px;
-    background: rgba(26, 77, 92, 0.06); border: 1px solid rgba(26, 77, 92, 0.12);
-    font-size: 13px; font-weight: 700; color: var(--primary);
-  }
-  .selected-org svg { width: 14px; height: 14px; }
 
-  .form-group { margin-bottom: 18px; }
-  .form-group label {
-    display: block; font-size: 13px; font-weight: 600;
-    color: var(--headline); margin-bottom: 6px;
+  /* ============================
+     STEP 2: SIGNUP BAR
+     ============================ */
+  .reg-signup-bar {
+    background: white;
+    border-radius: 20px;
+    padding: 36px 44px;
+    max-width: 600px; width: 100%;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04);
+    text-align: center;
+    animation: modalUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .form-group input {
-    width: 100%; padding: 12px 16px; border: 1px solid var(--border);
-    border-radius: 10px; font-size: 15px; color: var(--headline);
-    outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+  .signup-lock {
+    width: 40px; height: 40px; margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(26, 77, 92, 0.06); border-radius: 12px;
+    color: var(--primary);
   }
-  .form-group input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26, 77, 92, 0.1); }
-  .form-group input::placeholder { color: #94A3B8; }
-  .register-btn {
-    width: 100%; padding: 14px; border: none; border-radius: 12px;
-    background: var(--primary); color: white;
-    font-size: 16px; font-weight: 700;
-    cursor: pointer; transition: background 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    margin-top: 8px;
+  .signup-lock svg { width: 20px; height: 20px; }
+  .signup-label {
+    display: block;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--headline); margin-bottom: 24px;
+    text-transform: uppercase;
   }
-  .register-btn:hover {
-    background: var(--primary-light); transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(26, 77, 92, 0.3);
+  .signup-form {
+    display: flex; gap: 8px; max-width: 460px; margin: 0 auto 16px;
   }
-  .register-terms { font-size: 12px; color: var(--body); margin-top: 14px; text-align: center; }
-  .register-terms a { color: var(--primary); }
-  .register-signin { font-size: 14px; color: var(--body); margin-top: 24px; text-align: center; }
-  .register-signin a { color: var(--primary); font-weight: 700; }
+  .signup-form input {
+    flex: 1; padding: 14px 18px; border: 1px solid var(--border);
+    border-radius: 12px; font-size: 15px; color: var(--headline);
+    outline: none; background: white;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .signup-form input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(26, 77, 92, 0.1);
+  }
+  .signup-form input::placeholder { color: #94A3B8; }
+  .signup-form button {
+    padding: 14px 28px; border: none; border-radius: 12px;
+    background: var(--primary-dark); color: white;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
+  }
+  .signup-form button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(15, 44, 53, 0.25);
+  }
+  .signup-note {
+    font-size: 12px; color: var(--body); font-weight: 500;
+  }
 
-  @media (max-width: 900px) {
-    .register-page { flex-direction: column; }
-    .org-card, .register-card { max-width: 100%; padding: 40px 24px; }
-    .register-side { padding: 40px 24px; }
+  /* ============================
+     RESPONSIVE
+     ============================ */
+  @media (max-width: 768px) {
+    .reg-bg-sidebar { display: none; }
+    .reg-modal { padding: 36px 28px; }
+    .reg-signup-bar { padding: 28px 24px; }
+    .signup-form { flex-direction: column; }
+    .signup-form button { width: 100%; justify-content: center; }
+    .reg-modal h2 { font-size: 20px; }
   }
 </style>
