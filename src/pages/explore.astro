@@ -24,12 +24,12 @@ const recentFilings = [
 ];
 
 const topCategories = [
-  { name: 'Artificial Intelligence', count: '2.4M', growth: '+34%', color: '#3B5BDB' },
-  { name: 'Electric Vehicles', count: '890K', growth: '+28%', color: '#8B5CF6' },
-  { name: 'Biotechnology', count: '1.8M', growth: '+22%', color: '#0EA5E9' },
-  { name: 'Renewable Energy', count: '1.2M', growth: '+31%', color: '#22C55E' },
-  { name: 'Semiconductors', count: '3.1M', growth: '+18%', color: '#F97316' },
-  { name: 'Quantum Computing', count: '45K', growth: '+67%', color: '#EC4899' },
+  { name: 'Artificial Intelligence', count: '2.4M', growth: '+34%', color: '#1A4D5C' },
+  { name: 'Electric Vehicles', count: '890K', growth: '+28%', color: '#2B7A8C' },
+  { name: 'Biotechnology', count: '1.8M', growth: '+22%', color: '#24697D' },
+  { name: 'Renewable Energy', count: '1.2M', growth: '+31%', color: '#2D8A6E' },
+  { name: 'Semiconductors', count: '3.1M', growth: '+18%', color: '#E07A2F' },
+  { name: 'Quantum Computing', count: '45K', growth: '+67%', color: '#C9612A' },
 ];
 
 const globalStats = [
@@ -72,14 +72,14 @@ const globalStats = [
     <!-- Trending companies -->
     <section class="explore-section">
       <div class="explore-section-inner">
-        <div class="section-header">
+        <div class="section-header reveal">
           <div>
             <p class="section-label">Trending Now</p>
             <h2>Top patent holders</h2>
           </div>
-          <a href="/register" class="section-action">View all companies →</a>
+          <a href={`${import.meta.env.BASE_URL}register`} class="section-action">Explore all companies →</a>
         </div>
-        <div class="companies-grid">
+        <div class="companies-grid reveal">
           {trendingCompanies.map((c, i) => (
             <div class="company-card">
               <div class="company-rank">#{i + 1}</div>
@@ -125,14 +125,14 @@ const globalStats = [
     <!-- Technology categories -->
     <section class="explore-section bg-light">
       <div class="explore-section-inner">
-        <div class="section-header center">
+        <div class="section-header center reveal">
           <div>
             <p class="section-label">Technology Landscape</p>
             <h2>Fastest growing patent categories</h2>
             <p class="section-sub">Discover which technology areas are seeing the most patent activity worldwide.</p>
           </div>
         </div>
-        <div class="categories-grid">
+        <div class="categories-grid reveal">
           {topCategories.map(cat => (
             <div class="category-card">
               <div class="category-color" style={`background: ${cat.color};`}></div>
@@ -153,14 +153,14 @@ const globalStats = [
     <!-- Recent filings -->
     <section class="explore-section">
       <div class="explore-section-inner">
-        <div class="section-header">
+        <div class="section-header reveal">
           <div>
             <p class="section-label">Live Feed</p>
             <h2>Recent patent filings</h2>
           </div>
-          <a href="/register" class="section-action">Get real-time alerts →</a>
+          <a href={`${import.meta.env.BASE_URL}register`} class="section-action">Get real-time alerts →</a>
         </div>
-        <div class="filings-table">
+        <div class="filings-table reveal">
           <div class="filings-header">
             <span>Patent Title</span>
             <span>Applicant</span>
@@ -183,7 +183,7 @@ const globalStats = [
         </div>
         <div class="filings-cta">
           <p>Want to see more? Create a free account to access the full database.</p>
-          <a href="/register" class="filings-btn">Create free account →</a>
+          <a href={`${import.meta.env.BASE_URL}register`} class="filings-btn">Start free →</a>
         </div>
       </div>
     </section>
@@ -194,8 +194,8 @@ const globalStats = [
         <h2>Want the full picture?</h2>
         <p>Create a free account to unlock portfolio analytics, competitor monitoring, and professional reports.</p>
         <div class="explore-cta-actions">
-          <a href="/register" class="cta-primary">Sign up free</a>
-          <a href="/" class="cta-secondary">Learn more</a>
+          <a href={`${import.meta.env.BASE_URL}register`} class="cta-primary">Start free</a>
+          <a href={import.meta.env.BASE_URL} class="cta-secondary">Learn more</a>
         </div>
       </div>
     </section>
@@ -207,20 +207,20 @@ const globalStats = [
   /* Hero */
   .explore-hero {
     position: relative; padding: 140px 24px 60px; text-align: center;
-    background: linear-gradient(165deg, #0D1531 0%, #1B2559 40%, #2B3A7A 100%);
+    background: linear-gradient(165deg, #0F2C35 0%, #1A4D5C 40%, #24697D 100%);
     overflow: hidden;
   }
   .explore-hero-bg { position: absolute; inset: 0; }
   .explore-orb {
-    position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.25;
+    position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.12;
   }
   .explore-orb.orb-1 {
     width: 500px; height: 500px; top: -150px; right: -100px;
-    background: radial-gradient(circle, rgba(59,91,219,0.5), transparent 70%);
+    background: radial-gradient(circle, rgba(26,77,92,0.5), transparent 70%);
   }
   .explore-orb.orb-2 {
     width: 350px; height: 350px; bottom: -100px; left: -50px;
-    background: radial-gradient(circle, rgba(139,92,246,0.4), transparent 70%);
+    background: radial-gradient(circle, rgba(43,122,140,0.4), transparent 70%);
   }
   .explore-hero-inner { position: relative; max-width: 700px; margin: 0 auto; }
   .explore-hero h1 {
@@ -260,7 +260,7 @@ const globalStats = [
   .explore-stat-label { font-size: 11px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
 
   /* Sections */
-  .explore-section { padding: 80px 24px; }
+  .explore-section { padding: 80px 24px; border-bottom: 1px solid var(--border); }
   .explore-section.bg-light { background: var(--bg-light); }
   .explore-section-inner { max-width: 1100px; margin: 0 auto; }
   .section-header {
@@ -287,16 +287,16 @@ const globalStats = [
     display: flex; align-items: flex-start; gap: 16px;
     padding: 24px; border-radius: var(--radius-card);
     border: 1px solid var(--border); background: white;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s, border-color 0.3s;
     position: relative; overflow: hidden;
   }
   .company-card:hover {
     transform: translateY(-2px); box-shadow: 0 12px 40px rgba(27,37,89,0.06);
-    border-color: rgba(59,91,219,0.2);
+    border-color: rgba(26,77,92,0.2);
   }
   .company-rank {
     font-size: 14px; font-weight: 900; color: var(--primary);
-    background: rgba(59,91,219,0.06); border-radius: 10px;
+    background: rgba(26,77,92,0.06); border-radius: 10px;
     width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
@@ -328,7 +328,7 @@ const globalStats = [
   .category-card {
     padding: 24px; border-radius: var(--radius-card);
     border: 1px solid var(--border); background: white;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
   }
   .category-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.05); }
   .category-color { width: 8px; height: 8px; border-radius: 50%; margin-bottom: 14px; }
@@ -355,7 +355,7 @@ const globalStats = [
     display: grid; grid-template-columns: 2.5fr 1.5fr 0.8fr 1fr 0.8fr;
     gap: 16px; padding: 16px 24px; border-bottom: 1px solid #f3f4f6;
     font-size: 13px; color: var(--headline); align-items: center;
-    transition: background 0.15s;
+    transition: background 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .filing-row:last-child { border-bottom: none; }
   .filing-row:hover { background: var(--bg-lighter); }
@@ -389,7 +389,7 @@ const globalStats = [
   /* CTA */
   .explore-cta {
     padding: 80px 24px; text-align: center;
-    background: linear-gradient(165deg, #0D1531, #1B2559);
+    background: linear-gradient(165deg, #0F2C35, #1A4D5C);
   }
   .explore-cta-inner { max-width: 560px; margin: 0 auto; }
   .explore-cta h2 {
@@ -430,6 +430,7 @@ const globalStats = [
     const query = input?.value.trim();
     if (!query) return;
     // In a real app this would search — for now redirect to register
-    window.location.href = `/register?company=${encodeURIComponent(query)}`;
+    const base = import.meta.env.BASE_URL;
+    window.location.href = `${base}register?company=${encodeURIComponent(query)}`;
   });
 </script>

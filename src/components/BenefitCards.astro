@@ -2,39 +2,31 @@
 const cards = [
   {
     icon: 'search',
-    color: '#3B5BDB',
-    bgColor: '#EEF2FF',
+    color: '#1A4D5C',
+    bgColor: '#EDF5F7',
     headline: 'Patent Discovery',
     body: 'Search across 100M+ patents from 80+ global offices instantly. Type any company name and explore their full patent portfolio.',
-    stat: '100M+',
-    statLabel: 'patents indexed',
   },
   {
     icon: 'monitor',
-    color: '#8B5CF6',
-    bgColor: '#F3F0FF',
+    color: '#2B7A8C',
+    bgColor: '#EBF4F6',
     headline: 'Competitor Monitoring',
     body: 'Get automated alerts when competitors file new patents. Monitor any technology space with real-time intelligence.',
-    stat: 'Real-time',
-    statLabel: 'filing alerts',
   },
   {
     icon: 'report',
-    color: '#0EA5E9',
-    bgColor: '#EFF6FF',
+    color: '#24697D',
+    bgColor: '#ECF3F5',
     headline: 'Reports & Analytics',
     body: 'Generate board-ready IP reports in one click. Portfolio benchmarks, green patent analysis, and technology landscapes.',
-    stat: '1-click',
-    statLabel: 'PDF exports',
   },
   {
     icon: 'global',
-    color: '#F97316',
-    bgColor: '#FFF7ED',
+    color: '#E07A2F',
+    bgColor: '#FDF5EE',
     headline: 'Global Coverage',
     body: 'Access patent data from EPO, USPTO, WIPO, DPMA and 80+ offices worldwide in one unified, searchable platform.',
-    stat: '80+',
-    statLabel: 'patent offices',
   },
 ];
 
@@ -61,11 +53,7 @@ const icons: Record<string, string> = {
           </div>
           <h3>{c.headline}</h3>
           <p>{c.body}</p>
-          <div class="card-stat">
-            <span class="card-stat-num" style={`color: ${c.color};`}>{c.stat}</span>
-            <span class="card-stat-label">{c.statLabel}</span>
-          </div>
-          <a href="/register" class="card-link" style={`color: ${c.color};`}>
+          <a href={`${import.meta.env.BASE_URL}register`} class="card-link" style={`color: ${c.color};`}>
             Learn more
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
           </a>
@@ -113,9 +101,6 @@ const icons: Record<string, string> = {
   .card-icon svg { width: 24px; height: 24px; }
   .benefit-card h3 { font-size: 20px; font-weight: 800; color: var(--headline); margin-bottom: 10px; letter-spacing: -0.3px; }
   .benefit-card p { font-size: 14.5px; color: var(--body); line-height: 1.7; margin-bottom: 22px; }
-  .card-stat { display: flex; align-items: baseline; gap: 8px; margin-bottom: 18px; }
-  .card-stat-num { font-size: 30px; font-weight: 900; letter-spacing: -0.5px; }
-  .card-stat-label { font-size: 13px; color: var(--body); font-weight: 500; }
   .card-link {
     display: inline-flex; align-items: center; gap: 6px;
     font-size: 14px; font-weight: 700;

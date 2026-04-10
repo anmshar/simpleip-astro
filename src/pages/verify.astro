@@ -8,7 +8,7 @@ import Footer from '../components/Footer.astro';
   <section class="verify-page">
     <div class="verify-card">
       <div class="verify-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#264d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="48" height="48">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="48" height="48">
           <rect x="2" y="4" width="20" height="16" rx="2"/>
           <path d="M22 7l-10 7L2 7"/>
         </svg>
@@ -37,14 +37,16 @@ import Footer from '../components/Footer.astro';
   }
   .verify-card {
     background: var(--white); border-radius: 16px; padding: 56px 48px; text-align: center;
-    max-width: 520px; width: 100%; box-shadow: 0 12px 48px rgba(0,0,0,0.06);
+    max-width: 520px; width: 100%; box-shadow: 0 20px 60px rgba(27, 37, 89, 0.08);
+    animation: fadeDown 0.5s ease both;
   }
-  .verify-icon { margin-bottom: 24px; }
+  .verify-icon { margin-bottom: 24px; color: var(--primary); }
+  .verify-icon svg { background: rgba(26, 77, 92, 0.08); border-radius: 16px; padding: 16px; }
   .verify-card h1 { font-size: 28px; font-weight: 800; color: var(--headline); margin-bottom: 12px; }
   .verify-sub { font-size: 15px; color: var(--body); line-height: 1.7; margin-bottom: 32px; }
   .unlock-preview {
     background: var(--bg-light); border-radius: var(--radius-card); padding: 24px;
-    text-align: left; margin-bottom: 24px;
+    text-align: left; margin-bottom: 24px; border: 1px solid var(--border);
   }
   .unlock-preview h3 { font-size: 14px; font-weight: 700; color: var(--headline); margin-bottom: 14px; }
   .unlock-preview ul { list-style: none; }
@@ -52,7 +54,8 @@ import Footer from '../components/Footer.astro';
     display: flex; align-items: center; gap: 10px;
     font-size: 14px; color: var(--body); padding: 5px 0;
   }
-  .unlock-preview li span { color: #48bb78; font-weight: 700; }
+  .unlock-preview li span { color: var(--green, #2D8A6E); font-weight: 700; }
   .verify-hint { font-size: 13px; color: var(--body); }
-  .verify-hint a { color: var(--primary); font-weight: 600; }
+  .verify-hint a { color: var(--primary); font-weight: 600; transition: color 0.2s; }
+  .verify-hint a:hover { text-decoration: underline; }
 </style>

@@ -1,15 +1,13 @@
 ---
 ---
 <section class="final-cta">
-  <div class="cta-orb cta-orb-1"></div>
-  <div class="cta-orb cta-orb-2"></div>
   <div class="cta-inner reveal">
     <div class="cta-badge">Start for free today</div>
     <h2>Ready to take control of your patent portfolio?</h2>
     <p class="cta-sub">Join thousands of IP professionals using SimpleIP to discover, monitor, and manage their patents. Free forever.</p>
     <div class="cta-actions">
-      <a href="/register" class="cta-btn-primary">Create your free account</a>
-      <a href="/#features" class="cta-btn-secondary">See all features</a>
+      <a href={`${import.meta.env.BASE_URL}register`} class="cta-btn-primary">Start free</a>
+      <a href={`${import.meta.env.BASE_URL}register`} class="cta-btn-secondary">Talk to sales</a>
     </div>
     <div class="cta-trust">
       <div class="cta-trust-item">
@@ -31,27 +29,16 @@
 <style>
   .final-cta {
     padding: 110px 24px; text-align: center;
-    background: linear-gradient(180deg, var(--white) 0%, var(--bg-light) 30%, #EEF2FF 100%);
+    background: linear-gradient(180deg, var(--white) 0%, var(--bg-light) 30%, #EDF5F7 100%);
     position: relative; overflow: hidden;
-  }
-  .cta-orb {
-    position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none;
-  }
-  .cta-orb-1 {
-    width: 400px; height: 400px; top: -100px; right: -100px;
-    background: radial-gradient(circle, rgba(59, 91, 219, 0.08), transparent 70%);
-  }
-  .cta-orb-2 {
-    width: 350px; height: 350px; bottom: -80px; left: -80px;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.06), transparent 70%);
   }
   .cta-inner { position: relative; max-width: 700px; margin: 0 auto; }
   .cta-badge {
     display: inline-flex; padding: 7px 18px; border-radius: 40px;
-    background: rgba(59, 91, 219, 0.08); color: var(--primary);
+    background: rgba(26, 77, 92, 0.08); color: var(--primary);
     font-size: 13px; font-weight: 700; margin-bottom: 24px;
     text-transform: uppercase; letter-spacing: 1px;
-    border: 1px solid rgba(59, 91, 219, 0.1);
+    border: 1px solid rgba(26, 77, 92, 0.1);
   }
   .final-cta h2 {
     font-size: clamp(28px, 4vw, 46px); font-weight: 900; color: var(--headline);
@@ -64,15 +51,15 @@
   .cta-actions { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 36px; flex-wrap: wrap; }
   .cta-btn-primary {
     display: inline-flex; padding: 16px 40px; border-radius: 12px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background: linear-gradient(135deg, #1A4D5C, #0F2C35);
     color: var(--white);
     font-size: 16px; font-weight: 700;
     transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
-    box-shadow: 0 4px 20px rgba(59, 91, 219, 0.25);
+    box-shadow: 0 4px 20px rgba(26, 77, 92, 0.25);
   }
   .cta-btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 14px 40px rgba(59, 91, 219, 0.35);
+    box-shadow: 0 14px 40px rgba(26, 77, 92, 0.35);
   }
   .cta-btn-secondary {
     display: inline-flex; padding: 16px 36px; border-radius: 12px;

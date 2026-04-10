@@ -1,9 +1,9 @@
 ---
 const steps = [
-  { n: 1, title: 'Search', desc: 'Enter any company or applicant name into the search bar.', color: '#3B5BDB' },
-  { n: 2, title: 'Select', desc: 'Choose the correct entity from the matching results.', color: '#8B5CF6' },
-  { n: 3, title: 'Sign up', desc: 'Create your free account in under 60 seconds.', color: '#0EA5E9' },
-  { n: 4, title: 'Explore', desc: 'Access your full patent portfolio, analytics and alerts.', color: '#22C55E' },
+  { n: 1, title: 'Search', desc: 'Enter any company or applicant name into the search bar.', color: '#1A4D5C' },
+  { n: 2, title: 'Select', desc: 'Choose the correct entity from the matching results.', color: '#24697D' },
+  { n: 3, title: 'Sign up', desc: 'Create your free account in under 60 seconds.', color: '#2B7A8C' },
+  { n: 4, title: 'Explore', desc: 'Access your full patent portfolio, analytics and alerts.', color: '#2D8A6E' },
 ];
 ---
 <section class="how-it-works" id="how-it-works">
@@ -28,8 +28,8 @@ const steps = [
       ))}
     </div>
     <div class="how-cta">
-      <a href="/register" class="how-btn">Get started free</a>
-      <span class="how-note">No credit card required</span>
+      <a href={`${import.meta.env.BASE_URL}register`} class="how-btn">Start free</a>
+      <span class="how-note">60-second setup</span>
     </div>
   </div>
 </section>
@@ -42,7 +42,7 @@ const steps = [
     letter-spacing: -1.5px; margin-bottom: 12px;
   }
   .highlight {
-    background: linear-gradient(135deg, var(--primary), var(--purple));
+    background: linear-gradient(135deg, var(--primary), #2B7A8C);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
   .how-sub { font-size: 16px; color: var(--body); max-width: 480px; margin: 0 auto 56px; line-height: 1.7; }
@@ -75,11 +75,11 @@ const steps = [
     display: inline-flex; padding: 15px 36px; border-radius: 12px;
     background: var(--primary); color: var(--white); font-size: 15px; font-weight: 700;
     transition: background 0.2s, transform 0.3s var(--ease-out), box-shadow 0.3s;
-    box-shadow: 0 4px 16px rgba(59, 91, 219, 0.2);
+    box-shadow: 0 4px 16px rgba(26, 77, 92, 0.2);
   }
   .how-btn:hover {
     background: var(--primary-light); transform: translateY(-3px);
-    box-shadow: 0 12px 36px rgba(59, 91, 219, 0.35);
+    box-shadow: 0 12px 36px rgba(26, 77, 92, 0.35);
   }
   .how-note { font-size: 12px; color: var(--body); opacity: 0.7; }
 
