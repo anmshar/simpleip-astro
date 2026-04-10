@@ -53,7 +53,7 @@ const features = [
 <section class="features" id="features">
   <div class="features-inner">
     {features.map(f => (
-      <div class:list={['feature-block', { reverse: f.reverse }]}>
+      <div class:list={['feature-block reveal', { reverse: f.reverse }]}>
         <div class="feature-img" style={`background: linear-gradient(145deg, ${f.gradFrom}, ${f.gradTo});`} aria-hidden="true">
           <div class="feature-window">
             <div class="feature-window-bar">
@@ -111,17 +111,23 @@ const features = [
   .features { padding: 60px 24px; background: var(--white); }
   .features-inner { max-width: 1100px; margin: 0 auto; }
   .feature-block {
-    display: flex; align-items: center; gap: 64px;
-    padding: 60px 0;
+    display: flex; align-items: center; gap: 72px;
+    padding: 72px 0;
+  }
+  .feature-block + .feature-block {
+    border-top: 1px solid var(--border);
   }
   .feature-block.reverse { flex-direction: row-reverse; }
   .feature-img {
-    flex: 1; border-radius: var(--radius-lg); padding: 24px;
+    flex: 1; border-radius: var(--radius-lg); padding: 28px;
     min-height: 380px; display: flex; align-items: center; justify-content: center;
+    transition: transform 0.5s var(--ease-out);
   }
+  .feature-block:hover .feature-img { transform: scale(1.02); }
   .feature-window {
     width: 100%; border-radius: 16px; overflow: hidden;
-    background: var(--white); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    background: var(--white);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.03);
   }
   .feature-window-bar {
     display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px;
@@ -179,12 +185,18 @@ const features = [
   .bullet-check svg { width: 12px; height: 12px; }
   .feature-cta {
     display: inline-flex; align-items: center; gap: 8px;
-    padding: 12px 24px; border-radius: 10px;
+    padding: 13px 26px; border-radius: 10px;
     font-size: 14px; font-weight: 700; color: var(--white);
-    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s, opacity 0.2s;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   }
-  .feature-cta svg { width: 14px; height: 14px; }
-  .feature-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); opacity: 0.9; }
+  .feature-cta svg { width: 14px; height: 14px; transition: transform 0.3s var(--ease-out); }
+  .feature-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    opacity: 0.95;
+  }
+  .feature-cta:hover svg { transform: translateX(3px); }
 
   @media (max-width: 768px) {
     .feature-block, .feature-block.reverse { flex-direction: column; gap: 32px; }

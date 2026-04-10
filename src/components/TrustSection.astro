@@ -25,12 +25,14 @@ const cards = [
 ---
 <section class="enterprise">
   <div class="enterprise-inner">
+    <div class="reveal">
     <p class="section-label" style="color: rgba(255,255,255,0.5);">Enterprise Ready</p>
     <h2>Built on 60 years of IP expertise</h2>
     <p class="enterprise-sub">SimpleIP is built by Dennemeyer — one of the world's leading intellectual property law and management firms, trusted by global enterprises since 1962.</p>
+    </div>
     <div class="trust-cards">
-      {cards.map(c => (
-        <div class="trust-card">
+      {cards.map((c, i) => (
+        <div class={`trust-card reveal reveal-delay-${i}`}>
           <div class="trust-card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" set:html={c.icon} />
           </div>
@@ -48,15 +50,21 @@ const cards = [
 
 <style>
   .enterprise {
-    padding: 100px 24px; text-align: center;
-    background: linear-gradient(165deg, #0D1531 0%, #1B2559 100%);
+    padding: 110px 24px; text-align: center;
+    background: linear-gradient(165deg, #0D1531 0%, #1B2559 50%, #0D1531 100%);
     position: relative; overflow: hidden;
   }
   .enterprise::before {
     content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 91, 219, 0.18), transparent 70%);
+    filter: blur(80px);
+  }
+  .enterprise::after {
+    content: ''; position: absolute; bottom: -250px; left: -200px;
     width: 500px; height: 500px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(59, 91, 219, 0.2), transparent 70%);
-    filter: blur(60px);
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.1), transparent 70%);
+    filter: blur(80px);
   }
   .enterprise-inner { position: relative; max-width: 1100px; margin: 0 auto; }
   .enterprise h2 {
@@ -64,21 +72,24 @@ const cards = [
     letter-spacing: -1.5px; margin-bottom: 14px;
   }
   .enterprise-sub {
-    font-size: 16px; color: rgba(255,255,255,0.45); max-width: 580px;
-    margin: 0 auto 56px; line-height: 1.7;
+    font-size: 16px; color: rgba(255,255,255,0.5); max-width: 580px;
+    margin: 0 auto 60px; line-height: 1.7;
   }
   .trust-cards {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
   }
   .trust-card {
-    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-card); padding: 36px; text-align: left;
-    backdrop-filter: blur(10px);
-    transition: background 0.3s, border-color 0.3s;
+    backdrop-filter: blur(12px);
+    transition: background 0.4s, border-color 0.4s, transform 0.4s var(--ease-out), box-shadow 0.4s;
   }
   .trust-card:hover {
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(59, 91, 219, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 0 40px rgba(59, 91, 219, 0.06);
   }
   .trust-card-icon {
     width: 48px; height: 48px; border-radius: 14px;

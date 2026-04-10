@@ -8,18 +8,22 @@ const steps = [
 ---
 <section class="how-it-works" id="how-it-works">
   <div class="how-inner">
-    <p class="section-label">How it works</p>
-    <h2>From search to portfolio in <span class="highlight">4 simple steps</span></h2>
-    <p class="how-sub">No technical setup. No credit card. Just type your applicant name and start exploring.</p>
-    <div class="steps-row">
+    <div class="reveal">
+      <p class="section-label">How it works</p>
+      <h2>From search to portfolio in <span class="highlight">4 simple steps</span></h2>
+      <p class="how-sub">No technical setup. No credit card. Just type your applicant name and start exploring.</p>
+    </div>
+    <div class="steps-row reveal reveal-delay-1">
       {steps.map((s, i) => (
         <div class="step">
-          <div class="step-number" style={`background: ${s.color};`}>
+          <div class="step-number" style={`background: ${s.color}; box-shadow: 0 8px 24px ${s.color}33;`}>
             {s.n}
           </div>
           {i < steps.length - 1 && <div class="step-connector"></div>}
-          <h4>{s.title}</h4>
-          <p>{s.desc}</p>
+          <div class="step-text">
+            <h4>{s.title}</h4>
+            <p>{s.desc}</p>
+          </div>
         </div>
       ))}
     </div>
@@ -43,37 +47,52 @@ const steps = [
   }
   .how-sub { font-size: 16px; color: var(--body); max-width: 480px; margin: 0 auto 56px; line-height: 1.7; }
   .steps-row {
-    display: flex; justify-content: center; max-width: 900px; margin: 0 auto 48px;
+    display: flex; justify-content: center; max-width: 900px; margin: 0 auto 52px;
     position: relative;
   }
-  .step { flex: 1; position: relative; padding: 0 20px; }
+  .step {
+    flex: 1; position: relative; padding: 0 16px;
+  }
   .step-number {
     width: 52px; height: 52px; border-radius: 16px; color: var(--white);
     font-size: 20px; font-weight: 900; display: flex; align-items: center; justify-content: center;
     margin: 0 auto 20px; position: relative; z-index: 2;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s var(--ease-out);
   }
+  .step:hover .step-number { transform: scale(1.1); }
   .step-connector {
     position: absolute; top: 26px; left: calc(50% + 36px); right: calc(-50% + 36px);
-    height: 2px; background: var(--border); z-index: 1;
+    height: 2px; z-index: 1;
+    background: linear-gradient(90deg, var(--border), var(--primary-light), var(--border));
+    opacity: 0.5;
   }
-  .step h4 { font-size: 16px; font-weight: 800; color: var(--headline); margin-bottom: 8px; }
-  .step p { font-size: 13px; color: var(--body); line-height: 1.6; }
+  .step-text { }
+  .step h4 { font-size: 17px; font-weight: 800; color: var(--headline); margin-bottom: 8px; }
+  .step p { font-size: 13.5px; color: var(--body); line-height: 1.65; }
 
-  .how-cta { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .how-cta { display: flex; flex-direction: column; align-items: center; gap: 14px; }
   .how-btn {
-    display: inline-flex; padding: 14px 32px; border-radius: 12px;
+    display: inline-flex; padding: 15px 36px; border-radius: 12px;
     background: var(--primary); color: var(--white); font-size: 15px; font-weight: 700;
-    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    transition: background 0.2s, transform 0.3s var(--ease-out), box-shadow 0.3s;
+    box-shadow: 0 4px 16px rgba(59, 91, 219, 0.2);
   }
   .how-btn:hover {
-    background: var(--primary-light); transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(59, 91, 219, 0.3);
+    background: var(--primary-light); transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(59, 91, 219, 0.35);
   }
-  .how-note { font-size: 12px; color: var(--body); }
+  .how-note { font-size: 12px; color: var(--body); opacity: 0.7; }
 
   @media (max-width: 768px) {
-    .steps-row { flex-direction: column; gap: 32px; }
+    .steps-row { flex-direction: column; gap: 28px; }
     .step-connector { display: none; }
+    .step {
+      display: flex; align-items: center; gap: 16px; text-align: left;
+      padding: 16px 20px; border-radius: 14px;
+      background: var(--white); border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(27, 37, 89, 0.04);
+    }
+    .step-number { margin: 0; flex-shrink: 0; width: 44px; height: 44px; font-size: 17px; }
+    .step h4 { margin-bottom: 4px; }
   }
 </style>

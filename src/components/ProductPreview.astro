@@ -2,9 +2,11 @@
 ---
 <section class="product-preview" id="solutions">
   <div class="product-preview-inner">
+    <div class="reveal">
     <p class="section-label">See it in action</p>
     <h2>Your complete patent portfolio, <br/><span class="highlight">visualized instantly.</span></h2>
     <p class="sub">See your patents, monitor competitors, analyze landscapes — all in one place.</p>
+    </div>
 
     <!-- Tab switcher -->
     <div class="preview-tabs" id="previewTabs">
@@ -285,33 +287,37 @@
     background: linear-gradient(135deg, var(--primary), var(--purple));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
-  .sub { font-size: 17px; color: var(--body); max-width: 520px; margin: 0 auto 36px; line-height: 1.7; }
+  .sub { font-size: 17px; color: var(--body); max-width: 520px; margin: 0 auto 40px; line-height: 1.7; }
 
   /* Tabs */
   .preview-tabs {
-    display: inline-flex; gap: 4px; padding: 4px; border-radius: 14px;
-    background: var(--white); border: 1px solid var(--border); margin-bottom: 32px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    display: inline-flex; gap: 4px; padding: 5px; border-radius: 14px;
+    background: var(--white); border: 1px solid var(--border); margin-bottom: 36px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
   }
   .preview-tab {
     display: flex; align-items: center; gap: 8px;
-    padding: 10px 20px; border-radius: 10px; border: none;
+    padding: 11px 22px; border-radius: 10px; border: none;
     background: transparent; font-size: 13px; font-weight: 600;
-    color: var(--body); cursor: pointer; transition: all 0.2s;
+    color: var(--body); cursor: pointer;
+    transition: all 0.3s var(--ease-out);
   }
   .preview-tab svg { width: 16px; height: 16px; }
-  .preview-tab.active { background: var(--primary); color: white; }
-  .preview-tab:not(.active):hover { background: var(--bg-light); }
+  .preview-tab.active {
+    background: var(--primary); color: white;
+    box-shadow: 0 4px 12px rgba(59, 91, 219, 0.25);
+  }
+  .preview-tab:not(.active):hover { background: var(--bg-light); color: var(--headline); }
 
   /* Tab content */
   .tab-content { display: none; }
-  .tab-content.active { display: block; animation: fadeDown 0.3s ease; }
+  .tab-content.active { display: block; animation: fadeDown 0.4s ease; }
 
   /* Browser frame */
   .dash-mockup {
     border-radius: var(--radius-lg); background: var(--white);
     border: 1px solid var(--border); overflow: hidden;
-    box-shadow: 0 40px 100px rgba(27, 37, 89, 0.08), 0 0 0 1px rgba(0,0,0,0.02);
+    box-shadow: 0 40px 100px rgba(27, 37, 89, 0.1), 0 0 0 1px rgba(0,0,0,0.03);
     text-align: left;
   }
   .dash-chrome {
