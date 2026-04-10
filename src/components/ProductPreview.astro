@@ -54,11 +54,11 @@ const tabs = [
 <style>
   .product-preview {
     position: relative;
-    min-height: 520px;
+    min-height: 85vh;
     display: flex; align-items: center; justify-content: center;
     text-align: center;
     overflow: hidden;
-    padding: 100px 24px;
+    padding: 120px 24px;
   }
 
   /* Background screenshots — blurred, full cover */
@@ -70,17 +70,21 @@ const tabs = [
   .pp-bg.active { opacity: 1; }
   .pp-bg img {
     width: 100%; height: 100%;
-    object-fit: cover; object-position: top center;
+    object-fit: cover; object-position: center center;
     display: block;
-    filter: blur(4px);
-    transform: scale(1.03);
+    filter: blur(3px);
+    transform: scale(1.02);
   }
 
   /* Overlay — white wash so text is readable */
   .pp-bg-overlay {
     position: absolute; inset: 0; z-index: 1;
-    background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(2px);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.88) 0%,
+      rgba(255, 255, 255, 0.72) 50%,
+      rgba(255, 255, 255, 0.85) 100%
+    );
   }
 
   /* Foreground content */
@@ -140,7 +144,7 @@ const tabs = [
   .pp-cta:hover svg { transform: translateX(3px); }
 
   @media (max-width: 768px) {
-    .product-preview { min-height: 420px; padding: 72px 20px; }
+    .product-preview { min-height: 60vh; padding: 80px 20px; }
     .preview-tabs { flex-wrap: wrap; }
     .preview-tab { font-size: 12px; padding: 9px 16px; }
   }
