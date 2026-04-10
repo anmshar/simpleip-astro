@@ -1,0 +1,435 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const trendingCompanies = [
+  { name: 'Siemens AG', country: 'DE', patents: 48231, granted: 38420, pending: 9811, trend: '+312', categories: ['Automation', 'Energy', 'Healthcare'] },
+  { name: 'Robert Bosch GmbH', country: 'DE', patents: 42156, granted: 35200, pending: 6956, trend: '+287', categories: ['Automotive', 'IoT', 'Manufacturing'] },
+  { name: 'BASF SE', country: 'DE', patents: 28340, granted: 22100, pending: 6240, trend: '+198', categories: ['Chemistry', 'Agriculture', 'Materials'] },
+  { name: 'Tesla Inc.', country: 'US', patents: 3840, granted: 2100, pending: 1740, trend: '+156', categories: ['EV', 'Battery', 'Energy Storage'] },
+  { name: 'Samsung Electronics', country: 'KR', patents: 89200, granted: 72400, pending: 16800, trend: '+421', categories: ['Semiconductors', 'Display', 'Mobile'] },
+  { name: 'Apple Inc.', country: 'US', patents: 35600, granted: 28900, pending: 6700, trend: '+245', categories: ['Consumer Electronics', 'Software', 'AI'] },
+];
+
+const recentFilings = [
+  { title: 'Method for autonomous vehicle path planning using neural networks', applicant: 'Tesla Inc.', country: 'US', date: '2026-04-02', status: 'Pending', office: 'USPTO' },
+  { title: 'Energy-efficient semiconductor manufacturing process', applicant: 'Samsung Electronics', country: 'KR', date: '2026-04-01', status: 'Pending', office: 'KIPO' },
+  { title: 'Solid-state battery electrode composition', applicant: 'Robert Bosch GmbH', country: 'DE', date: '2026-03-28', status: 'Pending', office: 'DPMA' },
+  { title: 'AI-based medical imaging diagnostic system', applicant: 'Siemens AG', country: 'DE', date: '2026-03-25', status: 'Pending', office: 'EPO' },
+  { title: 'Biodegradable polymer composite for packaging', applicant: 'BASF SE', country: 'DE', date: '2026-03-22', status: 'Pending', office: 'EPO' },
+  { title: 'Spatial computing gesture recognition method', applicant: 'Apple Inc.', country: 'US', date: '2026-03-20', status: 'Pending', office: 'USPTO' },
+  { title: 'Photovoltaic cell efficiency optimization technique', applicant: 'Siemens AG', country: 'DE', date: '2026-03-18', status: 'Pending', office: 'WIPO' },
+  { title: 'Machine learning model compression for edge devices', applicant: 'Samsung Electronics', country: 'KR', date: '2026-03-15', status: 'Pending', office: 'USPTO' },
+];
+
+const topCategories = [
+  { name: 'Artificial Intelligence', count: '2.4M', growth: '+34%', color: '#3B5BDB' },
+  { name: 'Electric Vehicles', count: '890K', growth: '+28%', color: '#8B5CF6' },
+  { name: 'Biotechnology', count: '1.8M', growth: '+22%', color: '#0EA5E9' },
+  { name: 'Renewable Energy', count: '1.2M', growth: '+31%', color: '#22C55E' },
+  { name: 'Semiconductors', count: '3.1M', growth: '+18%', color: '#F97316' },
+  { name: 'Quantum Computing', count: '45K', growth: '+67%', color: '#EC4899' },
+];
+
+const globalStats = [
+  { num: '100M+', label: 'Total patents indexed' },
+  { num: '80+', label: 'Patent offices covered' },
+  { num: '195', label: 'Countries represented' },
+  { num: '2.1M', label: 'New filings this year' },
+];
+---
+<Base title="Explore Patents — SimpleIP">
+  <Nav />
+  <main class="explore">
+    <!-- Hero search -->
+    <section class="explore-hero">
+      <div class="explore-hero-bg">
+        <div class="explore-orb orb-1"></div>
+        <div class="explore-orb orb-2"></div>
+      </div>
+      <div class="explore-hero-inner">
+        <h1>Explore the world's patents</h1>
+        <p class="explore-hero-sub">Search across 100M+ patents from 80+ offices. No account required.</p>
+        <form class="explore-search" id="exploreSearch">
+          <div class="search-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          </div>
+          <input type="text" name="query" placeholder="Search by company, inventor, or technology..." />
+          <button type="submit">Search</button>
+        </form>
+        <div class="explore-stats-row">
+          {globalStats.map(s => (
+            <div class="explore-stat">
+              <span class="explore-stat-num">{s.num}</span>
+              <span class="explore-stat-label">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Trending companies -->
+    <section class="explore-section">
+      <div class="explore-section-inner">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Trending Now</p>
+            <h2>Top patent holders</h2>
+          </div>
+          <a href="/register" class="section-action">View all companies →</a>
+        </div>
+        <div class="companies-grid">
+          {trendingCompanies.map((c, i) => (
+            <div class="company-card">
+              <div class="company-rank">#{i + 1}</div>
+              <div class="company-info">
+                <div class="company-header">
+                  <h3>{c.name}</h3>
+                  <span class="company-country">{c.country}</span>
+                </div>
+                <div class="company-categories">
+                  {c.categories.map(cat => <span class="cat-tag">{cat}</span>)}
+                </div>
+                <div class="company-stats">
+                  <div class="company-stat">
+                    <span class="cs-num">{c.patents.toLocaleString()}</span>
+                    <span class="cs-label">Total</span>
+                  </div>
+                  <div class="company-stat">
+                    <span class="cs-num">{c.granted.toLocaleString()}</span>
+                    <span class="cs-label">Granted</span>
+                  </div>
+                  <div class="company-stat">
+                    <span class="cs-num">{c.pending.toLocaleString()}</span>
+                    <span class="cs-label">Pending</span>
+                  </div>
+                  <div class="company-stat">
+                    <span class="cs-num trend-up">{c.trend}</span>
+                    <span class="cs-label">This month</span>
+                  </div>
+                </div>
+              </div>
+              <div class="company-mini-chart" aria-hidden="true">
+                <svg viewBox="0 0 80 32" fill="none">
+                  <path d={`M0 ${28 - i * 2} Q20 ${24 - i * 3} 40 ${20 - i * 2} T80 ${8 + i}`} stroke="var(--primary)" stroke-width="2" fill="none" opacity="0.6"/>
+                  <path d={`M0 ${28 - i * 2} Q20 ${24 - i * 3} 40 ${20 - i * 2} T80 ${8 + i} V32 H0Z`} fill="url(#chartGrad)" opacity="0.1"/>
+                </svg>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Technology categories -->
+    <section class="explore-section bg-light">
+      <div class="explore-section-inner">
+        <div class="section-header center">
+          <div>
+            <p class="section-label">Technology Landscape</p>
+            <h2>Fastest growing patent categories</h2>
+            <p class="section-sub">Discover which technology areas are seeing the most patent activity worldwide.</p>
+          </div>
+        </div>
+        <div class="categories-grid">
+          {topCategories.map(cat => (
+            <div class="category-card">
+              <div class="category-color" style={`background: ${cat.color};`}></div>
+              <h4>{cat.name}</h4>
+              <div class="category-stats">
+                <span class="category-count">{cat.count}</span>
+                <span class="category-growth" style={`color: ${cat.color};`}>{cat.growth}</span>
+              </div>
+              <div class="category-bar-bg">
+                <div class="category-bar" style={`width: ${parseInt(cat.growth)}%; background: ${cat.color};`}></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent filings -->
+    <section class="explore-section">
+      <div class="explore-section-inner">
+        <div class="section-header">
+          <div>
+            <p class="section-label">Live Feed</p>
+            <h2>Recent patent filings</h2>
+          </div>
+          <a href="/register" class="section-action">Get real-time alerts →</a>
+        </div>
+        <div class="filings-table">
+          <div class="filings-header">
+            <span>Patent Title</span>
+            <span>Applicant</span>
+            <span>Office</span>
+            <span>Filed</span>
+            <span>Status</span>
+          </div>
+          {recentFilings.map(f => (
+            <div class="filing-row">
+              <span class="filing-title">{f.title}</span>
+              <span class="filing-applicant">
+                <span class="filing-flag">{f.country}</span>
+                {f.applicant}
+              </span>
+              <span class="filing-office">{f.office}</span>
+              <span class="filing-date">{f.date}</span>
+              <span><span class="filing-status">{f.status}</span></span>
+            </div>
+          ))}
+        </div>
+        <div class="filings-cta">
+          <p>Want to see more? Create a free account to access the full database.</p>
+          <a href="/register" class="filings-btn">Create free account →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA banner -->
+    <section class="explore-cta">
+      <div class="explore-cta-inner">
+        <h2>Want the full picture?</h2>
+        <p>Create a free account to unlock portfolio analytics, competitor monitoring, and professional reports.</p>
+        <div class="explore-cta-actions">
+          <a href="/register" class="cta-primary">Sign up free</a>
+          <a href="/" class="cta-secondary">Learn more</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  /* Hero */
+  .explore-hero {
+    position: relative; padding: 140px 24px 60px; text-align: center;
+    background: linear-gradient(165deg, #0D1531 0%, #1B2559 40%, #2B3A7A 100%);
+    overflow: hidden;
+  }
+  .explore-hero-bg { position: absolute; inset: 0; }
+  .explore-orb {
+    position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.25;
+  }
+  .explore-orb.orb-1 {
+    width: 500px; height: 500px; top: -150px; right: -100px;
+    background: radial-gradient(circle, rgba(59,91,219,0.5), transparent 70%);
+  }
+  .explore-orb.orb-2 {
+    width: 350px; height: 350px; bottom: -100px; left: -50px;
+    background: radial-gradient(circle, rgba(139,92,246,0.4), transparent 70%);
+  }
+  .explore-hero-inner { position: relative; max-width: 700px; margin: 0 auto; }
+  .explore-hero h1 {
+    font-size: clamp(32px, 5vw, 52px); font-weight: 900; color: white;
+    letter-spacing: -2px; margin-bottom: 12px; line-height: 1.1;
+  }
+  .explore-hero-sub {
+    font-size: 17px; color: rgba(255,255,255,0.5); margin-bottom: 32px; line-height: 1.6;
+  }
+  .explore-search {
+    display: flex; align-items: center; max-width: 600px; margin: 0 auto 32px;
+    background: white; border-radius: 14px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3); position: relative;
+  }
+  .search-icon {
+    position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
+    color: #94A3B8; width: 20px; height: 20px;
+  }
+  .search-icon svg { width: 20px; height: 20px; }
+  .explore-search input {
+    flex: 1; padding: 18px 20px 18px 48px; border: none; outline: none;
+    font-size: 15px; color: var(--headline); background: transparent;
+  }
+  .explore-search input::placeholder { color: #94A3B8; }
+  .explore-search button {
+    padding: 12px 28px; margin: 6px; border: none; cursor: pointer;
+    background: var(--primary); color: white; border-radius: 10px;
+    font-size: 14px; font-weight: 700; white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .explore-search button:hover { background: var(--primary-light); }
+  .explore-stats-row {
+    display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+  }
+  .explore-stat { text-align: center; }
+  .explore-stat-num { display: block; font-size: 24px; font-weight: 800; color: white; }
+  .explore-stat-label { font-size: 11px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+
+  /* Sections */
+  .explore-section { padding: 80px 24px; }
+  .explore-section.bg-light { background: var(--bg-light); }
+  .explore-section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 36px; gap: 20px;
+  }
+  .section-header.center { justify-content: center; text-align: center; }
+  .section-header h2 {
+    font-size: clamp(24px, 3vw, 36px); font-weight: 900; color: var(--headline);
+    letter-spacing: -1px; margin-top: 4px;
+  }
+  .section-sub { font-size: 15px; color: var(--body); margin-top: 8px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .section-action {
+    font-size: 14px; font-weight: 700; color: var(--primary); white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+  .section-action:hover { opacity: 0.7; }
+
+  /* Company cards */
+  .companies-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+  }
+  .company-card {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 24px; border-radius: var(--radius-card);
+    border: 1px solid var(--border); background: white;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .company-card:hover {
+    transform: translateY(-2px); box-shadow: 0 12px 40px rgba(27,37,89,0.06);
+    border-color: rgba(59,91,219,0.2);
+  }
+  .company-rank {
+    font-size: 14px; font-weight: 900; color: var(--primary);
+    background: rgba(59,91,219,0.06); border-radius: 10px;
+    width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .company-info { flex: 1; min-width: 0; }
+  .company-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .company-header h3 { font-size: 16px; font-weight: 800; color: var(--headline); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .company-country {
+    padding: 2px 8px; border-radius: 4px; background: var(--bg-light);
+    font-size: 11px; font-weight: 700; color: var(--body); flex-shrink: 0;
+  }
+  .company-categories { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+  .cat-tag {
+    padding: 3px 8px; border-radius: 6px; background: var(--bg-light);
+    font-size: 11px; color: var(--body); font-weight: 500;
+  }
+  .company-stats { display: flex; gap: 16px; }
+  .company-stat { display: flex; flex-direction: column; }
+  .cs-num { font-size: 15px; font-weight: 800; color: var(--headline); }
+  .cs-num.trend-up { color: var(--green); }
+  .cs-label { font-size: 10px; color: var(--body); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; }
+  .company-mini-chart {
+    position: absolute; bottom: 0; right: 0; width: 80px; height: 32px; opacity: 0.5;
+  }
+
+  /* Categories */
+  .categories-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .category-card {
+    padding: 24px; border-radius: var(--radius-card);
+    border: 1px solid var(--border); background: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .category-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.05); }
+  .category-color { width: 8px; height: 8px; border-radius: 50%; margin-bottom: 14px; }
+  .category-card h4 { font-size: 16px; font-weight: 800; color: var(--headline); margin-bottom: 12px; }
+  .category-stats { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+  .category-count { font-size: 28px; font-weight: 900; color: var(--headline); letter-spacing: -0.5px; }
+  .category-growth { font-size: 13px; font-weight: 700; }
+  .category-bar-bg { height: 4px; border-radius: 4px; background: var(--bg-light); overflow: hidden; }
+  .category-bar { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+
+  /* Filings table */
+  .filings-table {
+    border: 1px solid var(--border); border-radius: var(--radius-card); overflow: hidden;
+    background: white;
+  }
+  .filings-header {
+    display: grid; grid-template-columns: 2.5fr 1.5fr 0.8fr 1fr 0.8fr;
+    gap: 16px; padding: 14px 24px; background: var(--bg-lighter);
+    border-bottom: 1px solid var(--border);
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--body);
+  }
+  .filing-row {
+    display: grid; grid-template-columns: 2.5fr 1.5fr 0.8fr 1fr 0.8fr;
+    gap: 16px; padding: 16px 24px; border-bottom: 1px solid #f3f4f6;
+    font-size: 13px; color: var(--headline); align-items: center;
+    transition: background 0.15s;
+  }
+  .filing-row:last-child { border-bottom: none; }
+  .filing-row:hover { background: var(--bg-lighter); }
+  .filing-title { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .filing-applicant { display: flex; align-items: center; gap: 8px; color: var(--body); }
+  .filing-flag {
+    padding: 1px 6px; border-radius: 3px; background: var(--bg-light);
+    font-size: 10px; font-weight: 700; color: var(--headline); flex-shrink: 0;
+  }
+  .filing-office {
+    padding: 3px 8px; border-radius: 6px; background: var(--bg-light);
+    font-size: 11px; font-weight: 700; color: var(--primary); text-align: center;
+  }
+  .filing-date { font-size: 12px; color: var(--body); }
+  .filing-status {
+    padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;
+    background: #FFF7ED; color: #EA580C;
+  }
+  .filings-cta {
+    text-align: center; padding: 32px 24px; border-top: 1px solid var(--border);
+    background: var(--bg-lighter);
+  }
+  .filings-cta p { font-size: 14px; color: var(--body); margin-bottom: 14px; }
+  .filings-btn {
+    display: inline-flex; padding: 10px 24px; border-radius: 10px;
+    background: var(--primary); color: white; font-size: 14px; font-weight: 700;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .filings-btn:hover { background: var(--primary-light); transform: translateY(-1px); }
+
+  /* CTA */
+  .explore-cta {
+    padding: 80px 24px; text-align: center;
+    background: linear-gradient(165deg, #0D1531, #1B2559);
+  }
+  .explore-cta-inner { max-width: 560px; margin: 0 auto; }
+  .explore-cta h2 {
+    font-size: clamp(28px, 4vw, 40px); font-weight: 900; color: white;
+    letter-spacing: -1.5px; margin-bottom: 12px;
+  }
+  .explore-cta p { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 32px; line-height: 1.7; }
+  .explore-cta-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .cta-primary {
+    padding: 14px 32px; border-radius: 12px; background: var(--primary); color: white;
+    font-size: 15px; font-weight: 700; transition: background 0.2s, transform 0.2s;
+  }
+  .cta-primary:hover { background: var(--primary-light); transform: translateY(-2px); }
+  .cta-secondary {
+    padding: 14px 32px; border-radius: 12px; color: rgba(255,255,255,0.7);
+    font-size: 15px; font-weight: 700; border: 1px solid rgba(255,255,255,0.15);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .cta-secondary:hover { border-color: rgba(255,255,255,0.4); color: white; }
+
+  @media (max-width: 768px) {
+    .companies-grid { grid-template-columns: 1fr; }
+    .categories-grid { grid-template-columns: 1fr; }
+    .filings-header, .filing-row {
+      grid-template-columns: 1fr 1fr;
+    }
+    .filings-header > :nth-child(n+3), .filing-row > :nth-child(n+3) { display: none; }
+    .explore-stats-row { gap: 24px; }
+    .company-mini-chart { display: none; }
+    .section-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+<script>
+  document.getElementById('exploreSearch')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = (e.target as HTMLFormElement).querySelector('input[name="query"]') as HTMLInputElement;
+    const query = input?.value.trim();
+    if (!query) return;
+    // In a real app this would search — for now redirect to register
+    window.location.href = `/register?company=${encodeURIComponent(query)}`;
+  });
+</script>

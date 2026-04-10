@@ -1,0 +1,69 @@
+---
+---
+<section class="trust-bar">
+  <p class="trust-bar-label">Trusted by IP teams at leading companies worldwide</p>
+  <div class="logo-row">
+    <div class="logo-item"><img src="/logos/siemens.png" alt="Siemens" /></div>
+    <div class="logo-item"><img src="/logos/bosch.png" alt="Bosch" /></div>
+    <div class="logo-item"><img src="/logos/sap.png" alt="SAP" /></div>
+    <div class="logo-item"><img src="/logos/bayer.png" alt="Bayer" /></div>
+  </div>
+  <div class="trust-badges">
+    <div class="trust-badge">
+      <div class="trust-badge-stars">
+        {[1,2,3,4,5].map(() => (
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        ))}
+      </div>
+      <span class="trust-badge-text">4.8/5 on G2</span>
+    </div>
+    <div class="trust-badge-divider"></div>
+    <div class="trust-badge">
+      <span class="trust-badge-text">Backed by <strong>Dennemeyer Group</strong></span>
+    </div>
+    <div class="trust-badge-divider"></div>
+    <div class="trust-badge">
+      <span class="trust-badge-text">Since <strong>1962</strong></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust-bar {
+    background: var(--white); padding: 60px 24px 56px; text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .trust-bar-label {
+    font-size: 12px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 2.5px; color: var(--body); margin-bottom: 28px; opacity: 0.7;
+  }
+  .logo-row {
+    display: flex; justify-content: center; align-items: center; gap: 48px;
+    flex-wrap: wrap; max-width: 800px; margin: 0 auto 32px;
+  }
+  .logo-item {
+    opacity: 0.85; transition: opacity 0.3s;
+  }
+  .logo-item img { height: 32px; max-width: 120px; width: auto; display: block; object-fit: contain; }
+  .logo-item:hover { opacity: 1; }
+  .trust-badges {
+    display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap;
+  }
+  .trust-badge {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .trust-badge-stars {
+    display: flex; gap: 2px; color: #F59E0B;
+  }
+  .trust-badge-stars svg { width: 14px; height: 14px; }
+  .trust-badge-text { font-size: 13px; color: var(--body); font-weight: 500; }
+  .trust-badge-text strong { color: var(--headline); font-weight: 700; }
+  .trust-badge-divider { width: 1px; height: 20px; background: var(--border); }
+
+  @media (max-width: 768px) {
+    .logo-row { gap: 28px; }
+    .logo-item img { height: 24px; }
+    .trust-badge-divider { display: none; }
+    .trust-badges { flex-direction: column; gap: 12px; }
+  }
+</style>

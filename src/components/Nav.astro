@@ -1,0 +1,213 @@
+---
+---
+<!-- Announcement bar -->
+<div class="announce-bar" id="announceBar">
+  <div class="announce-inner">
+    <span class="announce-badge">New</span>
+    <span>Competitive landscape analysis is here — compare your portfolio to competitors.</span>
+    <a href="/explore" class="announce-link">Explore now →</a>
+  </div>
+  <button class="announce-close" id="announceClose" aria-label="Close">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+  </button>
+</div>
+
+<nav class="nav" id="mainNav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/logo.svg" alt="SimpleIP" class="nav-logo-img" />
+      <img src="/logo.svg" alt="SimpleIP" class="nav-logo-img scrolled-logo" />
+    </a>
+    <button
+      class="nav-toggle"
+      id="navToggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="navMenu"
+      aria-label="Open navigation"
+    >
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <div class="nav-center" id="navMenu">
+      <a href="/explore">Explore</a>
+      <a href="/#solutions">Solutions</a>
+      <a href="/#how-it-works">How it works</a>
+      <a href="/#features">Features</a>
+    </div>
+    <div class="nav-right">
+      <a href="/register" class="nav-demo">Get a demo</a>
+      <a href="https://app.simpleip.com" class="nav-cta" target="_blank" rel="noopener">Get started</a>
+      <span class="nav-divider"></span>
+      <a href="https://app.simpleip.com" class="nav-login" target="_blank" rel="noopener">Login</a>
+    </div>
+  </div>
+</nav>
+<div id="content-start" tabindex="-1"></div>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  const hero = document.querySelector('.hero');
+  const announceBar = document.getElementById('announceBar');
+  const announceClose = document.getElementById('announceClose');
+
+  announceClose?.addEventListener('click', () => {
+    announceBar?.classList.add('closed');
+    document.body.style.setProperty('--announce-height', '0px');
+  });
+
+  const setMenuState = (isOpen: boolean) => {
+    navToggle?.setAttribute('aria-expanded', String(isOpen));
+    navToggle?.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+    navMenu?.classList.toggle('open', isOpen);
+    document.body.classList.toggle('nav-open', isOpen);
+  };
+
+  const syncNavAppearance = () => {
+    nav?.classList.toggle('scrolled', !hero || window.scrollY > 50);
+  };
+
+  syncNavAppearance();
+
+  navToggle?.addEventListener('click', () => {
+    const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+    setMenuState(!isOpen);
+  });
+
+  navMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setMenuState(false));
+  });
+
+  window.addEventListener('scroll', syncNavAppearance);
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMenuState(false);
+  });
+
+  const desktopViewport = window.matchMedia('(min-width: 769px)');
+  desktopViewport.addEventListener?.('change', (e: MediaQueryListEvent) => {
+    if (e.matches) setMenuState(false);
+  });
+</script>
+
+<style>
+  /* Announcement bar */
+  .announce-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 110;
+    height: 40px; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(90deg, #1a1f3d, #252a4a);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .announce-bar.closed { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+  .announce-inner {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: rgba(255,255,255,0.7);
+  }
+  .announce-badge {
+    padding: 2px 10px; border-radius: 20px;
+    background: rgba(139, 92, 246, 0.2); border: 1px solid rgba(139, 92, 246, 0.3);
+    font-size: 11px; font-weight: 700; color: #A78BFA;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .announce-link { color: rgba(255,255,255,0.9); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+  .announce-close {
+    position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.4);
+    width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+  }
+  .announce-close svg { width: 14px; height: 14px; }
+  .announce-close:hover { color: rgba(255,255,255,0.8); }
+
+  /* Nav */
+  .nav {
+    position: fixed; top: 40px; left: 0; right: 0; z-index: 100;
+    height: 64px; display: flex; align-items: center; justify-content: center;
+    background: transparent;
+    transition: background 0.3s, box-shadow 0.3s, top 0.3s;
+  }
+  .announce-bar.closed ~ .nav { top: 0; }
+  .nav.scrolled {
+    background: rgba(11, 13, 26, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; max-width: 1200px; padding: 0 32px;
+  }
+  .nav-logo { display: flex; align-items: center; height: 22px; position: relative; }
+  .nav-logo-img {
+    height: 22px; width: auto;
+    filter: brightness(0) invert(1);
+    transition: opacity 0.3s;
+  }
+  .nav-logo-img.scrolled-logo { position: absolute; opacity: 0; filter: none; }
+  .nav.scrolled .nav-logo-img { opacity: 1; }
+  .nav.scrolled .nav-logo-img.scrolled-logo { opacity: 0; }
+
+  .nav-center { display: flex; align-items: center; gap: 32px; }
+  .nav-center a {
+    font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.65);
+    transition: color 0.2s;
+  }
+  .nav-center a:hover { color: white; }
+
+  .nav-right { display: flex; align-items: center; gap: 8px; }
+  .nav-demo {
+    padding: 8px 18px; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.85) !important;
+    font-size: 13px !important; font-weight: 600 !important;
+    transition: border-color 0.2s, background 0.2s !important;
+  }
+  .nav-demo:hover { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.05); }
+  .nav-cta {
+    padding: 8px 18px; border-radius: 8px;
+    background: linear-gradient(135deg, #F97316, #EF4444); color: white !important;
+    font-size: 13px !important; font-weight: 700 !important;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s !important;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3); opacity: 0.95; }
+  .nav-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.1); margin: 0 4px; }
+  .nav-login {
+    font-size: 13px !important; font-weight: 600 !important; color: rgba(255,255,255,0.7) !important;
+    padding: 8px 12px;
+  }
+  .nav-login:hover { color: white !important; }
+
+  .nav-toggle {
+    display: none; align-items: center; justify-content: center; flex-direction: column;
+    gap: 5px; width: 44px; height: 44px; border: none; border-radius: 10px;
+    background: transparent; cursor: pointer;
+  }
+  .nav-toggle-bar {
+    width: 20px; height: 2px; border-radius: 999px;
+    background: rgba(255,255,255,0.8); transition: transform 0.2s, opacity 0.2s;
+  }
+  .nav-toggle[aria-expanded='true'] .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle[aria-expanded='true'] .nav-toggle-bar:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded='true'] .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 768px) {
+    .announce-bar { display: none; }
+    .nav { top: 0; padding: 0 16px; }
+    .nav-toggle { display: inline-flex; }
+    .nav-center {
+      position: absolute; top: calc(100% + 8px); left: 16px; right: 16px;
+      flex-direction: column; align-items: stretch; gap: 8px; padding: 20px;
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 16px;
+      background: rgba(11, 13, 26, 0.98); backdrop-filter: blur(20px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      opacity: 0; pointer-events: none; transform: translateY(-8px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .nav-center.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .nav-center a { padding: 8px 0; }
+    .nav-right { gap: 6px; }
+    .nav-demo { display: none; }
+    .nav-divider { display: none; }
+    .nav-login { display: none; }
+  }
+</style>

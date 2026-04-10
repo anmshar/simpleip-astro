@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base title="SimpleIP — Confirm your email">
+  <Nav />
+  <section class="verify-page">
+    <div class="verify-card">
+      <div class="verify-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#264d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="48" height="48">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="M22 7l-10 7L2 7"/>
+        </svg>
+      </div>
+      <h1>Check your inbox</h1>
+      <p class="verify-sub">We sent a confirmation link to your email address. Click the link to activate your account and access your full patent portfolio.</p>
+      <div class="unlock-preview">
+        <h3>What you unlock after confirming:</h3>
+        <ul>
+          <li><span>✓</span> Full patent portfolio with analytics</li>
+          <li><span>✓</span> Competitor monitoring and alerts</li>
+          <li><span>✓</span> Professional IP report generation</li>
+          <li><span>✓</span> Patent search across 80+ offices</li>
+        </ul>
+      </div>
+      <p class="verify-hint">Didn't receive the email? Check your spam folder or <a href="#">resend confirmation</a>.</p>
+    </div>
+  </section>
+  <Footer />
+</Base>
+
+<style>
+  .verify-page {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 72px 24px 0; background: var(--bg-light);
+  }
+  .verify-card {
+    background: var(--white); border-radius: 16px; padding: 56px 48px; text-align: center;
+    max-width: 520px; width: 100%; box-shadow: 0 12px 48px rgba(0,0,0,0.06);
+  }
+  .verify-icon { margin-bottom: 24px; }
+  .verify-card h1 { font-size: 28px; font-weight: 800; color: var(--headline); margin-bottom: 12px; }
+  .verify-sub { font-size: 15px; color: var(--body); line-height: 1.7; margin-bottom: 32px; }
+  .unlock-preview {
+    background: var(--bg-light); border-radius: var(--radius-card); padding: 24px;
+    text-align: left; margin-bottom: 24px;
+  }
+  .unlock-preview h3 { font-size: 14px; font-weight: 700; color: var(--headline); margin-bottom: 14px; }
+  .unlock-preview ul { list-style: none; }
+  .unlock-preview li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; color: var(--body); padding: 5px 0;
+  }
+  .unlock-preview li span { color: #48bb78; font-weight: 700; }
+  .verify-hint { font-size: 13px; color: var(--body); }
+  .verify-hint a { color: var(--primary); font-weight: 600; }
+</style>

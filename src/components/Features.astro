@@ -1,0 +1,195 @@
+---
+const features = [
+  {
+    label: 'Patent Discovery',
+    headline: '100 million patents. Found in seconds.',
+    body: 'SimpleIP connects directly to the world\'s major patent offices — EPO, USPTO, WIPO, DPMA and 80+ more. Type any company name and instantly see their complete global patent portfolio.',
+    bullets: ['Search by company, applicant or inventor name', 'Patents from 80+ global offices in one place', 'Filter by country, status, technology area and date'],
+    cta: 'Start searching free',
+    visualLabel: 'Discovery workspace',
+    statValue: '48,231',
+    statLabel: 'matched patents',
+    tags: ['EPO', 'USPTO', 'WIPO'],
+    rows: ['Applicant match: Siemens AG', 'Coverage across 83 offices', 'Granted and pending status filters'],
+    reverse: false,
+    color: '#3B5BDB',
+    gradFrom: '#EEF2FF',
+    gradTo: '#E0E7FF',
+  },
+  {
+    label: 'Competitor Monitoring',
+    headline: 'Know what your competitors file — before they ship.',
+    body: 'Set up monitoring for any company or technology area and receive automatic alerts when new patents are filed. Stay one step ahead — without spending hours on manual research.',
+    bullets: ['Automatic alerts for new competitor filings', 'Monitor by company, technology class or keyword', 'Weekly digest or real-time notifications'],
+    cta: 'Set up monitoring free',
+    visualLabel: 'Monitoring alerts',
+    statValue: '12',
+    statLabel: 'new filings this week',
+    tags: ['Automotive', 'Battery', 'Autonomy'],
+    rows: ['Bosch filed 3 new patents', '2 high-priority watchlists triggered', 'Real-time digest scheduled for 08:00'],
+    reverse: true,
+    color: '#8B5CF6',
+    gradFrom: '#F3F0FF',
+    gradTo: '#EDE9FE',
+  },
+  {
+    label: 'Reports & Analytics',
+    headline: 'Board-ready IP reports in one click.',
+    body: 'Export tailored reports for your board, investors or legal team — instantly. Green patent analysis, portfolio benchmarks, technology landscape overviews all built in.',
+    bullets: ['PDF export in one click', 'Green patent and ESG analysis included', 'Share reports via link or download'],
+    cta: 'Generate your first report',
+    visualLabel: 'Board-ready exports',
+    statValue: '1 click',
+    statLabel: 'to create the next report',
+    tags: ['Board deck', 'PDF export', 'ESG view'],
+    rows: ['Portfolio benchmark completed', 'Green patent score: 74 / 100', 'Secure share link generated'],
+    reverse: false,
+    color: '#0EA5E9',
+    gradFrom: '#EFF6FF',
+    gradTo: '#DBEAFE',
+  },
+];
+---
+<section class="features" id="features">
+  <div class="features-inner">
+    {features.map(f => (
+      <div class:list={['feature-block', { reverse: f.reverse }]}>
+        <div class="feature-img" style={`background: linear-gradient(145deg, ${f.gradFrom}, ${f.gradTo});`} aria-hidden="true">
+          <div class="feature-window">
+            <div class="feature-window-bar">
+              <span class="fw-dot"></span>
+              <span class="fw-dot"></span>
+              <span class="fw-dot"></span>
+            </div>
+            <div class="feature-window-body">
+              <div class="feature-visual-header">
+                <p>{f.visualLabel}</p>
+                <div class="feature-tag-row">
+                  {f.tags.map(tag => <span class="feature-tag" style={`color: ${f.color}; background: ${f.color}12;`}>{tag}</span>)}
+                </div>
+              </div>
+              <div class="feature-stat-card" style={`background: ${f.color};`}>
+                <span class="feature-stat-value">{f.statValue}</span>
+                <span class="feature-stat-label">{f.statLabel}</span>
+              </div>
+              <div class="feature-detail-list">
+                {f.rows.map(row => (
+                  <div class="feature-detail-row">
+                    <span class="feature-detail-dot" style={`background: ${f.color};`}></span>
+                    <span>{row}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="feature-text">
+          <p class="section-label" style={`color: ${f.color};`}>{f.label}</p>
+          <h3>{f.headline}</h3>
+          <p class="feature-body">{f.body}</p>
+          <ul class="feature-bullets">
+            {f.bullets.map(b => (
+              <li>
+                <span class="bullet-check" style={`background: ${f.color}15; color: ${f.color};`}>
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 8l3 3 5-5"/></svg>
+                </span>
+                {b}
+              </li>
+            ))}
+          </ul>
+          <a class="feature-cta" href="/register" style={`background: ${f.color};`}>
+            {f.cta}
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .features { padding: 60px 24px; background: var(--white); }
+  .features-inner { max-width: 1100px; margin: 0 auto; }
+  .feature-block {
+    display: flex; align-items: center; gap: 64px;
+    padding: 60px 0;
+  }
+  .feature-block.reverse { flex-direction: row-reverse; }
+  .feature-img {
+    flex: 1; border-radius: var(--radius-lg); padding: 24px;
+    min-height: 380px; display: flex; align-items: center; justify-content: center;
+  }
+  .feature-window {
+    width: 100%; border-radius: 16px; overflow: hidden;
+    background: var(--white); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  }
+  .feature-window-bar {
+    display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px;
+    background: var(--bg-lighter); border-bottom: 1px solid var(--border);
+  }
+  .fw-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+  .feature-window-body {
+    display: flex; flex-direction: column; gap: 14px; padding: 20px;
+  }
+  .feature-visual-header {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+  }
+  .feature-visual-header p {
+    font-size: 13px; font-weight: 700; color: var(--headline); margin: 0;
+  }
+  .feature-tag-row { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+  .feature-tag {
+    display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 999px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .feature-stat-card {
+    display: flex; flex-direction: column; gap: 4px; padding: 18px 20px;
+    border-radius: 14px; color: var(--white);
+  }
+  .feature-stat-value { font-size: clamp(28px, 4vw, 38px); font-weight: 900; letter-spacing: -1px; }
+  .feature-stat-label {
+    font-size: 12px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px;
+  }
+  .feature-detail-list { display: flex; flex-direction: column; gap: 8px; }
+  .feature-detail-row {
+    display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 10px;
+    background: var(--bg-lighter); color: var(--body); font-size: 13px; line-height: 1.5;
+    border: 1px solid var(--border);
+  }
+  .feature-detail-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  .feature-text { flex: 1; }
+  .feature-text .section-label { text-align: left; }
+  .feature-text h3 {
+    font-size: clamp(24px, 3vw, 32px); font-weight: 900; color: var(--headline);
+    letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.2;
+  }
+  .feature-body { font-size: 15px; color: var(--body); line-height: 1.7; margin-bottom: 24px; }
+  .feature-bullets { list-style: none; margin-bottom: 28px; }
+  .feature-bullets li {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 14px; color: var(--body); padding: 6px 0; font-weight: 500;
+  }
+  .bullet-check {
+    width: 24px; height: 24px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .bullet-check svg { width: 12px; height: 12px; }
+  .feature-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border-radius: 10px;
+    font-size: 14px; font-weight: 700; color: var(--white);
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  }
+  .feature-cta svg { width: 14px; height: 14px; }
+  .feature-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); opacity: 0.9; }
+
+  @media (max-width: 768px) {
+    .feature-block, .feature-block.reverse { flex-direction: column; gap: 32px; }
+    .feature-img { min-height: 280px; }
+    .feature-visual-header { flex-direction: column; }
+    .feature-tag-row { justify-content: flex-start; }
+  }
+</style>

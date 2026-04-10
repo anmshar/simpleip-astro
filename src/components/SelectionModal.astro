@@ -1,0 +1,84 @@
+---
+/**
+ * SelectionModal — shown after hero search. Displays blurred overlay with matching applicants.
+ * Hidden by default. Opened via custom event from Hero search form.
+ * In V1, data is mocked.
+ */
+const mockResults = [
+  { name: 'Siemens AG', country: 'DE', patents: 48231 },
+  { name: 'Siemens Energy AG', country: 'DE', patents: 5102 },
+  { name: 'Siemens Healthineers AG', country: 'DE', patents: 12840 },
+  { name: 'Siemens Gamesa Renewable Energy', country: 'ES', patents: 3201 },
+];
+---
+<div class="selection-overlay" id="selectionModal" hidden>
+  <div class="selection-blur" id="selectionBlur"></div>
+  <div class="selection-popup">
+    <h3>Select your organisation</h3>
+    <p class="popup-sub">We found multiple matches for <strong id="modalQuery">your search</strong>. Choose the correct entity below.</p>
+    <div class="results-list">
+      {mockResults.map(r => (
+        <a href={`/register?company=${encodeURIComponent(r.name)}`} class="result-row">
+          <div>
+            <div class="result-name">{r.name}</div>
+            <div class="result-meta">{r.country} · {r.patents.toLocaleString()} patents</div>
+          </div>
+          <span class="result-arrow">&rarr;</span>
+        </a>
+      ))}
+    </div>
+    <p class="popup-note">Can't find your organisation? <a href="/register">Register manually &rarr;</a></p>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('selectionModal');
+  const blur = document.getElementById('selectionBlur');
+  const queryEl = document.getElementById('modalQuery');
+
+  function openModal(query: string) {
+    if (!modal) return;
+    if (queryEl) queryEl.textContent = query;
+    modal.hidden = false;
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.hidden = true;
+  }
+
+  modal?.addEventListener('open', (e) => {
+    openModal((e as CustomEvent).detail);
+  });
+
+  blur?.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+
+<style>
+  .selection-overlay { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; }
+  .selection-blur { position: absolute; inset: 0; background: rgba(26,53,64,0.7); backdrop-filter: blur(12px); }
+  .selection-popup {
+    position: relative; background: var(--white); border-radius: 16px; padding: 40px;
+    max-width: 520px; width: 90%; box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+    animation: fadeDown 0.4s ease both;
+  }
+  .selection-popup h3 { font-size: 22px; font-weight: 800; color: var(--headline); margin-bottom: 8px; }
+  .popup-sub { font-size: 14px; color: var(--body); margin-bottom: 24px; }
+  .popup-sub strong { color: var(--headline); }
+  .results-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .result-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px; border: 1px solid var(--border); border-radius: var(--radius-btn);
+    transition: border-color 0.2s, background 0.2s; cursor: pointer; text-decoration: none;
+  }
+  .result-row:hover { border-color: var(--primary); background: rgba(38,77,90,0.03); }
+  .result-name { font-size: 15px; font-weight: 600; color: var(--headline); }
+  .result-meta { font-size: 12px; color: var(--body); margin-top: 2px; }
+  .result-arrow { font-size: 18px; color: var(--primary); font-weight: 600; }
+  .popup-note { font-size: 13px; color: var(--body); text-align: center; }
+  .popup-note a { color: var(--primary); font-weight: 600; }
+</style>

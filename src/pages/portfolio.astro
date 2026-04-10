@@ -1,0 +1,119 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const stats = [
+  { num: '1,247', lbl: 'Total Patents' },
+  { num: '38', lbl: 'Countries' },
+  { num: '892', lbl: 'Granted' },
+  { num: '355', lbl: 'Pending' },
+];
+const rows = [
+  { title: 'Method for autonomous navigation systems', status: 'Granted', country: 'DE', filed: '2023-04-12' },
+  { title: 'AI-based image classification apparatus', status: 'Granted', country: 'US', filed: '2022-11-08' },
+  { title: 'Energy storage optimization process', status: 'Pending', country: 'EP', filed: '2024-01-22' },
+  { title: 'Quantum computing error correction method', status: 'Pending', country: 'JP', filed: '2024-06-03' },
+  { title: 'Wireless sensor network protocol', status: 'Granted', country: 'CN', filed: '2021-09-17' },
+  { title: 'Battery thermal management system', status: 'Granted', country: 'KR', filed: '2023-07-30' },
+];
+---
+<Base title="SimpleIP — Your Portfolio">
+  <Nav />
+  <div class="portfolio-page">
+    <aside class="sidebar">
+      <div class="sidebar-logo">Simple<span>IP</span></div>
+      <nav class="sidebar-nav">
+        <a class="sidebar-item active" href="#">Portfolio</a>
+        <a class="sidebar-item" href="#">Monitoring</a>
+        <a class="sidebar-item" href="#">Reports</a>
+        <a class="sidebar-item" href="#">Analytics</a>
+        <a class="sidebar-item" href="#">Documents</a>
+        <a class="sidebar-item" href="#">Settings</a>
+      </nav>
+    </aside>
+    <main class="portfolio-main">
+      <div class="portfolio-header">
+        <div>
+          <h1>Your Patent Portfolio</h1>
+          <p>Siemens AG · Last updated today</p>
+        </div>
+        <a href="#" class="export-btn">Export Report →</a>
+      </div>
+      <div class="stat-cards">
+        {stats.map(s => (
+          <div class="stat-card"><div class="stat-num">{s.num}</div><div class="stat-lbl">{s.lbl}</div></div>
+        ))}
+      </div>
+      <div class="table-wrap">
+        <div class="table-header">
+          <span>Patent Title</span><span>Status</span><span>Country</span><span>Filed</span>
+        </div>
+        {rows.map(r => (
+          <div class="table-row">
+            <span>{r.title}</span>
+            <span><span class:list={['badge', r.status.toLowerCase()]}>{r.status}</span></span>
+            <span>{r.country}</span>
+            <span>{r.filed}</span>
+          </div>
+        ))}
+      </div>
+    </main>
+  </div>
+</Base>
+
+<style>
+  .portfolio-page { display: flex; min-height: 100vh; padding-top: 72px; }
+  .sidebar {
+    width: 220px; background: var(--white); border-right: 1px solid var(--border);
+    padding: 28px 20px; flex-shrink: 0;
+  }
+  .sidebar-logo { font-size: 18px; font-weight: 800; color: var(--headline); margin-bottom: 32px; }
+  .sidebar-logo span { color: var(--accent); }
+  .sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
+  .sidebar-item {
+    padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 500;
+    color: var(--body); transition: background 0.2s, color 0.2s;
+  }
+  .sidebar-item:hover { background: var(--bg-light); }
+  .sidebar-item.active { background: rgba(38,77,90,0.08); color: var(--primary); font-weight: 600; }
+  .portfolio-main { flex: 1; padding: 32px 40px; background: var(--bg-light); }
+  .portfolio-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+  .portfolio-header h1 { font-size: 24px; font-weight: 800; color: var(--headline); }
+  .portfolio-header p { font-size: 13px; color: var(--body); margin-top: 4px; }
+  .export-btn {
+    padding: 10px 22px; border-radius: var(--radius-btn); background: var(--primary);
+    color: var(--white); font-size: 14px; font-weight: 600; transition: background 0.2s;
+  }
+  .export-btn:hover { background: var(--primary-light); }
+  .stat-cards { display: flex; gap: 16px; margin-bottom: 28px; }
+  .stat-card {
+    flex: 1; padding: 20px; border-radius: var(--radius-card); background: var(--white);
+    border: 1px solid var(--border);
+  }
+  .stat-num { font-size: 28px; font-weight: 800; color: var(--headline); }
+  .stat-lbl { font-size: 13px; color: var(--body); margin-top: 2px; }
+  .table-wrap { background: var(--white); border-radius: var(--radius-card); border: 1px solid var(--border); overflow: hidden; }
+  .table-header {
+    display: grid; grid-template-columns: 2.5fr 1fr 0.8fr 1fr; gap: 12px;
+    padding: 14px 20px; background: var(--bg-light); border-bottom: 1px solid var(--border);
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--body);
+  }
+  .table-row {
+    display: grid; grid-template-columns: 2.5fr 1fr 0.8fr 1fr; gap: 12px;
+    padding: 14px 20px; border-bottom: 1px solid #f0f2f5; font-size: 14px; color: var(--headline);
+  }
+  .table-row:last-child { border-bottom: none; }
+  .badge { display: inline-block; padding: 3px 12px; border-radius: 40px; font-size: 12px; font-weight: 600; }
+  .badge.granted { background: #e6f7ef; color: #1a7f4b; }
+  .badge.pending { background: #fff4e6; color: #c05600; }
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .portfolio-main { padding: 24px 16px; }
+    .stat-cards { flex-wrap: wrap; }
+    .stat-card { min-width: calc(50% - 8px); }
+    .table-header, .table-row { grid-template-columns: 2fr 1fr 1fr; }
+    .table-header > :last-child, .table-row > :last-child { display: none; }
+    .portfolio-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>
