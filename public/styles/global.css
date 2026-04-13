@@ -1,48 +1,66 @@
-/* SimpleIP Design System — global.css (SimilarWeb-inspired) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+/* SimpleIP Design System — global.css (Hub Design System) */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap');
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  /* Typography */
-  --font: 'Inter', system-ui, sans-serif;
+  /* Typography — Source Sans 3 (Hub system font) */
+  --font: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 
-  /* Colors — Dennemeyer deep teal + warm amber palette */
-  --headline: #1A1F25;
-  --body: #5A6772;
-  --primary: #1A4D5C;
-  --primary-light: #24697D;
-  --primary-dark: #0F2C35;
-  --accent: #E07A2F;
-  --accent-light: #E8944D;
-  --signup-blue: #1A4D5C;
-  --bg-light: #F7F5F2;
-  --bg-lighter: #FAF9F7;
-  --border: #E5E3DF;
-  --dark: #0F2C35;
-  --dark-card: #163A47;
-  --hero-from: #0F2C35;
-  --hero-to: #1A4D5C;
+  /* ===== Hub Design System Colors ===== */
+
+  /* Primary — Blue Gray (SimpleIP brand) */
+  --headline: #262b32;        /* sip-gray-600 */
+  --body: #637381;            /* sip-gray-400 */
+  --primary: #264d5a;         /* sip-primary-500 */
+  --primary-light: #698a95;   /* sip-primary-400 */
+  --primary-dark: #0f2c35;    /* sip-primary-600 */
+
+  /* Accent — Orange (Dennemeyer brand) */
+  --accent: #ff6700;          /* sip-orange-500 */
+  --accent-light: #ff8533;    /* sip-orange-400 */
+
+  /* Secondary — Blue */
+  --secondary: #004ed8;       /* sip-secondary-500 */
+  --secondary-light: #3371e0; /* sip-secondary-400 */
+
+  /* Semantic */
+  --signup-blue: #264d5a;
+  --green: #36b37e;           /* sip-success-500 */
+  --teal: #004964;            /* sip-teal-500 */
+  --purple: #5e4db2;          /* sip-discovery-500 */
+  --orange: #ff6700;          /* sip-orange-500 */
+  --info: #00b9f0;            /* sip-info-500 */
+  --warning: #ffa800;         /* sip-warning-500 */
+  --error: #ff303c;           /* sip-error-500 */
+
+  /* Neutrals — Gray scale */
+  --bg-light: #f4f6f8;        /* sip-gray-50 */
+  --bg-lighter: #f9fafb;      /* sip-gray-25 */
+  --border: #dfe3e8;          /* sip-gray-100 */
   --white: #ffffff;
-  --green: #2D8A6E;
-  --teal: #1A4D5C;
-  --purple: #2B7A8C;
-  --orange: #E07A2F;
-  --amber: #E07A2F;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(27, 37, 89, 0.04);
-  --shadow-md: 0 4px 16px rgba(27, 37, 89, 0.06);
-  --shadow-lg: 0 20px 60px rgba(27, 37, 89, 0.08);
-  --shadow-xl: 0 32px 80px rgba(27, 37, 89, 0.12);
+  /* Dark — for hero/footer */
+  --dark: #0f2c35;            /* sip-primary-600 */
+  --dark-card: #002832;       /* sip-primary-700 */
+  --hero-from: #0f2c35;       /* sip-primary-600 */
+  --hero-to: #264d5a;         /* sip-primary-500 */
+
+  /* Elevation — Hub system shadows */
+  --shadow-sm: 0 1px 2px 0 #264d5a0a;
+  --shadow-md: 0 4px 12px 0 #264d5a1f;
+  --shadow-lg: 0 4px 16px 0 #264d5a29;
+  --shadow-xl: 0 4px 24px 0 #264d5a29;
 
   /* Radii */
   --radius-btn: 8px;
   --radius-card: 16px;
   --radius-lg: 24px;
 
-  /* Transitions */
+  /* Easings — Hub system */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 html { scroll-behavior: smooth; }
@@ -66,7 +84,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid rgba(26, 77, 92, 0.4);
+  outline: 3px solid rgba(38, 77, 90, 0.4);
   outline-offset: 3px;
 }
 
