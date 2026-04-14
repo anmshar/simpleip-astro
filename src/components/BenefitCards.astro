@@ -61,7 +61,7 @@ const cards = [
   .benefits-sub { font-size: 17px; color: var(--body); max-width: 520px; margin: 0 auto; line-height: 1.7; }
   .cards-grid {
     display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 20px; max-width: 900px; margin: 0 auto;
   }
   .benefit-card {
     border: 1px solid #e2eaee; border-radius: var(--radius-card);
@@ -84,16 +84,15 @@ const cards = [
 
   .card-illustration {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1;
     display: flex; align-items: center; justify-content: center;
     background: #f4f6f8;
-    border-bottom: none;
-    padding: 0;
+    padding: 24px;
     overflow: hidden;
   }
   .card-illustration img {
     width: 100%; height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.4s var(--ease-out);
   }
   .benefit-card:hover .card-illustration img { transform: scale(1.05); }
