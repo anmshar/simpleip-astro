@@ -1,9 +1,9 @@
 ---
 const steps = [
-  { n: '01', title: 'Search', desc: 'Type any company or applicant name. We instantly search across 100M+ patents worldwide.', color: '#264d5a', icon: '🔍' },
-  { n: '02', title: 'Select', desc: 'Choose the correct entity from matching results. We confirm the exact applicant for you.', color: '#004ed8', icon: '✦' },
-  { n: '03', title: 'Register', desc: 'Create your account in 60 seconds. Business email only. No card, no commitment.', color: '#ff6c2d', icon: '⚡' },
-  { n: '04', title: 'Your portfolio, live', desc: 'Land directly in your patent portfolio with your original search pre-loaded.', color: '#17b26a', icon: '🚀' },
+  { n: '01', title: 'Search', desc: 'Type any company or applicant name. We instantly search across 100M+ patents worldwide.', color: '#264d5a', iconImg: 'icons/step-search.png' },
+  { n: '02', title: 'Select', desc: 'Choose the correct entity from matching results. We confirm the exact applicant for you.', color: '#004ed8', iconImg: 'icons/step-select.png' },
+  { n: '03', title: 'Register', desc: 'Create your account in 60 seconds. Business email only. No card, no commitment.', color: '#ff6c2d', iconImg: 'icons/step-register.png' },
+  { n: '04', title: 'Your portfolio, live', desc: 'Land directly in your patent portfolio with your original search pre-loaded.', color: '#17b26a', iconImg: 'icons/step-live.png' },
 ];
 ---
 <section class="how-it-works" id="how-it-works">
@@ -22,7 +22,7 @@ const steps = [
         {steps.map((s, i) => (
           <div class={`step-circle-wrap${i === 3 ? ' step-highlight' : ''}`}>
             <div class="step-circle" style={`background: ${s.color};`}>
-              <span class="step-icon">{s.icon}</span>
+              <img class="step-icon-img" src={`${import.meta.env.BASE_URL}${s.iconImg}`} alt={s.title} />
             </div>
             {i < 3 && <div class="step-line"></div>}
           </div>
@@ -93,7 +93,7 @@ const steps = [
     transform: scale(1.1);
     box-shadow: 0 0 0 8px rgba(38,77,90,0.1), 0 12px 32px rgba(0,0,0,0.12);
   }
-  .step-icon { font-size: 28px; line-height: 1; }
+  .step-icon-img { width: 36px; height: 36px; object-fit: contain; filter: invert(1); }
   .step-line {
     width: 80px; height: 3px;
     background: linear-gradient(90deg, var(--primary), rgba(38,77,90,0.15));
