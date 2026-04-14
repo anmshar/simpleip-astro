@@ -97,6 +97,9 @@
     display: flex; align-items: center; justify-content: center;
     opacity: 0; pointer-events: none;
     transition: opacity 0.3s;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 24px 0;
   }
   .reg-overlay.open { opacity: 1; pointer-events: auto; }
 
@@ -123,6 +126,9 @@
     box-shadow: 0 40px 100px rgba(0,0,0,0.25);
     transform: scale(0.94); opacity: 0;
     transition: transform 0.32s var(--ease-out), opacity 0.32s;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    margin: auto;
   }
   .reg-overlay.open .reg-modal {
     transform: scale(1); opacity: 1;
@@ -211,18 +217,31 @@
   .reg-terms a { color: var(--body); text-decoration: underline; }
 
   @media (max-width: 768px) {
-    .reg-modal { padding: 28px 24px; width: 94%; max-width: 400px; }
+    .reg-overlay { padding: 16px 0; }
+    .reg-modal {
+      padding: 28px 24px; width: 94%; max-width: 400px;
+      max-height: calc(100vh - 32px);
+    }
     .reg-headline { font-size: 20px; }
     .reg-name-row { grid-template-columns: 1fr; gap: 0; }
-    .reg-field input { padding: 10px 12px; font-size: 14px; }
-    .reg-submit { padding: 12px 20px; font-size: 14px; }
+    .reg-field input { padding: 12px 14px; font-size: 16px; }
+    .reg-submit { padding: 14px 20px; font-size: 15px; }
+    .reg-close { width: 36px; height: 36px; top: 12px; right: 12px; }
+    .reg-close svg { width: 16px; height: 16px; }
   }
 
-  @media (max-width: 375px) {
-    .reg-modal { padding: 24px 18px; border-radius: 16px; }
+  @media (max-width: 480px) {
+    .reg-overlay { padding: 8px 0; }
+    .reg-modal {
+      padding: 24px 18px; border-radius: 16px; width: 96%;
+      max-height: calc(100vh - 16px);
+    }
     .reg-headline { font-size: 18px; }
     .reg-subtext { font-size: 13px; }
     .reg-context { font-size: 12px; padding: 8px 12px; }
     .reg-field label { font-size: 12px; }
+    .reg-field input { font-size: 16px; padding: 12px; }
+    .reg-submit { padding: 14px 18px; font-size: 15px; }
+    .reg-logo img { height: 18px; }
   }
 </style>

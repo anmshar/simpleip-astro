@@ -77,4 +77,24 @@
     width: 8px; height: 8px; border-radius: 50%;
     background: #17b26a; display: inline-block; flex-shrink: 0;
   }
+
+  @media (max-width: 768px) {
+    .final-cta { padding: 60px 16px 80px; }
+    .final-cta h2 { font-size: 26px; letter-spacing: -1px; }
+    .cta-sub { font-size: 15px; margin-bottom: 32px; }
+    .cta-btn-primary { padding: 13px 28px; font-size: 15px; width: 100%; max-width: 320px; justify-content: center; }
+    .cta-trust { gap: 16px; }
+    .cta-trust-item { font-size: 12px; }
+    .cta-badge { font-size: 12px; padding: 6px 14px; }
+  }
+
+  @media (max-width: 480px) {
+    .final-cta { padding: 48px 14px 64px; }
+    .final-cta h2 { font-size: 22px; letter-spacing: -0.5px; }
+    .cta-sub { font-size: 14px; margin-bottom: 28px; }
+    .cta-btn-primary { padding: 12px 24px; font-size: 14px; }
+    .cta-trust { flex-direction: column; gap: 10px; align-items: center; }
+    .cta-trust-item { font-size: 12px; }
+    .cta-badge { font-size: 11px; padding: 5px 12px; }
+  }
 </style>

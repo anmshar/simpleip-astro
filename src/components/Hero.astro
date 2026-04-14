@@ -298,38 +298,66 @@
     .hero-content { max-width: 700px; }
   }
 
+  @media (max-width: 1024px) {
+    .hero-content { max-width: 620px; }
+    .marquee-card { width: 320px; }
+  }
+
   @media (max-width: 768px) {
     .hero { padding: 110px 0 0; }
+    .hero-content { padding: 0 20px; }
     h1 { font-size: clamp(28px, 8vw, 42px); letter-spacing: -0.02em; line-height: 1.12; }
     .h1-teal { white-space: normal !important; }
     .hero-sub { font-size: 15px; margin-bottom: 28px; }
     .hero-badge { font-size: 12px; padding: 5px 14px; margin-bottom: 20px; }
-    .hero-search { flex-direction: column; margin: 0 20px; padding: 8px; }
+    .hero-search { flex-direction: column; margin: 0 auto; padding: 8px; max-width: 100%; }
     .search-icon { display: none; }
-    .hero-search input { width: 100%; padding: 14px 16px; }
-    .hero-search button { width: 100%; justify-content: center; padding: 14px 20px; }
-    .hint-chips { gap: 6px; margin-top: 14px; }
+    .hero-search input { width: 100%; padding: 14px 16px; font-size: 16px; }
+    .hero-search button { width: 100%; justify-content: center; padding: 14px 20px; min-height: 48px; }
+    .hint-chips { gap: 6px; margin-top: 14px; padding: 0 8px; }
     .hint-label { font-size: 12px; }
-    .hint-chip { font-size: 12px; padding: 4px 10px; }
-    .hero-trust { flex-direction: column; gap: 6px; margin-top: 20px; }
+    .hint-chip { font-size: 12px; padding: 6px 12px; min-height: 36px; display: inline-flex; align-items: center; }
+    .hero-trust { flex-direction: column; gap: 8px; margin-top: 20px; }
     .trust-dot { display: none; }
-    .metric-badges { gap: 6px; margin-top: 28px; }
-    .metric-badge { font-size: 10px; padding: 5px 10px; gap: 6px; }
+    .hero-trust-item { min-height: 32px; }
+    .metric-badges { gap: 8px; margin-top: 28px; padding: 0 16px; }
+    .metric-badge { font-size: 11px; padding: 6px 12px; gap: 6px; }
     .marquee-card { width: 260px; }
     .marquee-fade-l, .marquee-fade-r { width: 60px; }
     .hero-orb { display: none; }
     .hero-dot-grid { height: 200px; }
   }
 
-  @media (max-width: 375px) {
-    .hero { padding: 96px 0 0; }
-    h1 { font-size: 28px; }
-    .hero-sub { font-size: 14px; padding: 0 8px; }
+  @media (max-width: 480px) {
+    .hero { padding: 100px 0 0; }
+    .hero-content { padding: 0 16px; }
+    h1 { font-size: clamp(26px, 7.5vw, 36px); }
+    .h1-teal { white-space: normal !important; }
+    .hero-sub { font-size: 14px; padding: 0; }
     .hero-badge { font-size: 11px; padding: 4px 12px; }
-    .hero-search { margin: 0 12px; }
-    .metric-badges { flex-direction: column; align-items: center; }
-    .marquee-card { width: 200px; }
-    .marquee-wrap { margin-top: 24px; }
+    .hero-search { margin: 0 auto; padding: 6px; }
+    .hero-search input { padding: 12px 14px; font-size: 16px; }
+    .hero-search button { padding: 12px 16px; font-size: 14px; min-height: 48px; }
+    .metric-badges { flex-direction: column; align-items: center; padding: 0 12px; }
+    .metric-badge { max-width: 100%; }
+    .marquee-card { width: 220px; }
+    .marquee-wrap { margin-top: 28px; }
+    .marquee-fade-l, .marquee-fade-r { width: 40px; }
+  }
+
+  @media (max-width: 320px) {
+    .hero { padding: 92px 0 0; }
+    .hero-content { padding: 0 12px; }
+    h1 { font-size: 24px; }
+    .hero-badge { font-size: 10px; padding: 4px 10px; gap: 6px; }
+    .hero-sub { font-size: 13px; }
+    .hero-search { padding: 5px; }
+    .hero-search input { padding: 10px 12px; }
+    .hero-search button { padding: 10px 14px; font-size: 13px; }
+    .hint-chips { gap: 4px; }
+    .hint-chip { font-size: 11px; padding: 5px 10px; }
+    .metric-badge { font-size: 10px; padding: 5px 10px; }
+    .marquee-card { width: 180px; }
   }
 </style>
 

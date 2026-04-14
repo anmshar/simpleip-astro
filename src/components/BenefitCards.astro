@@ -103,23 +103,30 @@ const cards = [
   .card-text h3 { font-size: 20px; font-weight: 800; color: var(--headline); margin-bottom: 10px; letter-spacing: -0.3px; }
   .card-text p { font-size: 14.5px; color: var(--body); line-height: 1.7; }
 
+  @media (max-width: 1024px) {
+    .benefits { padding: 80px 20px; }
+    .cards-grid { gap: 16px; }
+    .card-text { padding: 24px 24px 28px; }
+  }
+
   @media (max-width: 768px) {
     .benefits { padding: 60px 16px; }
     .benefits-header { margin-bottom: 40px; }
     .benefits-header h2 { font-size: 26px; letter-spacing: -1px; }
     .benefits-sub { font-size: 15px; }
-    .cards-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
-    .card-illustration { aspect-ratio: 4 / 3; padding: 20px; }
+    .cards-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; gap: 16px; }
+    .card-illustration { aspect-ratio: 16 / 10; padding: 20px; }
     .card-text { padding: 20px 22px 24px; }
     .card-text h3 { font-size: 18px; }
-    .card-text p { font-size: 13.5px; }
+    .card-text p { font-size: 14px; }
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 479px) {
     .benefits { padding: 48px 12px; }
-    .card-illustration { padding: 16px; }
+    .cards-grid { max-width: 100%; }
+    .card-illustration { aspect-ratio: 3 / 2; padding: 16px; }
     .card-text { padding: 16px 18px 20px; }
     .card-text h3 { font-size: 17px; }
-    .card-text p { font-size: 13px; }
+    .card-text p { font-size: 13.5px; }
   }
 </style>

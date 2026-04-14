@@ -164,8 +164,15 @@ const features = [
   }
   .feature-cta:hover { opacity: 0.7; }
 
+  @media (max-width: 1024px) {
+    .feature-block { gap: 40px; padding: 64px 24px; }
+  }
+
   @media (max-width: 768px) {
     .feature-block { flex-direction: column !important; padding: 48px 16px; gap: 28px; }
+    .feature-visual { width: 100%; }
+    .feature-text { width: 100%; }
+    .feature-photo img { width: 100%; height: auto; }
     .feature-text h3 { font-size: 22px; letter-spacing: -0.5px; }
     .feature-body { font-size: 14px; }
     .feature-label { font-size: 11px; letter-spacing: 1.5px; }
@@ -174,10 +181,11 @@ const features = [
     .feature-cta { font-size: 13px; }
   }
 
-  @media (max-width: 375px) {
-    .feature-block { padding: 36px 12px; gap: 24px; }
+  @media (max-width: 480px) {
+    .feature-block { padding: 36px 14px; gap: 24px; }
     .feature-text h3 { font-size: 20px; }
     .feature-body { font-size: 13px; }
+    .feature-pill { font-size: 11px; padding: 4px 10px; }
     .fb-bar { height: 32px; padding: 0 10px; }
     .fb-dots i { width: 7px; height: 7px; }
     .fb-url { font-size: 9px; padding: 3px 8px; }

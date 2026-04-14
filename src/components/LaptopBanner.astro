@@ -8,8 +8,8 @@
   .laptop-banner {
     position: relative;
     width: 100%;
-    height: 400px;
     overflow: hidden;
+    aspect-ratio: 21 / 7;
     background: linear-gradient(180deg, #f7f9fa 0%, #f0ebe4 30%, #f0ebe4 70%, #ffffff 100%);
   }
   .laptop-banner img {
@@ -20,10 +20,13 @@
     display: block;
   }
 
-  @media (max-width: 768px) {
-    .laptop-banner { height: 260px; }
+  @media (max-width: 1024px) {
+    .laptop-banner { aspect-ratio: 16 / 6; }
   }
-  @media (max-width: 480px) {
-    .laptop-banner { height: 180px; }
+  @media (max-width: 768px) {
+    .laptop-banner { aspect-ratio: 16 / 7; }
+  }
+  @media (max-width: 479px) {
+    .laptop-banner { aspect-ratio: 16 / 8; }
   }
 </style>
