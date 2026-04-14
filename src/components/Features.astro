@@ -6,10 +6,11 @@ const features = [
     body: 'SimpleIP connects to EPO, USPTO, WIPO, DPMA and 80+ global patent offices. Type any company name and instantly see their complete patent portfolio. Organised, searchable, exportable.',
     pills: ['Company search', '80+ offices', 'Status filters', 'Date range'],
     cta: 'Start searching →',
-    image: 'screenshot-patents.png',
+    image: 'feature-patent-discovery.webp',
     color: '#264d5a',
     bg: 'var(--bg-light)',
     direction: 'left',
+    noFrame: true,
   },
   {
     label: 'Competitor Monitoring',
@@ -17,10 +18,11 @@ const features = [
     body: 'Set up alerts for any company or technology area. Get notified when new patents are filed. Weekly digest or real-time notifications straight to your inbox.',
     pills: ['Auto alerts', 'Tech classes', 'Weekly digest', 'Watchlists'],
     cta: 'Set up monitoring →',
-    image: 'screenshot-monitoring.png',
+    image: 'feature-competitor-monitoring.webp',
     color: '#2B7A8C',
     bg: 'var(--white)',
     direction: 'right',
+    noFrame: true,
   },
   {
     label: 'Reports & Analytics',
@@ -28,10 +30,11 @@ const features = [
     body: 'Export tailored reports for your board, investors or legal team instantly. Green patent analysis, portfolio benchmarks, and landscape overviews all built in.',
     pills: ['PDF export', 'ESG analysis', 'Benchmarks', 'Share links'],
     cta: 'Generate your first report →',
-    image: 'screenshot-landscape.webp',
+    image: 'feature-reports-analytics.webp',
     color: '#24697D',
     bg: 'var(--bg-light)',
     direction: 'left',
+    noFrame: true,
   },
 ];
 ---
@@ -40,18 +43,24 @@ const features = [
     <div class="feature-band" style={`background: ${f.bg};`}>
       <div class={`feature-block reveal ${f.direction === 'right' ? 'feature-reverse' : ''}`}>
         <div class="feature-visual">
-          <div class="feature-browser">
-            <div class="fb-bar">
-              <div class="fb-dots"><i></i><i></i><i></i></div>
-              <div class="fb-url">
-                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="3.5"/><path d="M7.5 7.5L10 10"/></svg>
-                app.simpleip.com
-              </div>
-            </div>
-            <div class="fb-screen">
+          {f.noFrame ? (
+            <div class="feature-photo">
               <img src={`${import.meta.env.BASE_URL}${f.image}`} alt={f.label} loading="lazy" />
             </div>
-          </div>
+          ) : (
+            <div class="feature-browser">
+              <div class="fb-bar">
+                <div class="fb-dots"><i></i><i></i><i></i></div>
+                <div class="fb-url">
+                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="3.5"/><path d="M7.5 7.5L10 10"/></svg>
+                  app.simpleip.com
+                </div>
+              </div>
+              <div class="fb-screen">
+                <img src={`${import.meta.env.BASE_URL}${f.image}`} alt={f.label} loading="lazy" />
+              </div>
+            </div>
+          )}
         </div>
         <div class="feature-text">
           <span class="feature-label" style={`color: ${f.color};`}>{f.label}</span>
@@ -86,6 +95,19 @@ const features = [
 
   .feature-visual { flex: 1; min-width: 0; }
   .feature-text { flex: 1; min-width: 0; }
+
+  .feature-photo {
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 20px 50px rgba(0,0,0,0.07);
+    transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+  }
+  .feature-photo img {
+    width: 100%; display: block; border-radius: 14px;
+  }
+  .feature-block:hover .feature-photo {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 28px 70px rgba(0,0,0,0.1);
+  }
 
   .feature-browser {
     border-radius: 14px; overflow: hidden;
