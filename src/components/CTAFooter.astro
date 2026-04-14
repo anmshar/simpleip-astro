@@ -17,18 +17,9 @@
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
     </button>
     <div class="cta-trust">
-      <div class="cta-trust-item">
-        <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#17b26a"/><path d="M5 8.2L7 10.2L11 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        No credit card
-      </div>
-      <div class="cta-trust-item">
-        <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#17b26a"/><path d="M5 8.2L7 10.2L11 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Always available
-      </div>
-      <div class="cta-trust-item">
-        <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#17b26a"/><path d="M5 8.2L7 10.2L11 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        2-minute setup
-      </div>
+      <div class="cta-trust-item"><span class="green-dot"></span> No credit card</div>
+      <div class="cta-trust-item"><span class="green-dot"></span> Always available</div>
+      <div class="cta-trust-item"><span class="green-dot"></span> 2-minute setup</div>
     </div>
   </div>
 </section>
@@ -82,5 +73,8 @@
     display: flex; align-items: center; gap: 7px;
     font-size: 13px; color: var(--body); font-weight: 500;
   }
-  .cta-trust-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .green-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #17b26a; display: inline-block; flex-shrink: 0;
+  }
 </style>

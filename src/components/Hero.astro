@@ -39,25 +39,13 @@
 
     <!-- Trust row -->
     <div class="hero-trust" style="animation: fadeUp 0.6s var(--ease-out) 0.54s both;">
-      <div class="hero-trust-item">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#17b26a"/><path d="M5 8.2L7 10.2L11 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        No credit card
-      </div>
+      <div class="hero-trust-item"><span class="green-dot"></span> No credit card</div>
       <span class="trust-dot">·</span>
-      <div class="hero-trust-item">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#17b26a"/><path d="M5 8.2L7 10.2L11 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        100M+ patents indexed
-      </div>
+      <div class="hero-trust-item"><span class="green-dot"></span> 100M+ patents indexed</div>
       <span class="trust-dot">·</span>
-      <div class="hero-trust-item">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#17b26a"/><path d="M5 8.2L7 10.2L11 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Always available
-      </div>
+      <div class="hero-trust-item"><span class="green-dot"></span> Always available</div>
       <span class="trust-dot">·</span>
-      <div class="hero-trust-item">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#17b26a"/><path d="M5 8.2L7 10.2L11 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Ready in 2 minutes
-      </div>
+      <div class="hero-trust-item"><span class="green-dot"></span> Ready in 2 minutes</div>
     </div>
   </div>
 
@@ -259,6 +247,10 @@
   .hero-trust-item {
     display: flex; align-items: center; gap: 6px;
     font-size: 13px; color: var(--body); font-weight: 500;
+  }
+  .green-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #17b26a; display: inline-block; flex-shrink: 0;
   }
   .trust-dot { color: var(--border); font-size: 18px; }
 
