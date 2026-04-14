@@ -143,11 +143,24 @@ const steps = [
   .how-note { font-size: 12px; color: var(--body); opacity: 0.7; }
 
   @media (max-width: 768px) {
+    .how-it-works { padding: 60px 16px; }
+    .how-it-works h2 { font-size: 26px; letter-spacing: -1px; }
+    .how-sub { font-size: 14px; margin-bottom: 36px; }
     .steps-circles { display: none; }
-    .steps-cards { grid-template-columns: 1fr; }
+    .steps-cards { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
     .step-card {
       display: flex; align-items: flex-start; gap: 16px; text-align: left;
-      padding: 20px;
+      padding: 18px;
     }
+    .step-card h4 { font-size: 15px; }
+    .step-card p { font-size: 12.5px; }
+    .how-cta { margin-top: 36px; }
+    .how-btn { padding: 14px 28px; font-size: 14px; }
+  }
+
+  @media (max-width: 375px) {
+    .how-it-works { padding: 48px 12px; }
+    .how-it-works h2 { font-size: 22px; }
+    .step-card { padding: 14px; gap: 12px; }
   }
 </style>

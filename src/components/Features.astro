@@ -143,9 +143,21 @@ const features = [
   .feature-cta:hover { opacity: 0.7; }
 
   @media (max-width: 768px) {
-    .feature-block { flex-direction: column !important; padding: 56px 20px; gap: 32px; }
-    .feature-text h3 { font-size: 24px; }
+    .feature-block { flex-direction: column !important; padding: 48px 16px; gap: 28px; }
+    .feature-text h3 { font-size: 22px; letter-spacing: -0.5px; }
+    .feature-body { font-size: 14px; }
+    .feature-label { font-size: 11px; letter-spacing: 1.5px; }
     .feature-pills { gap: 6px; }
     .feature-pill { font-size: 12px; padding: 5px 11px; }
+    .feature-cta { font-size: 13px; }
+  }
+
+  @media (max-width: 375px) {
+    .feature-block { padding: 36px 12px; gap: 24px; }
+    .feature-text h3 { font-size: 20px; }
+    .feature-body { font-size: 13px; }
+    .fb-bar { height: 32px; padding: 0 10px; }
+    .fb-dots i { width: 7px; height: 7px; }
+    .fb-url { font-size: 9px; padding: 3px 8px; }
   }
 </style>

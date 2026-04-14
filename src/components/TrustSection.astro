@@ -112,6 +112,21 @@ const cards = [
   .trust-card p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; }
 
   @media (max-width: 768px) {
-    .trust-cards { grid-template-columns: 1fr; }
+    .enterprise { padding: 72px 16px; }
+    .enterprise h2 { font-size: 26px; letter-spacing: -1px; }
+    .enterprise-sub { font-size: 14px; margin-bottom: 40px; }
+    .trust-cards { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .trust-card { padding: 28px; }
+    .tcs-num { font-size: 28px; }
+    .trust-card h4 { font-size: 16px; }
+    .trust-card p { font-size: 13px; }
+  }
+
+  @media (max-width: 375px) {
+    .enterprise { padding: 56px 12px; }
+    .enterprise h2 { font-size: 22px; }
+    .trust-card { padding: 22px; }
+    .trust-card-emoji { font-size: 26px; }
+    .tcs-num { font-size: 24px; }
   }
 </style>

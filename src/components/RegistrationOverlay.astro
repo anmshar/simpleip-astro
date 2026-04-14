@@ -209,4 +209,20 @@
     font-size: 11px; color: var(--muted); margin-top: 12px; line-height: 1.5;
   }
   .reg-terms a { color: var(--body); text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    .reg-modal { padding: 28px 24px; width: 94%; max-width: 400px; }
+    .reg-headline { font-size: 20px; }
+    .reg-name-row { grid-template-columns: 1fr; gap: 0; }
+    .reg-field input { padding: 10px 12px; font-size: 14px; }
+    .reg-submit { padding: 12px 20px; font-size: 14px; }
+  }
+
+  @media (max-width: 375px) {
+    .reg-modal { padding: 24px 18px; border-radius: 16px; }
+    .reg-headline { font-size: 18px; }
+    .reg-subtext { font-size: 13px; }
+    .reg-context { font-size: 12px; padding: 8px 12px; }
+    .reg-field label { font-size: 12px; }
+  }
 </style>
