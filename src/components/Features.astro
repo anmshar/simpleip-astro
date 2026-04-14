@@ -3,49 +3,42 @@ const features = [
   {
     label: 'Patent Discovery',
     headline: '100 million patents. Found in seconds.',
-    body: 'Type any company name and instantly see their complete global patent portfolio across EPO, USPTO, WIPO, DPMA and 80+ offices.',
+    body: 'SimpleIP connects to EPO, USPTO, WIPO, DPMA and 80+ global patent offices. Type any company name and instantly see their complete patent portfolio — organised, searchable, exportable.',
     pills: ['Company search', '80+ offices', 'Status filters', 'Date range'],
-    cta: 'Try it free',
+    cta: 'Start searching free →',
     image: 'screenshot-patents.png',
-    color: '#1A4D5C',
-    bg: 'var(--white)',
+    color: '#264d5a',
+    bg: 'var(--bg-light)',
+    direction: 'left',
   },
   {
     label: 'Competitor Monitoring',
     headline: 'Know what competitors file — before they ship.',
-    body: 'Set up alerts for any company or technology area. Get notified when new patents are filed — weekly digest or real-time.',
+    body: 'Set up alerts for any company or technology area. Get notified when new patents are filed — weekly digest or real-time notifications straight to your inbox.',
     pills: ['Auto alerts', 'Tech classes', 'Weekly digest', 'Watchlists'],
-    cta: 'Try it free',
+    cta: 'Set up monitoring free →',
     image: 'screenshot-monitoring.png',
     color: '#2B7A8C',
-    bg: 'var(--bg-light)',
+    bg: 'var(--white)',
+    direction: 'right',
   },
   {
     label: 'Reports & Analytics',
     headline: 'Board-ready IP reports in one click.',
-    body: 'Export tailored reports for your board, investors or legal team. Green patent analysis, portfolio benchmarks, and landscape overviews built in.',
+    body: 'Export tailored reports for your board, investors or legal team instantly. Green patent analysis, portfolio benchmarks, and landscape overviews all built in.',
     pills: ['PDF export', 'ESG analysis', 'Benchmarks', 'Share links'],
-    cta: 'Try it free',
+    cta: 'Generate your first report free →',
     image: 'screenshot-landscape.webp',
     color: '#24697D',
-    bg: 'var(--white)',
+    bg: 'var(--bg-light)',
+    direction: 'left',
   },
 ];
 ---
 <section class="features" id="features">
-  {features.map(f => (
+  {features.map((f, idx) => (
     <div class="feature-band" style={`background: ${f.bg};`}>
-      <div class="feature-block reveal">
-        <div class="feature-header">
-          <span class="feature-label" style={`color: ${f.color};`}>{f.label}</span>
-          <h3>{f.headline}</h3>
-          <p class="feature-body">{f.body}</p>
-          <div class="feature-pills">
-            {f.pills.map(p => (
-              <span class="feature-pill" style={`color: ${f.color}; border-color: ${f.color}25; background: ${f.color}08;`}>{p}</span>
-            ))}
-          </div>
-        </div>
+      <div class={`feature-block reveal ${f.direction === 'right' ? 'feature-reverse' : ''}`}>
         <div class="feature-visual">
           <div class="feature-browser">
             <div class="fb-bar">
@@ -60,11 +53,18 @@ const features = [
             </div>
           </div>
         </div>
-        <div class="feature-footer">
-          <a class="feature-cta" href={`${import.meta.env.BASE_URL}register`} style={`background: ${f.color};`}>
+        <div class="feature-text">
+          <span class="feature-label" style={`color: ${f.color};`}>{f.label}</span>
+          <h3>{f.headline}</h3>
+          <p class="feature-body">{f.body}</p>
+          <div class="feature-pills">
+            {f.pills.map(p => (
+              <span class="feature-pill" style={`color: ${f.color}; border-color: ${f.color}25; background: ${f.color}08;`}>{p}</span>
+            ))}
+          </div>
+          <button class="feature-cta" style={`color: ${f.color};`} onclick="openReg()">
             {f.cta}
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -72,108 +72,79 @@ const features = [
 </section>
 
 <style>
-  .features { }
-
   .feature-band { }
 
   .feature-block {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 80px 32px 64px;
-    display: flex !important;
-    flex-direction: column !important;
+    padding: 80px 32px;
+    display: flex;
     align-items: center;
-    text-align: center;
+    gap: 64px;
   }
+  .feature-reverse { flex-direction: row-reverse; }
 
-  /* Header: label + headline + body + pills */
-  .feature-header {
-    max-width: 640px; margin-bottom: 40px;
-  }
-  .feature-label {
-    font-size: 13px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 2px; display: block; margin-bottom: 14px;
-  }
-  .feature-header h3 {
-    font-size: clamp(28px, 3.5vw, 40px); font-weight: 900; color: var(--headline);
-    letter-spacing: -1.2px; margin-bottom: 14px; line-height: 1.12;
-  }
-  .feature-body {
-    font-size: 16px; color: var(--body); line-height: 1.7; margin-bottom: 24px;
-  }
-  .feature-pills {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
-  }
-  .feature-pill {
-    padding: 6px 14px; border-radius: 100px;
-    font-size: 13px; font-weight: 600;
-    border: 1px solid;
-  }
+  .feature-visual { flex: 1; min-width: 0; }
+  .feature-text { flex: 1; min-width: 0; }
 
-  /* Screenshot in browser frame */
-  .feature-visual {
-    width: 100%; margin-bottom: 32px;
-  }
   .feature-browser {
     border-radius: 14px; overflow: hidden;
     background: var(--white);
-    border: 1px solid var(--border);
-    box-shadow:
-      0 4px 12px rgba(0,0,0,0.04),
-      0 20px 50px rgba(0,0,0,0.07);
+    border: 1px solid #e2eaee;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 20px 50px rgba(0,0,0,0.07);
     transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
   }
   .feature-block:hover .feature-browser {
-    transform: translateY(-4px);
-    box-shadow:
-      0 4px 12px rgba(0,0,0,0.04),
-      0 28px 70px rgba(0,0,0,0.1);
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 28px 70px rgba(0,0,0,0.1);
   }
   .fb-bar {
     display: flex; align-items: center; gap: 14px;
     height: 42px; padding: 0 16px;
-    background: var(--bg-lighter); border-bottom: 1px solid var(--border);
+    background: var(--bg-lighter); border-bottom: 1px solid #e2eaee;
   }
   .fb-dots { display: flex; gap: 6px; }
-  .fb-dots i {
-    width: 10px; height: 10px; border-radius: 50%; display: block;
-    font-style: normal;
-  }
+  .fb-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; font-style: normal; }
   .fb-dots i:nth-child(1) { background: #ff5f57; }
   .fb-dots i:nth-child(2) { background: #febc2e; }
   .fb-dots i:nth-child(3) { background: #28c840; }
   .fb-url {
     display: flex; align-items: center; gap: 6px;
     padding: 4px 12px; border-radius: 6px;
-    background: var(--white); border: 1px solid var(--border);
+    background: var(--white); border: 1px solid #e2eaee;
     font-size: 11px; color: var(--body); font-weight: 500;
   }
   .fb-url svg { width: 10px; height: 10px; opacity: 0.5; }
-  .fb-screen { overflow: hidden; }
-  .fb-screen img {
-    width: 100%; display: block;
-    object-fit: cover; object-position: top center;
-  }
+  .fb-screen img { width: 100%; display: block; object-fit: cover; object-position: top center; }
 
-  /* CTA */
-  .feature-footer { }
+  .feature-label {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; display: block; margin-bottom: 14px;
+  }
+  .feature-text h3 {
+    font-size: clamp(24px, 3vw, 36px); font-weight: 800; color: var(--headline);
+    letter-spacing: -1px; margin-bottom: 14px; line-height: 1.15;
+  }
+  .feature-body {
+    font-size: 15px; color: var(--body); line-height: 1.7; margin-bottom: 24px;
+  }
+  .feature-pills {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;
+  }
+  .feature-pill {
+    padding: 6px 14px; border-radius: 100px;
+    font-size: 13px; font-weight: 600; border: 1px solid;
+  }
   .feature-cta {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 14px 30px; border-radius: 10px;
-    font-size: 15px; font-weight: 700; color: var(--white);
-    transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    font-size: 14px; font-weight: 700; background: none; border: none;
+    cursor: pointer; padding: 0;
+    transition: opacity 0.2s;
   }
-  .feature-cta svg { width: 14px; height: 14px; transition: transform 0.3s var(--ease-out); }
-  .feature-cta:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-  }
-  .feature-cta:hover svg { transform: translateX(3px); }
+  .feature-cta:hover { opacity: 0.7; }
 
   @media (max-width: 768px) {
-    .feature-block { padding: 56px 20px 48px; }
-    .feature-header h3 { font-size: 26px; }
+    .feature-block { flex-direction: column !important; padding: 56px 20px; gap: 32px; }
+    .feature-text h3 { font-size: 24px; }
     .feature-pills { gap: 6px; }
     .feature-pill { font-size: 12px; padding: 5px 11px; }
   }

@@ -1,44 +1,69 @@
 ---
 const steps = [
-  { n: 1, title: 'Search', desc: 'Enter any company or applicant name into the search bar.', color: '#1A4D5C' },
-  { n: 2, title: 'Select', desc: 'Choose the correct entity from the matching results.', color: '#24697D' },
-  { n: 3, title: 'Sign up', desc: 'Create your free account in under 60 seconds.', color: '#2B7A8C' },
-  { n: 4, title: 'Explore', desc: 'Access your full patent portfolio, analytics and alerts.', color: '#2D8A6E' },
+  { n: '01', title: 'Search', desc: 'Type any company or applicant name. We instantly search across 100M+ patents worldwide.', color: '#264d5a', icon: '🔍' },
+  { n: '02', title: 'Select', desc: 'Choose the correct entity from matching results. We confirm the exact applicant for you.', color: '#004ed8', icon: '✦' },
+  { n: '03', title: 'Register free', desc: 'Create your account in 60 seconds. Business email only. No card, no commitment.', color: '#ff6c2d', icon: '⚡' },
+  { n: '04', title: 'Your portfolio, live', desc: 'Land directly in your patent portfolio with your original search pre-loaded.', color: '#17b26a', icon: '🚀' },
 ];
 ---
 <section class="how-it-works" id="how-it-works">
+  <!-- Dot grid texture -->
+  <div class="how-dot-grid"></div>
   <div class="how-inner">
     <div class="reveal">
       <p class="section-label">How it works</p>
       <h2>From search to portfolio in <span class="highlight">4 simple steps</span></h2>
-      <p class="how-sub">No technical setup. No credit card. Just type your applicant name and start exploring.</p>
+      <p class="how-sub">No technical setup. No credit card. Type your company name and you're in.</p>
     </div>
+
     <div class="steps-row reveal reveal-delay-1">
-      {steps.map((s, i) => (
-        <div class="step">
-          <div class="step-number" style={`background: ${s.color}; box-shadow: 0 8px 24px ${s.color}33;`}>
-            {s.n}
+      <!-- Circles with connector line -->
+      <div class="steps-circles">
+        {steps.map((s, i) => (
+          <div class={`step-circle-wrap${i === 3 ? ' step-highlight' : ''}`}>
+            <div class="step-circle" style={`background: ${s.color};`}>
+              <span class="step-icon">{s.icon}</span>
+            </div>
+            {i < 3 && <div class="step-line"></div>}
           </div>
-          {i < steps.length - 1 && <div class="step-connector"></div>}
-          <div class="step-text">
+        ))}
+      </div>
+
+      <!-- Cards below circles -->
+      <div class="steps-cards">
+        {steps.map((s, i) => (
+          <div class={`step-card${i === 3 ? ' step-card-highlight' : ''}`}>
+            <span class={`step-badge${i === 3 ? ' step-badge-green' : ''}`}>{s.n}</span>
             <h4>{s.title}</h4>
             <p>{s.desc}</p>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-    <div class="how-cta">
-      <a href={`${import.meta.env.BASE_URL}register`} class="how-btn">Start free</a>
-      <span class="how-note">60-second setup</span>
+
+    <div class="how-cta reveal reveal-delay-2">
+      <button class="how-btn" onclick="openReg()">
+        Start free
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
+      <span class="how-note">60-second setup · No credit card</span>
     </div>
   </div>
 </section>
 
 <style>
-  .how-it-works { padding: 100px 24px; background: var(--bg-light); text-align: center; }
-  .how-inner { max-width: 900px; margin: 0 auto; }
+  .how-it-works {
+    padding: 100px 24px; background: var(--white);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .how-dot-grid {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(38,77,90,0.05) 1px, transparent 1px);
+    background-size: 48px 48px; pointer-events: none;
+  }
+  .how-inner { max-width: 960px; margin: 0 auto; position: relative; }
   .how-it-works h2 {
-    font-size: clamp(28px, 3.5vw, 42px); font-weight: 900; color: var(--headline);
+    font-size: clamp(28px, 3.5vw, 42px); font-weight: 800; color: var(--headline);
     letter-spacing: -1.5px; margin-bottom: 12px;
   }
   .highlight {
@@ -46,53 +71,83 @@ const steps = [
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
   .how-sub { font-size: 16px; color: var(--body); max-width: 480px; margin: 0 auto 56px; line-height: 1.7; }
-  .steps-row {
-    display: flex; justify-content: center; max-width: 900px; margin: 0 auto 52px;
-    position: relative;
-  }
-  .step {
-    flex: 1; position: relative; padding: 0 16px;
-  }
-  .step-number {
-    width: 52px; height: 52px; border-radius: 16px; color: var(--white);
-    font-size: 20px; font-weight: 900; display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px; position: relative; z-index: 2;
-    transition: transform 0.3s var(--ease-out);
-  }
-  .step:hover .step-number { transform: scale(1.1); }
-  .step-connector {
-    position: absolute; top: 26px; left: calc(50% + 36px); right: calc(-50% + 36px);
-    height: 2px; z-index: 1;
-    background: linear-gradient(90deg, var(--border), var(--primary-light), var(--border));
-    opacity: 0.5;
-  }
-  .step-text { }
-  .step h4 { font-size: 17px; font-weight: 800; color: var(--headline); margin-bottom: 8px; }
-  .step p { font-size: 13.5px; color: var(--body); line-height: 1.65; }
 
-  .how-cta { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .steps-row { position: relative; }
+
+  /* Circles row */
+  .steps-circles {
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px; gap: 0;
+  }
+  .step-circle-wrap {
+    display: flex; align-items: center; position: relative;
+  }
+  .step-circle {
+    width: 84px; height: 84px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: white;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+    cursor: default; position: relative; z-index: 2;
+  }
+  .step-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 8px rgba(38,77,90,0.1), 0 12px 32px rgba(0,0,0,0.12);
+  }
+  .step-icon { font-size: 28px; line-height: 1; }
+  .step-line {
+    width: 80px; height: 3px;
+    background: linear-gradient(90deg, var(--primary), rgba(38,77,90,0.15));
+    flex-shrink: 0;
+  }
+  .step-highlight .step-circle {
+    box-shadow: 0 0 0 4px rgba(23,178,106,0.2);
+  }
+
+  /* Cards row */
+  .steps-cards {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  }
+  .step-card {
+    padding: 24px 16px; border-radius: 14px;
+    border: 1px solid #e2eaee; background: white;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+    cursor: default;
+  }
+  .step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  }
+  .step-card-highlight { border-color: #17b26a; }
+  .step-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 6px;
+    font-size: 11px; font-weight: 700; color: var(--primary);
+    background: rgba(38,77,90,0.08); margin-bottom: 12px;
+  }
+  .step-badge-green { color: #17b26a; background: #edfaf4; }
+  .step-card h4 { font-size: 16px; font-weight: 800; color: var(--headline); margin-bottom: 8px; }
+  .step-card p { font-size: 13px; color: var(--body); line-height: 1.65; }
+
+  .how-cta { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 48px; }
   .how-btn {
-    display: inline-flex; padding: 15px 36px; border-radius: 12px;
-    background: var(--primary); color: var(--white); font-size: 15px; font-weight: 700;
-    transition: background 0.2s, transform 0.3s var(--ease-out), box-shadow 0.3s;
-    box-shadow: 0 4px 16px rgba(26, 77, 92, 0.2);
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 15px 36px; border-radius: 10px;
+    background: linear-gradient(135deg, #1a3540, #264d5a);
+    color: white; font-size: 15px; font-weight: 700;
+    border: none; cursor: pointer;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+    box-shadow: 0 4px 16px rgba(26,77,90,0.2);
   }
-  .how-btn:hover {
-    background: var(--primary-light); transform: translateY(-3px);
-    box-shadow: 0 12px 36px rgba(26, 77, 92, 0.35);
-  }
+  .how-btn svg { transition: transform 0.3s; }
+  .how-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(26,77,90,0.35); }
+  .how-btn:hover svg { transform: translateX(3px); }
   .how-note { font-size: 12px; color: var(--body); opacity: 0.7; }
 
   @media (max-width: 768px) {
-    .steps-row { flex-direction: column; gap: 28px; }
-    .step-connector { display: none; }
-    .step {
-      display: flex; align-items: center; gap: 16px; text-align: left;
-      padding: 16px 20px; border-radius: 14px;
-      background: var(--white); border: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(27, 37, 89, 0.04);
+    .steps-circles { display: none; }
+    .steps-cards { grid-template-columns: 1fr; }
+    .step-card {
+      display: flex; align-items: flex-start; gap: 16px; text-align: left;
+      padding: 20px;
     }
-    .step-number { margin: 0; flex-shrink: 0; width: 44px; height: 44px; font-size: 17px; }
-    .step h4 { margin-bottom: 4px; }
   }
 </style>

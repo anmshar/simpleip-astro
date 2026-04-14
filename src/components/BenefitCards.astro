@@ -2,29 +2,29 @@
 const cards = [
   {
     icon: 'search',
-    color: '#1A4D5C',
+    color: '#264d5a',
     bgColor: '#EDF5F7',
     headline: 'Patent Discovery',
     body: 'Search across 100M+ patents from 80+ global offices instantly. Type any company name and explore their full patent portfolio.',
   },
   {
     icon: 'monitor',
-    color: '#2B7A8C',
-    bgColor: '#EBF4F6',
+    color: '#ff6c2d',
+    bgColor: '#FFF5EE',
     headline: 'Competitor Monitoring',
     body: 'Get automated alerts when competitors file new patents. Monitor any technology space with real-time intelligence.',
   },
   {
     icon: 'report',
-    color: '#24697D',
-    bgColor: '#ECF3F5',
+    color: '#004ed8',
+    bgColor: '#EEF4FF',
     headline: 'Reports & Analytics',
     body: 'Generate board-ready IP reports in one click. Portfolio benchmarks, green patent analysis, and technology landscapes.',
   },
   {
     icon: 'global',
-    color: '#E07A2F',
-    bgColor: '#FDF5EE',
+    color: '#17b26a',
+    bgColor: '#EDFAF4',
     headline: 'Global Coverage',
     body: 'Access patent data from EPO, USPTO, WIPO, DPMA and 80+ offices worldwide in one unified, searchable platform.',
   },
@@ -53,10 +53,6 @@ const icons: Record<string, string> = {
           </div>
           <h3>{c.headline}</h3>
           <p>{c.body}</p>
-          <a href={`${import.meta.env.BASE_URL}register`} class="card-link" style={`color: ${c.color};`}>
-            Learn more
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          </a>
         </div>
       ))}
     </div>
@@ -64,11 +60,11 @@ const icons: Record<string, string> = {
 </section>
 
 <style>
-  .benefits { padding: 100px 24px; background: var(--white); }
+  .benefits { padding: 100px 24px; background: var(--bg-light); }
   .benefits-inner { max-width: 1100px; margin: 0 auto; }
   .benefits-header { text-align: center; margin-bottom: 64px; }
   .benefits-header h2 {
-    font-size: clamp(28px, 3.5vw, 42px); font-weight: 900; color: var(--headline);
+    font-size: clamp(28px, 3.5vw, 42px); font-weight: 800; color: var(--headline);
     letter-spacing: -1.5px; margin-bottom: 14px;
   }
   .benefits-sub { font-size: 17px; color: var(--body); max-width: 520px; margin: 0 auto; line-height: 1.7; }
@@ -77,21 +73,22 @@ const icons: Record<string, string> = {
     gap: 20px;
   }
   .benefit-card {
-    border: 1px solid var(--border); border-radius: var(--radius-card); padding: 36px;
+    border: 1px solid #e2eaee; border-radius: var(--radius-card); padding: 36px;
     background: var(--white);
     transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.4s;
     position: relative; overflow: hidden;
   }
   .card-accent {
-    position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    opacity: 0; transition: opacity 0.4s;
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s var(--ease-out);
   }
   .benefit-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 24px 64px rgba(27, 37, 89, 0.1), 0 0 0 1px rgba(27, 37, 89, 0.03);
-    border-color: transparent;
+    box-shadow: 0 24px 64px rgba(27,37,89,0.1);
+    border-color: var(--card-color);
   }
-  .benefit-card:hover .card-accent { opacity: 1; }
+  .benefit-card:hover .card-accent { transform: scaleX(1); }
   .card-icon {
     width: 56px; height: 56px; border-radius: 14px;
     display: flex; align-items: center; justify-content: center; margin-bottom: 22px;
@@ -100,15 +97,7 @@ const icons: Record<string, string> = {
   .benefit-card:hover .card-icon { transform: scale(1.08); }
   .card-icon svg { width: 24px; height: 24px; }
   .benefit-card h3 { font-size: 20px; font-weight: 800; color: var(--headline); margin-bottom: 10px; letter-spacing: -0.3px; }
-  .benefit-card p { font-size: 14.5px; color: var(--body); line-height: 1.7; margin-bottom: 22px; }
-  .card-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 14px; font-weight: 700;
-    transition: gap 0.3s var(--ease-out), opacity 0.2s;
-  }
-  .card-link svg { width: 14px; height: 14px; transition: transform 0.3s var(--ease-out); }
-  .card-link:hover { gap: 10px; }
-  .card-link:hover svg { transform: translateX(2px); }
+  .benefit-card p { font-size: 14.5px; color: var(--body); line-height: 1.7; }
 
   @media (max-width: 768px) {
     .cards-grid { grid-template-columns: 1fr; }

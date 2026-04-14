@@ -1,102 +1,177 @@
 ---
-const tabs = [
-  { id: 'patents', label: 'My Patents', icon: '<path d="M3 5h14M3 10h14M3 15h10"/>', image: 'screenshot-patents.png' },
-  { id: 'monitoring', label: 'Monitoring', icon: '<path d="M15 7A5 5 0 005 7c0 5.5-2.5 7-2.5 7h15S15 12.5 15 7z"/><path d="M11.5 17a2 2 0 01-3 0"/>', image: 'screenshot-monitoring.png' },
-  { id: 'landscape', label: 'Landscape', icon: '<path d="M3 17V7l4-4 4 5 6-5v14H3z"/>', image: 'screenshot-landscape.webp' },
-];
 ---
 <section class="product-preview" id="solutions">
-  <!-- Background images (one per tab, blurred) -->
-  {tabs.map((t, i) => (
-    <div class={`pp-bg${i === 0 ? ' active' : ''}`} id={`bg-${t.id}`}>
-      <img src={`${import.meta.env.BASE_URL}${t.image}`} alt="" aria-hidden="true" loading={i === 0 ? 'eager' : 'lazy'} />
-    </div>
-  ))}
-  <div class="pp-bg-overlay"></div>
-
-  <!-- Foreground content -->
   <div class="pp-content reveal">
     <p class="section-label" style="color: var(--primary);">See it in action</p>
     <h2>Your complete patent portfolio, <br/><span class="highlight">visualized instantly.</span></h2>
     <p class="sub">See your patents, monitor competitors, analyze landscapes — all in one place.</p>
 
+    <!-- Tab switcher -->
     <div class="preview-tabs" id="previewTabs">
-      {tabs.map((t, i) => (
-        <button class={`preview-tab${i === 0 ? ' active' : ''}`} data-tab={t.id}>
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" set:html={t.icon} />
-          {t.label}
-        </button>
-      ))}
+      <button class="preview-tab active" data-tab="patents">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5h14M3 10h14M3 15h10"/></svg>
+        My Patents
+      </button>
+      <button class="preview-tab" data-tab="monitoring">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 7A5 5 0 005 7c0 5.5-2.5 7-2.5 7h15S15 12.5 15 7z"/><path d="M11.5 17a2 2 0 01-3 0"/></svg>
+        Monitoring
+      </button>
+      <button class="preview-tab" data-tab="landscape">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17V7l4-4 4 5 6-5v14H3z"/></svg>
+        Landscape
+      </button>
     </div>
 
-    <a href={`${import.meta.env.BASE_URL}register`} class="pp-cta">
-      Start free
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-    </a>
+    <!-- Browser frame dashboard mockup -->
+    <div class="pp-browser">
+      <div class="ppb-bar">
+        <div class="ppb-dots"><i></i><i></i><i></i></div>
+        <div class="ppb-url">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="5" cy="5" r="3.5"/><path d="M7.5 7.5L10 10"/></svg>
+          app.simpleip.com
+        </div>
+        <div class="ppb-user">
+          <div class="ppb-avatar">LT</div>
+          <span>Levon Tahmasian</span>
+        </div>
+      </div>
+      <div class="ppb-body">
+        <div class="ppb-sidebar">
+          <div class="ppb-nav-item active">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h8"/></svg>
+            My patents
+          </div>
+          <div class="ppb-nav-item">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 6A4 4 0 004 6c0 4-2 5.5-2 5.5h12S12 10 12 6z"/></svg>
+            Monitoring
+          </div>
+          <div class="ppb-nav-item">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 14V6l3-3 3 4 5-4v11H2z"/></svg>
+            Landscape
+          </div>
+          <div class="ppb-nav-item">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v12M4 6l4-4 4 4"/></svg>
+            Smart file upload
+          </div>
+          <div class="ppb-nav-item">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M2 6h12"/></svg>
+            Book session
+          </div>
+          <div class="ppb-nav-item">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4l6 4 6-4M2 4v8h12V4H2z"/></svg>
+            Send feedback
+          </div>
+        </div>
+        <div class="ppb-main">
+          <div class="ppb-title-row">
+            <h4>Patent families</h4>
+            <span class="ppb-badge-fam">Families: 3</span>
+            <p class="ppb-title-sub">Manage your patents in one central place</p>
+          </div>
+          <button class="ppb-add-btn">+ Add patents</button>
+          <div class="ppb-stats" id="ppStats">
+            <div class="ppb-stat" data-target="248" style="--accent-top: #264d5a;">
+              <span class="ppb-stat-num">0</span>
+              <span class="ppb-stat-label">Total Patents</span>
+            </div>
+            <div class="ppb-stat" data-target="186" style="--accent-top: #17b26a;">
+              <span class="ppb-stat-num" style="color: #17b26a;">0</span>
+              <span class="ppb-stat-label">Active / Granted</span>
+            </div>
+            <div class="ppb-stat" data-target="14" style="--accent-top: #004ed8;">
+              <span class="ppb-stat-num" style="color: #004ed8;">0</span>
+              <span class="ppb-stat-label">Countries</span>
+            </div>
+            <div class="ppb-stat" data-target="12" style="--accent-top: #ff6c2d;">
+              <span class="ppb-stat-num" style="color: #ff6c2d;">0</span>
+              <span class="ppb-stat-label">Pending</span>
+            </div>
+          </div>
+          <div class="ppb-table">
+            <div class="ppb-row">
+              <span class="ppb-name">Hybrid measurement gap operation</span>
+              <span class="ppb-status ppb-active">Active</span>
+              <span class="ppb-country">🇺🇸 US</span>
+              <span class="ppb-id">US2021174440444A</span>
+            </div>
+            <div class="ppb-row">
+              <span class="ppb-name">Advanced thermal management system for electronics</span>
+              <span class="ppb-status ppb-granted">Granted</span>
+              <span class="ppb-country">🇩🇪 DE</span>
+              <span class="ppb-id">EP3845432A1</span>
+            </div>
+            <div class="ppb-row">
+              <span class="ppb-name">Energy-efficient data processing method</span>
+              <span class="ppb-status ppb-active">Active</span>
+              <span class="ppb-country">🇪🇺 EP</span>
+              <span class="ppb-id">DE102020128813</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <script>
-  const tabs = document.querySelectorAll('.preview-tab');
-  const bgs = document.querySelectorAll('.pp-bg');
+  // Stat counter animation — fires once on scroll
+  let counted = false;
+  const statsEl = document.getElementById('ppStats');
 
+  function easeOutCubic(t: number): number {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function animateCounters() {
+    if (counted) return;
+    counted = true;
+    const nums = statsEl?.querySelectorAll('.ppb-stat');
+    nums?.forEach((stat, i) => {
+      const target = parseInt((stat as HTMLElement).dataset.target || '0');
+      const numEl = stat.querySelector('.ppb-stat-num');
+      if (!numEl) return;
+      const duration = 700 + i * 200;
+      const start = performance.now();
+      function tick(now: number) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const value = Math.round(easeOutCubic(progress) * target);
+        numEl!.textContent = String(value);
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCounters();
+        counterObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  if (statsEl) counterObserver.observe(statsEl);
+
+  // Tab switcher
+  const tabs = document.querySelectorAll('.preview-tab');
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      const target = (tab as HTMLElement).dataset.tab;
       tabs.forEach(t => t.classList.remove('active'));
-      bgs.forEach(b => b.classList.remove('active'));
       tab.classList.add('active');
-      document.getElementById(`bg-${target}`)?.classList.add('active');
     });
   });
 </script>
 
 <style>
   .product-preview {
-    position: relative;
-    min-height: 85vh;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    padding: 120px 24px;
+    padding: 100px 24px; text-align: center;
+    background: var(--white);
   }
-
-  /* Background screenshots — blurred, full cover */
-  .pp-bg {
-    position: absolute; inset: 0; z-index: 0;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    display: flex; align-items: center; justify-content: center;
-    padding: 40px;
-  }
-  .pp-bg.active { opacity: 1; }
-  .pp-bg img {
-    max-width: 100%; max-height: 100%;
-    width: auto; height: auto;
-    display: block;
-    filter: blur(2px);
-    border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-  }
-
-  /* Overlay — white wash so text is readable */
-  .pp-bg-overlay {
-    position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.88) 0%,
-      rgba(255, 255, 255, 0.72) 50%,
-      rgba(255, 255, 255, 0.85) 100%
-    );
-  }
-
-  /* Foreground content */
-  .pp-content {
-    position: relative; z-index: 2;
-    max-width: 700px;
-  }
+  .pp-content { max-width: 1000px; margin: 0 auto; }
   .pp-content h2 {
-    font-size: clamp(28px, 3.5vw, 44px); font-weight: 900; color: var(--headline);
+    font-size: clamp(28px, 3.5vw, 44px); font-weight: 800; color: var(--headline);
     letter-spacing: -1.5px; margin-bottom: 14px; line-height: 1.15;
   }
   .highlight {
@@ -111,10 +186,8 @@ const tabs = [
   /* Tabs */
   .preview-tabs {
     display: inline-flex; gap: 4px; padding: 5px; border-radius: 14px;
-    background: rgba(255, 255, 255, 0.9); border: 1px solid var(--border);
-    margin-bottom: 28px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    backdrop-filter: blur(8px);
+    background: var(--bg-light); border: 1px solid #e2eaee;
+    margin-bottom: 32px;
   }
   .preview-tab {
     display: flex; align-items: center; gap: 8px;
@@ -125,30 +198,125 @@ const tabs = [
   }
   .preview-tab svg { width: 16px; height: 16px; }
   .preview-tab.active {
-    background: var(--primary); color: white;
-    box-shadow: 0 4px 12px rgba(26, 77, 92, 0.25);
+    background: #1a3540; color: white;
+    box-shadow: 0 4px 12px rgba(26,77,90,0.25);
   }
   .preview-tab:not(.active):hover { background: rgba(255,255,255,0.8); color: var(--headline); }
 
-  /* CTA button */
-  .pp-cta {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 14px 32px; border-radius: 12px;
-    background: var(--primary-dark); color: white;
-    font-size: 15px; font-weight: 700;
-    box-shadow: 0 4px 20px rgba(15, 44, 53, 0.2);
-    transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+  /* Browser frame */
+  .pp-browser {
+    border-radius: 14px; overflow: hidden;
+    background: white; border: 1px solid #e2eaee;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 20px 50px rgba(0,0,0,0.07);
+    text-align: left;
   }
-  .pp-cta svg { width: 14px; height: 14px; transition: transform 0.3s var(--ease-out); }
-  .pp-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(15, 44, 53, 0.3);
+  .ppb-bar {
+    display: flex; align-items: center; gap: 14px;
+    height: 42px; padding: 0 16px;
+    background: var(--bg-lighter); border-bottom: 1px solid #e2eaee;
   }
-  .pp-cta:hover svg { transform: translateX(3px); }
+  .ppb-dots { display: flex; gap: 6px; }
+  .ppb-dots i { width: 10px; height: 10px; border-radius: 50%; display: block; font-style: normal; }
+  .ppb-dots i:nth-child(1) { background: #ff5f57; }
+  .ppb-dots i:nth-child(2) { background: #febc2e; }
+  .ppb-dots i:nth-child(3) { background: #28c840; }
+  .ppb-url {
+    display: flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 6px;
+    background: white; border: 1px solid #e2eaee;
+    font-size: 11px; color: var(--body); font-weight: 500;
+  }
+  .ppb-url svg { width: 10px; height: 10px; opacity: 0.5; }
+  .ppb-user {
+    margin-left: auto; display: flex; align-items: center; gap: 8px;
+    font-size: 11px; color: var(--body); font-weight: 500;
+  }
+  .ppb-avatar {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: #1a3540; color: white;
+    font-size: 9px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .ppb-body { display: flex; min-height: 320px; }
+
+  /* Sidebar */
+  .ppb-sidebar {
+    width: 180px; border-right: 1px solid #e2eaee;
+    padding: 16px 12px; flex-shrink: 0;
+  }
+  .ppb-nav-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 10px; border-radius: 8px;
+    font-size: 12px; font-weight: 500; color: var(--body);
+    margin-bottom: 2px; cursor: default;
+  }
+  .ppb-nav-item svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .ppb-nav-item.active {
+    background: rgba(38,77,90,0.06); color: var(--primary); font-weight: 600;
+    border-right: 2px solid var(--primary);
+  }
+
+  /* Main content */
+  .ppb-main { flex: 1; padding: 20px 24px; }
+  .ppb-title-row { margin-bottom: 12px; }
+  .ppb-title-row h4 {
+    font-size: 16px; font-weight: 700; color: var(--headline);
+    display: inline; margin-right: 8px;
+  }
+  .ppb-badge-fam {
+    font-size: 11px; font-weight: 600; color: var(--primary);
+    background: rgba(38,77,90,0.08); padding: 3px 8px; border-radius: 6px;
+  }
+  .ppb-title-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .ppb-add-btn {
+    padding: 7px 16px; border-radius: 8px; border: none;
+    background: #004ed8; color: white;
+    font-size: 12px; font-weight: 600; cursor: default;
+    margin-bottom: 16px;
+  }
+
+  /* Stat cards */
+  .ppb-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  .ppb-stat {
+    padding: 14px 12px; border-radius: 10px;
+    border: 1px solid #e2eaee; background: white;
+    position: relative; overflow: hidden;
+  }
+  .ppb-stat::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent-top);
+  }
+  .ppb-stat-num { font-size: 24px; font-weight: 800; color: var(--headline); display: block; }
+  .ppb-stat-label { font-size: 11px; color: var(--muted); font-weight: 500; }
+
+  /* Table rows */
+  .ppb-table { border: 1px solid #e2eaee; border-radius: 10px; overflow: hidden; }
+  .ppb-row {
+    display: grid; grid-template-columns: 1fr auto auto auto;
+    gap: 12px; align-items: center;
+    padding: 10px 14px; font-size: 12px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .ppb-row:last-child { border-bottom: none; }
+  .ppb-name { font-weight: 500; color: var(--headline); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ppb-status {
+    padding: 3px 10px; border-radius: 100px;
+    font-size: 11px; font-weight: 600;
+  }
+  .ppb-active { color: #17b26a; background: #edfaf4; }
+  .ppb-granted { color: #004ed8; background: #eef4ff; }
+  .ppb-country { font-size: 12px; color: var(--body); }
+  .ppb-id { font-size: 11px; color: var(--muted); font-family: monospace; }
 
   @media (max-width: 768px) {
-    .product-preview { min-height: 60vh; padding: 80px 20px; }
+    .product-preview { padding: 80px 20px; }
     .preview-tabs { flex-wrap: wrap; }
     .preview-tab { font-size: 12px; padding: 9px 16px; }
+    .ppb-sidebar { display: none; }
+    .ppb-stats { grid-template-columns: repeat(2, 1fr); }
+    .ppb-row { grid-template-columns: 1fr auto; }
+    .ppb-country, .ppb-id { display: none; }
+    .ppb-user { display: none; }
   }
 </style>

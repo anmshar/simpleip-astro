@@ -1,0 +1,201 @@
+---
+---
+<div class="reg-overlay" id="regOverlay">
+  <div class="reg-backdrop" id="regBackdrop"></div>
+  <div class="reg-modal" id="regModal">
+    <button class="reg-close" id="regClose" aria-label="Close registration">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+    </button>
+    <div class="reg-logo">
+      <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="SimpleIP" />
+    </div>
+    <div class="reg-progress">
+      <span class="reg-dot active"></span>
+      <span class="reg-dot"></span>
+      <span class="reg-dot"></span>
+    </div>
+    <p class="reg-step-label">Create your free account</p>
+    <h3 class="reg-headline">Get started in 60 seconds</h3>
+    <p class="reg-subtext" id="regSubtext">Your search is saved. We'll take you straight there after signup.</p>
+    <div class="reg-context" id="regContext">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8fa4b0" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <span>Searching for: <strong id="regTerm"></strong></span>
+    </div>
+    <form class="reg-form" id="regForm">
+      <div class="reg-name-row">
+        <div class="reg-field">
+          <label for="regFirst">First name</label>
+          <input type="text" id="regFirst" name="first" required />
+        </div>
+        <div class="reg-field">
+          <label for="regLast">Last name</label>
+          <input type="text" id="regLast" name="last" required />
+        </div>
+      </div>
+      <div class="reg-field">
+        <label for="regEmail">Business email</label>
+        <input type="email" id="regEmail" name="email" required />
+      </div>
+      <div class="reg-field">
+        <label for="regPassword">Password</label>
+        <input type="password" id="regPassword" name="password" minlength="8" required />
+        <span class="reg-hint">Min. 8 characters</span>
+      </div>
+      <button type="submit" class="reg-submit">
+        Create free account
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
+    </form>
+    <p class="reg-signin">Already have an account? <a href="https://app.simpleip.com" target="_blank" rel="noopener">Sign in</a></p>
+    <p class="reg-terms">By signing up you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+  </div>
+</div>
+
+<script is:inline>
+  function openReg(searchTerm) {
+    const overlay = document.getElementById('regOverlay');
+    const term = searchTerm || document.getElementById('heroSearchInput')?.value?.trim() || sessionStorage.getItem('sip_q') || '';
+
+    if (term) {
+      sessionStorage.setItem('sip_q', term);
+      document.getElementById('regTerm').textContent = term;
+      document.getElementById('regSubtext').textContent = 'Your search for "' + term + '" is saved. We\'ll take you straight there after signup.';
+      document.getElementById('regContext').style.display = 'flex';
+    } else {
+      document.getElementById('regContext').style.display = 'none';
+      document.getElementById('regSubtext').textContent = 'Create your free account to get started.';
+    }
+
+    overlay.classList.add('open');
+    document.body.classList.add('reg-open');
+  }
+
+  function closeReg() {
+    document.getElementById('regOverlay').classList.remove('open');
+    document.body.classList.remove('reg-open');
+  }
+
+  document.getElementById('regBackdrop')?.addEventListener('click', closeReg);
+  document.getElementById('regClose')?.addEventListener('click', closeReg);
+  window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeReg();
+  });
+
+  document.getElementById('regForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var q = sessionStorage.getItem('sip_q') || '';
+    var email = document.getElementById('regEmail')?.value || '';
+    window.location.href = 'https://app.simpleip.com/register' + (q ? '?q=' + encodeURIComponent(q) : '');
+  });
+</script>
+
+<style>
+  .reg-overlay {
+    position: fixed; inset: 0; z-index: 500;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .reg-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .reg-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(8,20,26,0.6);
+    backdrop-filter: blur(8px);
+  }
+
+  .reg-modal {
+    position: relative; z-index: 1;
+    max-width: 432px; width: 90%;
+    background: white; border-radius: 20px;
+    padding: 38px; text-align: center;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.25);
+    transform: scale(0.94); opacity: 0;
+    transition: transform 0.32s var(--ease-out), opacity 0.32s;
+  }
+  .reg-overlay.open .reg-modal {
+    transform: scale(1); opacity: 1;
+  }
+
+  .reg-close {
+    position: absolute; top: 16px; right: 16px;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: #f0f5f7; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--body); transition: background 0.2s;
+  }
+  .reg-close svg { width: 14px; height: 14px; }
+  .reg-close:hover { background: #e2eaee; }
+
+  .reg-logo { margin-bottom: 20px; }
+  .reg-logo img { height: 20px; margin: 0 auto; }
+
+  .reg-progress { display: flex; gap: 6px; justify-content: center; margin-bottom: 20px; }
+  .reg-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #e2eaee;
+  }
+  .reg-dot.active { background: #264d5a; }
+
+  .reg-step-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--muted); font-weight: 600; margin-bottom: 8px;
+  }
+  .reg-headline {
+    font-size: 22px; font-weight: 800; color: var(--headline);
+    letter-spacing: -0.5px; margin-bottom: 8px;
+  }
+  .reg-subtext {
+    font-size: 14px; color: var(--body); margin-bottom: 16px; line-height: 1.5;
+  }
+
+  .reg-context {
+    display: flex; align-items: center; gap: 8px; justify-content: center;
+    padding: 10px 16px; border-radius: 10px;
+    background: #f7f9fa; margin-bottom: 20px;
+    font-size: 13px; color: var(--body);
+  }
+  .reg-context strong { color: var(--headline); font-weight: 700; }
+
+  .reg-form { text-align: left; }
+  .reg-name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .reg-field { margin-bottom: 14px; }
+  .reg-field label {
+    display: block; font-size: 13px; font-weight: 600;
+    color: var(--headline); margin-bottom: 6px;
+  }
+  .reg-field input {
+    width: 100%; padding: 11px 14px; border-radius: 10px;
+    border: 1px solid #c4cdd5; font-size: 14px; color: var(--headline);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: white;
+  }
+  .reg-field input:focus {
+    border-color: #264d5a;
+    box-shadow: 0 0 0 3px rgba(38,77,90,0.1);
+    outline: none;
+  }
+  .reg-hint { font-size: 11px; color: var(--muted); margin-top: 4px; display: block; }
+
+  .reg-submit {
+    width: 100%; padding: 13px 24px; border-radius: 10px;
+    background: linear-gradient(135deg, #1a3540, #264d5a);
+    color: white; font-size: 15px; font-weight: 700;
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+    box-shadow: 0 4px 16px rgba(26,77,90,0.2);
+    margin-top: 4px;
+  }
+  .reg-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,77,90,0.3); }
+
+  .reg-signin {
+    font-size: 13px; color: var(--body); margin-top: 18px;
+  }
+  .reg-signin a { color: var(--primary); font-weight: 600; }
+
+  .reg-terms {
+    font-size: 11px; color: var(--muted); margin-top: 12px; line-height: 1.5;
+  }
+  .reg-terms a { color: var(--body); text-decoration: underline; }
+</style>

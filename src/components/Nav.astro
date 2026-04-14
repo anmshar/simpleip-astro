@@ -5,9 +5,9 @@
   <div class="announce-inner">
     <span class="announce-badge">New</span>
     <span>Competitive landscape analysis is here — compare your portfolio to competitors.</span>
-    <a href={`${import.meta.env.BASE_URL}explore`} class="announce-link">Explore now →</a>
+    <a href="#" class="announce-link" onclick="event.preventDefault(); openReg();">Explore now →</a>
   </div>
-  <button class="announce-close" id="announceClose" aria-label="Close">
+  <button class="announce-close" id="announceClose" aria-label="Close announcement">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
   </button>
 </div>
@@ -16,32 +16,12 @@
   <div class="nav-inner">
     <a href={import.meta.env.BASE_URL} class="nav-logo">
       <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="SimpleIP" class="nav-logo-img" />
-      <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="SimpleIP" class="nav-logo-img scrolled-logo" />
     </a>
-    <button
-      class="nav-toggle"
-      id="navToggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="navMenu"
-      aria-label="Open navigation"
-    >
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-    </button>
-    <div class="nav-center" id="navMenu">
-      <a href={`${import.meta.env.BASE_URL}explore`}>Explore</a>
-      <a href="/#solutions">Solutions</a>
-      <a href="/#how-it-works">How it works</a>
-      <a href="/#features">Features</a>
-      <a href="https://www.simpleip.com/us/blog" target="_blank" rel="noopener">Blog</a>
-    </div>
     <div class="nav-right">
-      <a href={`${import.meta.env.BASE_URL}register`} class="nav-demo">Contact sales</a>
-      <a href="https://app.simpleip.com" class="nav-cta" target="_blank" rel="noopener">Get started</a>
-      <span class="nav-divider"></span>
-      <a href="https://app.simpleip.com" class="nav-login" target="_blank" rel="noopener">Login</a>
+      <button class="nav-cta" onclick="openReg()">
+        Register free
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -49,8 +29,6 @@
 
 <script>
   const nav = document.getElementById('mainNav');
-  const navToggle = document.getElementById('navToggle');
-  const navMenu = document.getElementById('navMenu');
   const hero = document.querySelector('.hero');
   const announceBar = document.getElementById('announceBar');
   const announceClose = document.getElementById('announceClose');
@@ -60,37 +38,11 @@
     document.body.style.setProperty('--announce-height', '0px');
   });
 
-  const setMenuState = (isOpen: boolean) => {
-    navToggle?.setAttribute('aria-expanded', String(isOpen));
-    navToggle?.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
-    navMenu?.classList.toggle('open', isOpen);
-    document.body.classList.toggle('nav-open', isOpen);
-  };
-
   const syncNavAppearance = () => {
     nav?.classList.toggle('scrolled', !hero || window.scrollY > 50);
   };
-
   syncNavAppearance();
-
-  navToggle?.addEventListener('click', () => {
-    const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
-    setMenuState(!isOpen);
-  });
-
-  navMenu?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => setMenuState(false));
-  });
-
   window.addEventListener('scroll', syncNavAppearance);
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') setMenuState(false);
-  });
-
-  const desktopViewport = window.matchMedia('(min-width: 769px)');
-  desktopViewport.addEventListener?.('change', (e: MediaQueryListEvent) => {
-    if (e.matches) setMenuState(false);
-  });
 </script>
 
 <style>
@@ -98,7 +50,7 @@
   .announce-bar {
     position: fixed; top: 0; left: 0; right: 0; z-index: 110;
     height: 40px; display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(90deg, #0F2C35, #163A47);
+    background: #1a3540;
     border-bottom: 1px solid rgba(255,255,255,0.06);
     transition: transform 0.3s, opacity 0.3s;
   }
@@ -109,8 +61,8 @@
   }
   .announce-badge {
     padding: 2px 10px; border-radius: 20px;
-    background: rgba(26, 77, 92, 0.2); border: 1px solid rgba(26, 77, 92, 0.3);
-    font-size: 11px; font-weight: 700; color: #4DABBF;
+    background: #ff6c2d; color: white;
+    font-size: 10px; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.5px;
   }
   .announce-link { color: rgba(255,255,255,0.9); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
@@ -122,10 +74,10 @@
   .announce-close svg { width: 14px; height: 14px; }
   .announce-close:hover { color: rgba(255,255,255,0.8); }
 
-  /* Nav — light by default, dark when scrolled */
+  /* Nav — white bg, 62px, just logo + CTA */
   .nav {
     position: fixed; top: 40px; left: 0; right: 0; z-index: 100;
-    height: 64px; display: flex; align-items: center; justify-content: center;
+    height: 62px; display: flex; align-items: center; justify-content: center;
     background: transparent;
     transition: background 0.3s, box-shadow 0.3s, top 0.3s;
   }
@@ -133,80 +85,32 @@
   .nav.scrolled {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px) saturate(180%);
-    box-shadow: 0 1px 0 var(--border), 0 4px 24px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 0 #e2eaee;
   }
   .nav-inner {
     display: flex; align-items: center; justify-content: space-between;
     width: 100%; max-width: 1200px; padding: 0 32px;
   }
-  .nav-logo { display: flex; align-items: center; height: 22px; position: relative; }
-  .nav-logo-img {
-    height: 22px; width: auto;
-    transition: opacity 0.3s;
-  }
-  .nav-logo-img.scrolled-logo { display: none; }
+  .nav-logo { display: flex; align-items: center; height: 22px; }
+  .nav-logo-img { height: 22px; width: auto; }
 
-  .nav-center { display: flex; align-items: center; gap: 32px; }
-  .nav-center a {
-    font-size: 14px; font-weight: 500; color: var(--body);
-    transition: color 0.2s;
-  }
-  .nav-center a:hover { color: var(--headline); }
-
-  .nav-right { display: flex; align-items: center; gap: 8px; }
-  .nav-demo {
-    padding: 8px 18px; border-radius: 8px;
-    border: 1px solid var(--border); color: var(--headline) !important;
-    font-size: 13px !important; font-weight: 600 !important;
-    transition: border-color 0.2s, background 0.2s !important;
-  }
-  .nav-demo:hover { border-color: var(--primary); background: rgba(26, 77, 92, 0.04); }
+  .nav-right { display: flex; align-items: center; }
   .nav-cta {
-    padding: 8px 20px; border-radius: 8px;
-    background: var(--primary-dark); color: white !important;
-    font-size: 13px !important; font-weight: 700 !important;
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s !important;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 22px; border-radius: 10px;
+    background: #1a3540; color: white;
+    font-size: 14px; font-weight: 700;
+    border: none; cursor: pointer;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
     box-shadow: 0 2px 8px rgba(15, 44, 53, 0.15);
   }
+  .nav-cta svg { width: 14px; height: 14px; transition: transform 0.3s; }
   .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(15, 44, 53, 0.2); }
-  .nav-divider { width: 1px; height: 20px; background: var(--border); margin: 0 4px; }
-  .nav-login {
-    font-size: 13px !important; font-weight: 600 !important; color: var(--body) !important;
-    padding: 8px 12px;
-  }
-  .nav-login:hover { color: var(--headline) !important; }
-
-  .nav-toggle {
-    display: none; align-items: center; justify-content: center; flex-direction: column;
-    gap: 5px; width: 44px; height: 44px; border: none; border-radius: 10px;
-    background: transparent; cursor: pointer;
-  }
-  .nav-toggle-bar {
-    width: 20px; height: 2px; border-radius: 999px;
-    background: var(--headline); transition: transform 0.2s, opacity 0.2s;
-  }
-  .nav-toggle[aria-expanded='true'] .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-toggle[aria-expanded='true'] .nav-toggle-bar:nth-child(2) { opacity: 0; }
-  .nav-toggle[aria-expanded='true'] .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-cta:hover svg { transform: translateX(3px); }
 
   @media (max-width: 768px) {
     .announce-bar { display: none; }
     .nav { top: 0; padding: 0 16px; }
-    .nav-toggle { display: inline-flex; }
-    .nav-center {
-      position: absolute; top: calc(100% + 8px); left: 16px; right: 16px;
-      flex-direction: column; align-items: stretch; gap: 8px; padding: 20px;
-      border: 1px solid var(--border); border-radius: 16px;
-      background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-      opacity: 0; pointer-events: none; transform: translateY(-8px);
-      transition: opacity 0.2s, transform 0.2s;
-    }
-    .nav-center.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
-    .nav-center a { padding: 8px 0; }
-    .nav-right { gap: 6px; }
-    .nav-demo { display: none; }
-    .nav-divider { display: none; }
-    .nav-login { display: none; }
+    .nav-cta { font-size: 13px; padding: 9px 18px; }
   }
 </style>

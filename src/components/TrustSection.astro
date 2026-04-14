@@ -1,41 +1,44 @@
 ---
 const cards = [
   {
-    icon: '<path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/>',
-    title: 'Backed by Dennemeyer Group',
-    body: 'Built by the team behind one of the world\'s leading IP law and management firms — operating in 100+ countries since 1962.',
+    emoji: '🏛️',
     stat: '100+',
-    statLabel: 'countries',
+    statLabel: 'COUNTRIES',
+    title: 'Backed by Dennemeyer Group',
+    body: 'Built by the team behind one of the world\'s leading IP law firms — operating globally since 1962.',
   },
   {
-    icon: '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>',
-    title: 'Enterprise-grade security',
-    body: 'Your patent data is encrypted and protected to the highest standards. GDPR compliant. Your IP data stays yours — always.',
+    emoji: '🔐',
     stat: 'GDPR',
-    statLabel: 'compliant',
+    statLabel: 'COMPLIANT',
+    title: 'Enterprise-grade security',
+    body: 'Your patent data is encrypted and protected. GDPR compliant. Your IP stays yours — always.',
   },
   {
-    icon: '<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><ellipse cx="12" cy="12" rx="4" ry="10"/>',
-    title: 'Global patent coverage',
-    body: 'Enterprise-grade support around the clock. Our IP specialists ensure your team gets the help they need, whenever they need it.',
+    emoji: '🌍',
     stat: '24/7',
-    statLabel: 'support',
+    statLabel: 'SUPPORT',
+    title: 'Global patent coverage',
+    body: 'Our IP specialists ensure your team gets expert help whenever you need it, around the clock.',
   },
 ];
 ---
 <section class="enterprise">
+  <!-- Dot grid overlay -->
+  <div class="ent-dot-grid"></div>
+  <!-- Orange radial glow -->
+  <div class="ent-glow"></div>
+
   <div class="enterprise-inner">
     <div class="reveal">
-    <p class="section-label" style="color: rgba(255,255,255,0.5);">Enterprise Ready</p>
-    <h2>Built on 60 years of IP expertise</h2>
-    <p class="enterprise-sub">SimpleIP is built by Dennemeyer — one of the world's leading intellectual property law and management firms, trusted by global enterprises since 1962.</p>
+      <p class="section-label" style="color: rgba(255,255,255,0.5);">Enterprise Ready</p>
+      <h2>Built on 60 years of IP expertise</h2>
+      <p class="enterprise-sub">SimpleIP is built by Dennemeyer — one of the world's leading intellectual property law and management firms, trusted by global enterprises since 1962.</p>
     </div>
     <div class="trust-cards">
       {cards.map((c, i) => (
         <div class={`trust-card reveal reveal-delay-${i}`}>
-          <div class="trust-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" set:html={c.icon} />
-          </div>
+          <div class="trust-card-emoji">{c.emoji}</div>
           <div class="trust-card-stat">
             <span class="tcs-num">{c.stat}</span>
             <span class="tcs-label">{c.statLabel}</span>
@@ -51,24 +54,23 @@ const cards = [
 <style>
   .enterprise {
     padding: 110px 24px; text-align: center;
-    background: linear-gradient(165deg, #0F2C35 0%, #1A4D5C 50%, #0F2C35 100%);
+    background: linear-gradient(158deg, #0d2330 0%, #1a3540 50%, #1e4e5e 100%);
     position: relative; overflow: hidden;
   }
-  .enterprise::before {
-    content: ''; position: absolute; top: -200px; right: -200px;
-    width: 600px; height: 600px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(26, 77, 92, 0.18), transparent 70%);
-    filter: blur(80px);
+  .ent-dot-grid {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 32px 32px; pointer-events: none;
   }
-  .enterprise::after {
-    content: ''; position: absolute; bottom: -250px; left: -200px;
+  .ent-glow {
+    position: absolute; top: -100px; right: -100px;
     width: 500px; height: 500px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(43, 122, 140, 0.1), transparent 70%);
-    filter: blur(80px);
+    background: radial-gradient(circle, rgba(255,108,45,0.15), transparent 70%);
+    filter: blur(60px); pointer-events: none;
   }
   .enterprise-inner { position: relative; max-width: 1100px; margin: 0 auto; }
   .enterprise h2 {
-    font-size: clamp(28px, 3.5vw, 42px); font-weight: 900; color: var(--white);
+    font-size: clamp(28px, 3.5vw, 42px); font-weight: 800; color: var(--white);
     letter-spacing: -1.5px; margin-bottom: 14px;
   }
   .enterprise-sub {
@@ -79,30 +81,34 @@ const cards = [
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
   }
   .trust-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-card); padding: 36px; text-align: left;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px; padding: 36px; text-align: left;
     backdrop-filter: blur(12px);
     transition: background 0.4s, border-color 0.4s, transform 0.4s var(--ease-out), box-shadow 0.4s;
+    position: relative; overflow: hidden;
   }
+  /* Shimmer line */
+  .trust-card::before {
+    content: ''; position: absolute; top: 0; left: -100%; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s;
+  }
+  .trust-card:hover::before { left: 100%; }
   .trust-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(26, 77, 92, 0.3);
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.15);
     transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 0 40px rgba(26, 77, 92, 0.06);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
   }
-  .trust-card-icon {
-    width: 48px; height: 48px; border-radius: 14px;
-    background: linear-gradient(135deg, #1A4D5C, #24697D);
-    display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
-  }
-  .trust-card-icon svg { width: 22px; height: 22px; }
+  .trust-card-emoji { font-size: 32px; margin-bottom: 16px; }
   .trust-card-stat {
     display: flex; align-items: baseline; gap: 8px; margin-bottom: 16px;
   }
-  .tcs-num { font-size: 32px; font-weight: 900; color: var(--white); letter-spacing: -0.5px; }
-  .tcs-label { font-size: 13px; color: rgba(255,255,255,0.4); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-  .trust-card h4 { font-size: 17px; font-weight: 800; color: var(--white); margin-bottom: 10px; }
+  .tcs-num { font-size: 32px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; }
+  .tcs-label { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .trust-card h4 { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
   .trust-card p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; }
 
   @media (max-width: 768px) {
