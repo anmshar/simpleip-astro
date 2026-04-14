@@ -2,7 +2,6 @@
 ---
 <section class="office-banner">
   <img src={`${import.meta.env.BASE_URL}banner-office.webp`} alt="Enterprise office with city skyline at dusk" loading="lazy" />
-  <div class="office-banner-overlay"></div>
 </section>
 
 <style>
@@ -18,18 +17,6 @@
     object-fit: cover;
     object-position: center 40%;
     display: block;
-  }
-  .office-banner-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(247, 249, 250, 0.3) 0%,
-      transparent 20%,
-      transparent 80%,
-      rgba(255, 255, 255, 0.3) 100%
-    );
-    pointer-events: none;
   }
 
   @media (max-width: 768px) {
