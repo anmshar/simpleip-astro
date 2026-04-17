@@ -2,24 +2,24 @@
 const cards = [
   {
     icon: 'icons/countries.png',
-    stat: '100+',
-    statLabel: 'COUNTRIES',
-    title: 'Backed by Dennemeyer Group',
-    body: 'Built by the team behind one of the world\'s leading IP law firms, operating globally since 1962.',
+    stat: '180+',
+    statLabel: 'JURISDICTIONS',
+    title: 'Coverage you can count on',
+    body: 'Access patent data and expert services across 180+ jurisdictions worldwide.',
+  },
+  {
+    icon: 'icons/support.png',
+    stat: '20+',
+    statLabel: 'GLOBAL OFFICES',
+    title: 'A truly global IP group',
+    body: 'Dennemeyer operates worldwide with over 20 offices, bringing local expertise to every market.',
   },
   {
     icon: 'icons/gdpr.png',
     stat: 'GDPR',
     statLabel: 'COMPLIANT',
     title: 'Enterprise-grade security',
-    body: 'Your patent data is encrypted and protected. GDPR compliant. Your IP stays yours, always.',
-  },
-  {
-    icon: 'icons/support.png',
-    stat: '24/7',
-    statLabel: 'SUPPORT',
-    title: 'Global patent coverage',
-    body: 'Our IP specialists ensure your team gets expert help whenever you need it, around the clock.',
+    body: 'Your data is encrypted and GDPR compliant.',
   },
 ];
 ---
@@ -31,9 +31,8 @@ const cards = [
 
   <div class="enterprise-inner">
     <div class="reveal">
-      <p class="section-label" style="color: rgba(255,255,255,0.5);">Enterprise Ready</p>
-      <h2>Built on 60 years of IP expertise</h2>
-      <p class="enterprise-sub">SimpleIP is built by Dennemeyer,<br/>one of the world's leading intellectual property law and management firms, trusted by global enterprises since 1962.</p>
+      <h2>Built on over 60 years of IP expertise.</h2>
+      <p class="enterprise-sub">Simple IP is built by Dennemeyer, one of the world's leading IP groups, trusted by global enterprises since 1962.</p>
     </div>
     <div class="trust-cards">
       {cards.map((c, i) => (

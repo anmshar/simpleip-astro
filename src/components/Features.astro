@@ -1,10 +1,10 @@
 ---
 const features = [
   {
-    label: 'Patent Discovery',
-    headline: '100 million patents. Found in seconds.',
-    body: 'SimpleIP connects to EPO, USPTO, WIPO, DPMA and 80+ global patent offices. Type any company name and instantly see their complete patent portfolio. Organised, searchable, exportable.',
-    pills: ['Company search', '80+ offices', 'Status filters', 'Date range'],
+    label: 'Oversee your portfolio',
+    headline: 'Your entire patent portfolio, ready in seconds.',
+    body: 'Type your company name and Simple IP instantly builds your portfolio, organized by patent family, enriched with legal status and events across 80+ offices. Attach documents to patents and AI sorts them automatically.',
+    pills: ['Portfolio visibility', 'Patent families', 'Legal events', 'AI file sorting'],
     cta: 'Start searching →',
     image: 'feature-patent-discovery.webp',
     color: '#264d5a',
@@ -14,9 +14,9 @@ const features = [
   },
   {
     label: 'Competitor Monitoring',
-    headline: 'Know what competitors file before they ship.',
-    body: 'Set up alerts for any company or technology area. Get notified when new patents are filed. Weekly digest or real-time notifications straight to your inbox.',
-    pills: ['Auto alerts', 'Tech classes', 'Weekly digest', 'Watchlists'],
+    headline: 'Never miss what your competitors are working on.',
+    body: 'Every month, Simple IP automatically scans your competition and delivers clear insights on who was active, what they published and what they are building. Fully automated based on your own portfolio.',
+    pills: ['Monthly updates', 'Tech fields', 'Competitor watch', 'Global coverage'],
     cta: 'Set up monitoring →',
     image: 'feature-competitor-monitoring.webp',
     color: '#2B7A8C',
@@ -25,20 +25,36 @@ const features = [
     noFrame: true,
   },
   {
-    label: 'Reports & Analytics',
-    headline: 'Board-ready IP reports in one click.',
-    body: 'Export tailored reports for your board, investors or legal team instantly. Green patent analysis, portfolio benchmarks, and landscape overviews all built in.',
-    pills: ['PDF export', 'ESG analysis', 'Benchmarks', 'Share links'],
-    cta: 'Generate your first report →',
+    label: 'Smart File Hub',
+    headline: 'Every IP document, automatically in the right place.',
+    body: 'Drop any file into Simple IP and our AI instantly attaches it to the correct patent. Manage and organize all your IP documents in one single source of truth, from certificates to invoices. Find anything in seconds, no email chains, no scattered folders.',
+    pills: ['AI file sorting', 'Email drop', 'Document search', 'Centralized hub'],
+    cta: 'Try Smart Files →',
     image: 'feature-reports-analytics.webp',
     color: '#24697D',
     bg: 'var(--bg-light)',
     direction: 'left',
     noFrame: true,
   },
+  {
+    label: 'Coming Soon',
+    headline: 'Turn your ideas into actionable invention disclosures.',
+    body: 'Structure and refine your invention in Simple IP until it is attorney-ready, then send it directly to Dennemeyer for advisory or filing. Along the way, get a free AI-powered prior art assessment to sharpen your claims before filing.',
+    pills: ['Invention drafting', 'Prior art assessment', 'Attorney-ready exports', 'Direct filing with Dennemeyer'],
+    cta: 'Join the waitlist →',
+    image: 'feature-reports-analytics.webp',
+    color: '#ff6c2d',
+    bg: 'var(--white)',
+    direction: 'right',
+    noFrame: true,
+  },
 ];
 ---
 <section class="features" id="features">
+  <div class="features-header reveal">
+    <h2>One workspace to stay in control of your patents.</h2>
+    <p class="features-sub">Visibility, analytics and expert services. Built for growing teams.</p>
+  </div>
   {features.map((f, idx) => (
     <div class="feature-band" style={`background: ${f.bg};`}>
       <div class={`feature-block reveal ${f.direction === 'right' ? 'feature-reverse' : ''}`}>
