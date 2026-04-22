@@ -1,0 +1,41 @@
+---
+---
+<section class="dm-banner">
+  <div class="dm-inner reveal">
+    <p>Backed by <strong>Dennemeyer</strong>, one of the world's leading IP groups, operating across <strong>180+ jurisdictions</strong> since 1962.</p>
+  </div>
+</section>
+
+<style>
+  .dm-banner {
+    background-color: #f6a969;
+    background-image:
+      linear-gradient(180deg, rgba(198, 102, 30, 0.05) 0%, rgba(198, 102, 30, 0.00) 100%),
+      url('/peach-banner.webp');
+    background-repeat: no-repeat, no-repeat;
+    background-size: cover, cover;
+    background-position: center, center;
+    padding: 88px 24px;
+    text-align: center;
+  }
+  .dm-inner { max-width: 820px; margin: 0 auto; }
+  .dm-banner p {
+    font-size: clamp(22px, 2.6vw, 32px);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.35;
+    letter-spacing: -0.4px;
+    text-shadow: 0 2px 18px rgba(140, 60, 10, 0.18);
+    margin: 0;
+  }
+  .dm-banner strong { color: #ffffff; font-weight: 800; }
+
+  @media (max-width: 768px) {
+    .dm-banner { padding: 64px 20px; }
+    .dm-banner p { font-size: 20px; letter-spacing: -0.2px; }
+  }
+  @media (max-width: 480px) {
+    .dm-banner { padding: 48px 16px; }
+    .dm-banner p { font-size: 17px; line-height: 1.4; }
+  }
+</style>
