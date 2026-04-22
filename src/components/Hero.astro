@@ -69,41 +69,20 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background: #ffffff;
+    background-color: #2963e7;
+    background-image:
+      linear-gradient(180deg, rgba(5, 24, 80, 0.28) 0%, rgba(5, 24, 80, 0.10) 55%, rgba(5, 24, 80, 0.00) 100%),
+      url('/hero-banner.webp');
+    background-repeat: no-repeat, no-repeat;
+    background-size: cover, cover;
+    background-position: center, center;
     padding: 160px 0 0;
     overflow: hidden;
   }
 
-  /* Ambient orb blobs */
-  .hero-orb {
-    position: absolute; border-radius: 50%;
-    filter: blur(80px); opacity: 0.25; pointer-events: none; z-index: 0;
-  }
-  .orb-1 {
-    width: 400px; height: 400px; top: -50px; left: -100px;
-    background: radial-gradient(circle, #264d5a, transparent 70%);
-    animation: orbFloat1 20s ease-in-out infinite;
-  }
-  .orb-2 {
-    width: 350px; height: 350px; top: 100px; right: -80px;
-    background: radial-gradient(circle, #ff6c2d, transparent 70%);
-    animation: orbFloat2 25s ease-in-out infinite;
-  }
-  .orb-3 {
-    width: 300px; height: 300px; bottom: 200px; left: 40%;
-    background: radial-gradient(circle, #17b26a, transparent 70%);
-    animation: orbFloat3 22s ease-in-out infinite;
-  }
-
-  /* Dot grid */
-  .hero-dot-grid {
-    position: absolute; top: 0; left: 0; right: 0; height: 400px;
-    background-image: radial-gradient(circle, rgba(38,77,90,0.08) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
-    pointer-events: none; z-index: 0;
-  }
+  /* Orbs & dot-grid hidden on blue banner background */
+  .hero-orb,
+  .hero-dot-grid { display: none; }
 
   .hero-content {
     position: relative; z-index: 2;
@@ -130,16 +109,18 @@
   h1 {
     font-size: clamp(38px, 6vw, 68px);
     font-weight: 800;
-    color: #0f1d24;
+    color: #ffffff;
     letter-spacing: -0.03em;
     line-height: 1.08;
     margin-bottom: 18px;
+    text-shadow: 0 2px 24px rgba(5, 24, 80, 0.25);
   }
-  .h1-teal { color: #264d5a; }
+  .h1-teal { color: #ffffff; }
 
   .hero-sub {
-    font-size: 18px; color: #4a6070;
+    font-size: 18px; color: rgba(255, 255, 255, 0.92);
     max-width: 500px; margin: 0 auto 36px; line-height: 1.6;
+    text-shadow: 0 1px 12px rgba(5, 24, 80, 0.18);
   }
 
   /* Search bar */
@@ -201,13 +182,14 @@
   }
   .hero-trust-item {
     display: flex; align-items: center; gap: 6px;
-    font-size: 13px; color: var(--body); font-weight: 500;
+    font-size: 13px; color: #ffffff; font-weight: 500;
   }
   .green-dot {
     width: 8px; height: 8px; border-radius: 50%;
     background: #17b26a; display: inline-block; flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(23, 178, 106, 0.22);
   }
-  .trust-dot { color: var(--border); font-size: 18px; }
+  .trust-dot { color: rgba(255, 255, 255, 0.45); font-size: 18px; }
 
   /* Metric badges */
   .metric-badges {
@@ -235,8 +217,8 @@
     position: absolute; top: 0; bottom: 0; width: 160px;
     z-index: 2; pointer-events: none;
   }
-  .marquee-fade-l { left: 0; background: linear-gradient(to right, #ffffff, transparent); }
-  .marquee-fade-r { right: 0; background: linear-gradient(to left, #ffffff, transparent); }
+  .marquee-fade-l { left: 0; background: linear-gradient(to right, rgba(41, 99, 231, 0.95), rgba(41, 99, 231, 0)); }
+  .marquee-fade-r { right: 0; background: linear-gradient(to left, rgba(41, 99, 231, 0.95), rgba(41, 99, 231, 0)); }
 
   .marquee-track {
     display: flex; gap: 24px;
