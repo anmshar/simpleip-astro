@@ -1,7 +1,9 @@
 ---
 ---
-<section class="office-banner">
-  <img src={`${import.meta.env.BASE_URL}banner-office.webp`} alt="Enterprise office with city skyline at dusk" loading="lazy" />
+<section class="office-banner" aria-label="Backed by Dennemeyer">
+  <div class="office-banner-inner">
+    <p class="trust-stripe">Backed by <strong>Dennemeyer</strong>, one of the world's leading IP groups, operating across 180+ jurisdictions since 1962.</p>
+  </div>
 </section>
 
 <style>
@@ -9,23 +11,49 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    aspect-ratio: 21 / 6;
+    aspect-ratio: 21 / 5;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    background-color: #1ab0f0;
+    background-image:
+      linear-gradient(180deg, rgba(5, 24, 80, 0.22) 0%, rgba(5, 24, 80, 0.08) 100%),
+      url('/banner-trust.webp');
+    background-repeat: no-repeat, no-repeat;
+    background-size: cover, cover;
+    background-position: center, center;
   }
-  .office-banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 40%;
-    display: block;
+  .office-banner-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .trust-stripe {
+    font-size: clamp(15px, 1.4vw, 19px);
+    color: #ffffff;
+    line-height: 1.6;
+    font-weight: 500;
+    text-shadow: 0 2px 20px rgba(5, 24, 80, 0.30);
+    margin: 0;
+  }
+  .trust-stripe strong {
+    color: #ffffff;
+    font-weight: 700;
   }
 
   @media (max-width: 1024px) {
     .office-banner { aspect-ratio: 16 / 5; }
   }
   @media (max-width: 768px) {
-    .office-banner { aspect-ratio: 16 / 6; }
+    .office-banner { aspect-ratio: auto; padding: 36px 20px; min-height: 160px; }
+    .trust-stripe { font-size: 14px; }
   }
   @media (max-width: 479px) {
-    .office-banner { aspect-ratio: 16 / 7; }
+    .office-banner { padding: 28px 16px; min-height: 140px; }
+    .trust-stripe { font-size: 13px; }
   }
 </style>
