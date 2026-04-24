@@ -1,0 +1,229 @@
+---
+const videoSrc = `${import.meta.env.BASE_URL}simpleip-demo.mp4`;
+const posterSrc = `${import.meta.env.BASE_URL}screenshot-landscape.webp`;
+---
+<section class="video-section" id="video">
+  <div class="video-dot-grid"></div>
+  <div class="video-inner">
+    <div class="reveal">
+      <span class="video-eyebrow">See it in action</span>
+      <h2>Watch SimpleIP work <span class="highlight">in 60 seconds.</span></h2>
+      <p class="video-sub">From empty search bar to live portfolio — the full flow, no edits.</p>
+    </div>
+
+    <div class="video-frame reveal reveal-delay-1">
+      <div class="video-frame-glow"></div>
+      <div class="video-player">
+        <video
+          class="video-media"
+          src={videoSrc}
+          poster={posterSrc}
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        ></video>
+
+        <button class="video-sound" type="button" aria-label="Unmute video" aria-pressed="false">
+          <svg class="icon-muted" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" />
+            <path d="M17 8l4 8M21 8l-4 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+          </svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" />
+            <path d="M16 8c1.5 1.2 2.5 2.5 2.5 4s-1 2.8-2.5 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+            <path d="M19 5c2.5 2 4 4.3 4 7s-1.5 5-4 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+          </svg>
+        </button>
+
+        <div class="video-badge">
+          <span class="video-badge-dot"></span>
+          Live demo
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .video-section {
+    position: relative;
+    padding: 120px 24px 100px;
+    background: #ffffff;
+    overflow: hidden;
+  }
+  .video-dot-grid {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(0, 78, 216, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+    pointer-events: none;
+  }
+  .video-inner {
+    position: relative;
+    max-width: 1120px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .video-eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ff6c2d;
+    margin-bottom: 16px;
+  }
+  .video-section h2 {
+    font-size: clamp(32px, 4.2vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.2px;
+    color: #0a1930;
+    margin: 0 0 16px;
+  }
+  .video-section h2 .highlight { color: #004ED8; }
+  .video-sub {
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: #5a6a82;
+    max-width: 560px;
+    margin: 0 auto 56px;
+    line-height: 1.5;
+  }
+
+  .video-frame {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto;
+    border-radius: 20px;
+  }
+  .video-frame-glow {
+    position: absolute;
+    inset: -40px;
+    background: radial-gradient(ellipse at center, rgba(0, 78, 216, 0.18) 0%, rgba(0, 78, 216, 0) 70%);
+    filter: blur(30px);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .video-player {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+      0 30px 80px -20px rgba(0, 78, 216, 0.35),
+      0 10px 30px -10px rgba(10, 25, 48, 0.25),
+      0 0 0 1px rgba(10, 25, 48, 0.04) inset;
+    background: #0a1930;
+    z-index: 1;
+  }
+  .video-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .video-sound {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 44px; height: 44px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(10, 25, 48, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #ffffff;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    z-index: 3;
+    transition: background 0.25s ease, transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .video-sound:hover { background: rgba(10, 25, 48, 0.8); transform: scale(1.06); }
+  .video-sound svg { width: 20px; height: 20px; display: block; }
+  .video-sound .icon-unmuted { display: none; }
+  .video-sound[aria-pressed="true"] .icon-muted { display: none; }
+  .video-sound[aria-pressed="true"] .icon-unmuted { display: block; }
+
+  .video-badge {
+    position: absolute;
+    bottom: 16px; left: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(10, 25, 48, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 2;
+  }
+  .video-badge-dot {
+    width: 8px; height: 8px;
+    border-radius: 999px;
+    background: #ff6c2d;
+    box-shadow: 0 0 0 0 rgba(255, 108, 45, 0.6);
+    animation: video-pulse 1.8s ease-out infinite;
+  }
+  @keyframes video-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(255, 108, 45, 0.6); }
+    70%  { box-shadow: 0 0 0 10px rgba(255, 108, 45, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 108, 45, 0); }
+  }
+
+  @media (max-width: 768px) {
+    .video-section { padding: 80px 20px 72px; }
+    .video-sub { margin-bottom: 40px; }
+    .video-frame-glow { inset: -24px; }
+    .video-player { border-radius: 16px; }
+  }
+  @media (max-width: 480px) {
+    .video-section { padding: 64px 16px 56px; }
+    .video-sound { width: 38px; height: 38px; top: 12px; right: 12px; }
+    .video-badge { font-size: 12px; padding: 6px 12px; bottom: 12px; left: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .video-badge-dot { animation: none; }
+  }
+</style>
+
+<script>
+  const video = document.querySelector<HTMLVideoElement>('.video-section .video-media');
+  const soundBtn = document.querySelector<HTMLButtonElement>('.video-section .video-sound');
+
+  if (video) {
+    const tryPlay = () => video.play().catch(() => { /* ignored — browsers block this if unmuted */ });
+    tryPlay();
+
+    // Pause when off-screen to save CPU, resume when visible.
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) tryPlay();
+          else video.pause();
+        });
+      }, { threshold: 0.25 });
+      io.observe(video);
+    }
+  }
+
+  if (video && soundBtn) {
+    soundBtn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      soundBtn.setAttribute('aria-pressed', String(!video.muted));
+      soundBtn.setAttribute('aria-label', video.muted ? 'Unmute video' : 'Mute video');
+      if (!video.muted) video.play().catch(() => {});
+    });
+  }
+</script>
