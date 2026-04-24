@@ -37,10 +37,6 @@ const posterSrc = `${import.meta.env.BASE_URL}screenshot-landscape.webp`;
           </svg>
         </button>
 
-        <div class="video-badge">
-          <span class="video-badge-dot"></span>
-          Live demo
-        </div>
       </div>
     </div>
   </div>
@@ -151,37 +147,6 @@ const posterSrc = `${import.meta.env.BASE_URL}screenshot-landscape.webp`;
   .video-sound[aria-pressed="true"] .icon-muted { display: none; }
   .video-sound[aria-pressed="true"] .icon-unmuted { display: block; }
 
-  .video-badge {
-    position: absolute;
-    bottom: 16px; left: 16px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(10, 25, 48, 0.55);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.2px;
-    padding: 8px 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    z-index: 2;
-  }
-  .video-badge-dot {
-    width: 8px; height: 8px;
-    border-radius: 999px;
-    background: #ff6c2d;
-    box-shadow: 0 0 0 0 rgba(255, 108, 45, 0.6);
-    animation: video-pulse 1.8s ease-out infinite;
-  }
-  @keyframes video-pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(255, 108, 45, 0.6); }
-    70%  { box-shadow: 0 0 0 10px rgba(255, 108, 45, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 108, 45, 0); }
-  }
-
   @media (max-width: 768px) {
     .video-section { padding: 80px 20px 72px; }
     .video-sub { margin-bottom: 40px; }
@@ -191,10 +156,6 @@ const posterSrc = `${import.meta.env.BASE_URL}screenshot-landscape.webp`;
   @media (max-width: 480px) {
     .video-section { padding: 64px 16px 56px; }
     .video-sound { width: 38px; height: 38px; top: 12px; right: 12px; }
-    .video-badge { font-size: 12px; padding: 6px 12px; bottom: 12px; left: 12px; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .video-badge-dot { animation: none; }
   }
 </style>
 
